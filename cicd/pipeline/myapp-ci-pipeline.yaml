@@ -1,0 +1,155 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: myapp-ci-pipeline
+spec:
+  finally:
+    - name: clean-taskrun
+      params:
+        - name: TKN_IMAGE
+          value: >-
+            registry.redhat.io/openshift-pipelines/pipelines-cli-tkn-rhel8@sha256:72394dfaed68c4b6b490c3c971fb1d9f0139f8656f6672b55b8e02ea98d1298d
+        - name: SCRIPT
+          value: tkn $@
+        - name: ARGS
+          value:
+            - taskrun delete --keep 20 -f
+      taskRef:
+        kind: ClusterTask
+        name: tkn
+    - name: clean-pipelinerun
+      params:
+        - name: TKN_IMAGE
+          value: >-
+            registry.redhat.io/openshift-pipelines/pipelines-cli-tkn-rhel8@sha256:72394dfaed68c4b6b490c3c971fb1d9f0139f8656f6672b55b8e02ea98d1298d
+        - name: SCRIPT
+          value: tkn $@
+        - name: ARGS
+          value:
+            - pipelinerun delete --keep 5 -f
+      taskRef:
+        kind: ClusterTask
+        name: tkn
+  params:
+    - default: 'https://github.com/paichayon321/spring-web-quickstart.git'
+      description: The git repository url
+      name: git-repo-url
+      type: string
+    - default: main
+      description: The git revision
+      name: git-revision
+      type: string
+    - default: spring-web-quickstart
+      description: The name of the deployment to be created / patched
+      name: git-repo-name
+      type: string
+    - name: ext-branch
+      type: string
+      default: default
+    - name: environment
+      type: string
+  tasks:
+    - name: git-clone
+      params:
+        - name: url
+          value: $(params.git-repo-url)
+        - name: revision
+          value: $(params.git-revision)
+        - name: refspec
+          value: ''
+        - name: submodules
+          value: 'true'
+        - name: depth
+          value: '1'
+        - name: sslVerify
+          value: 'false'
+        - name: crtFileName
+          value: ca-bundle.crt
+        - name: subdirectory
+          value: ''
+        - name: sparseCheckoutDirectories
+          value: ''
+        - name: deleteExisting
+          value: 'true'
+        - name: httpProxy
+          value: ''
+        - name: httpsProxy
+          value: ''
+        - name: noProxy
+          value: ''
+        - name: verbose
+          value: 'true'
+        - name: gitInitImage
+          value: >-
+            registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8@sha256:697b1d12faa0c3ddde73706b304b3c267539bca689ae614815f2186d6befce0b
+        - name: userHome
+          value: /home/git
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      when:
+        - input: $(params.ext-branch)
+          operator: notin
+          values:
+            - refs-heads-main
+      workspaces:
+        - name: output
+          workspace: source
+    - name: update-dev
+      params:
+        - name: message
+          value: Update dev environment
+      runAfter:
+        - check-branch
+      taskRef:
+        kind: ClusterTask
+        name: echo
+      when:
+        - input: $(params.ext-branch)
+          operator: in
+          values:
+            - refs-heads-dev
+    - name: update-sit
+      params:
+        - name: message
+          value: update sit environment
+      runAfter:
+        - check-branch
+      taskRef:
+        kind: ClusterTask
+        name: echo
+      when:
+        - input: $(params.environment)
+          operator: in
+          values:
+            - sit
+    - name: update-uat
+      params:
+        - name: message
+          value: Update uat Environment
+      runAfter:
+        - check-branch
+      taskRef:
+        kind: ClusterTask
+        name: echo
+      when:
+        - input: $(params.environment)
+          operator: in
+          values:
+            - uat
+    - name: check-branch
+      params:
+        - name: cmd
+          value: echo " branch = $(params.ext-branch)"
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: ClusterTask
+        name: bash
+      workspaces:
+        - name: source
+          workspace: source
+  workspaces:
+    - name: source
+      optional: false
+  resources: []

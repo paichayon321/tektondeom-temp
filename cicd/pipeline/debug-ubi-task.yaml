@@ -11,9 +11,9 @@ spec:
   description: >-
     debug-task
   workspaces:
-    - name: source
+    - name: app-source
   steps:
     - name: debug-task
       image: registry.redhat.io/ubi7/ubi-minimal
-      workingDir: "$(workspaces.source.path)"
+      workingDir: "$(workspaces.app-source.path)"
       command: ["sleep", "infinity"]

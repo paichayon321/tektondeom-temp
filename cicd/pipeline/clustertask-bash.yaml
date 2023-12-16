@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: ClusterTask
+metadata:
+  name: bash
+spec:
+  params:
+    - name: cmd
+      type: string
+  workspaces:
+    - name: source
+  steps:
+    - image: registry.redhat.io/ubi7/ubi-minimal
+      command:
+        - /bin/bash
+        - '-c'
+        - |
+          $(inputs.params.cmd)

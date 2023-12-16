@@ -11,14 +11,19 @@ spec:
   params:
   - name: git-repo-url
     type: string
+    default: ""
   - name: git-revision
     type: string
+    default: ""
   - name: git-repo-name
     type: string
+    default: ""
   - name: ext-branch
     type: string
+    default: ""
   - name: environment
     type: string
+    default: ""
   description: >-
     debug-git-task
   workspaces:

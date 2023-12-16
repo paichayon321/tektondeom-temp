@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1beta1
+kind: ClusterTask
+metadata:
+  name: echo
+spec:
+  params:
+    - name: message
+      type: string
+  steps:
+    - name: echo
+      image: registry.access.redhat.com/ubi8/ubi
+      command:
+        - /bin/bash
+        - '-c'
+        - echo $(inputs.params.message)

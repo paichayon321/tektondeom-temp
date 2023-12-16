@@ -101,6 +101,7 @@ spec:
           value: Update dev environment
       runAfter:
         - check-branch
+        - debug-git-task
       taskRef:
         kind: ClusterTask
         name: echo

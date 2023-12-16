@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: debug-task
+  labels:
+    app.kubernetes.io/version: "0.3"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.21.0"
+    tekton.dev/displayName: "debug-task"
+spec:
+  description: >-
+    debug-task
+  workspaces:
+    - name: app-source
+  steps:
+    - name: debug-task
+      image: registry.redhat.io/ubi7/ubi-minimal
+      workingDir: "$(workspaces.app-source.path)"
+      command: ["sleep", "infinity"]

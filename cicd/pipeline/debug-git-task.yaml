@@ -8,8 +8,14 @@ metadata:
     tekton.dev/pipelines.minVersion: "0.1"
     tekton.dev/displayName: "debug-git-task"
 spec:
+  params:
+    - name: git-repo-url
+    - name: git-revision
+    - name: git-repo-name
+    - name: ext-branch
+    - name: environment
   description: >-
-    debug-task
+    debug-git-task
   workspaces:
     - name: app-source
   steps:

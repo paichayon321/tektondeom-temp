@@ -115,6 +115,7 @@ spec:
           value: update sit environment
       runAfter:
         - check-branch
+        - debug-git-task
       taskRef:
         kind: ClusterTask
         name: echo
@@ -134,6 +135,15 @@ spec:
         name: bash
       workspaces:
         - name: source
+          workspace: source
+      - name: debug-git-task
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: Task
+        name: debug-git-task
+      workspaces:
+        - name: app-source
           workspace: source
   workspaces:
     - name: source

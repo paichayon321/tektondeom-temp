@@ -20,7 +20,7 @@ spec:
     spec:
       serviceAccountName: pipeline
       pipelineRef:
-        name: myapp-pipeline
+        name: myapp-ci-pipeline
       timeouts:
         pipeline: 1h0m0s
       params:

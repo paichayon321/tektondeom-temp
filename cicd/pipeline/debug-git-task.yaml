@@ -9,11 +9,11 @@ metadata:
     tekton.dev/displayName: "debug-git-task"
 spec:
   params:
-    - name: git-repo-url
-    - name: git-revision
-    - name: git-repo-name
-    - name: ext-branch
-    - name: environment
+  - name: git-repo-url
+  - name: git-revision
+  - name: git-repo-name
+  - name: ext-branch
+  - name: environment
   description: >-
     debug-git-task
   workspaces:

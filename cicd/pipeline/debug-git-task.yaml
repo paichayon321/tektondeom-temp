@@ -29,6 +29,17 @@ spec:
   workspaces:
     - name: app-source
   steps:
+    - env:
+        - name: git-repo-url
+          value: $(params.git-repo-url)
+        - name: git-revision
+          value: $(params.git-revision)
+        - name: git-repo-name
+          value: $(params.git-repo-name)
+        - name: ext-branch
+          value: $(params.ext-branch)
+        - name: environment
+          value: $(params.environment)          
     - name: debug-git-task
       image: cgr.dev/chainguard/git:root-2.39@sha256:7759f87050dd8bacabe61354d75ccd7f864d6b6f8ec42697db7159eccd491139
       workingDir: "$(workspaces.app-source.path)"

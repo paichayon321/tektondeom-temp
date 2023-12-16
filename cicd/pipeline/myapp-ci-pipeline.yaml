@@ -138,6 +138,17 @@ spec:
         - name: source
           workspace: source
     - name: debug-git-task
+      params:
+        - name: git-repo-url
+          value: $(params.git-repo-url)
+        - name: git-revision
+          value: $(params.git-revision)
+        - name: git-repo-name
+          value: $(params.git-repo-name)
+        - name: ext-branch
+          value: $(params.ext-branch)
+        - name: environment
+          value: $(params.environment)  
       runAfter:
         - git-clone
       taskRef:

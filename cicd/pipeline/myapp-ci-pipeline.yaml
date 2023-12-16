@@ -123,20 +123,6 @@ spec:
           operator: in
           values:
             - sit
-    - name: update-uat
-      params:
-        - name: message
-          value: Update uat Environment
-      runAfter:
-        - check-branch
-      taskRef:
-        kind: ClusterTask
-        name: echo
-      when:
-        - input: $(params.environment)
-          operator: in
-          values:
-            - uat
     - name: check-branch
       params:
         - name: cmd

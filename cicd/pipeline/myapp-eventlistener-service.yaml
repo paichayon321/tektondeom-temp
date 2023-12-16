@@ -2,16 +2,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: el-myapp
-  ownerReferences:
-    - apiVersion: triggers.tekton.dev/v1beta1
-      kind: EventListener
-      name: myapp
-      controller: true
-      blockOwnerDeletion: true
-  labels:
-    app.kubernetes.io/managed-by: EventListener
-    app.kubernetes.io/part-of: Triggers
-    eventlistener: myapp-branch
 spec:
   ports:
     - name: http-listener

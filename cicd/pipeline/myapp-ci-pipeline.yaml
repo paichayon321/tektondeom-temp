@@ -136,7 +136,7 @@ spec:
       workspaces:
         - name: source
           workspace: source
-      - name: debug-git-task
+    - name: debug-git-task
       runAfter:
         - git-clone
       taskRef:

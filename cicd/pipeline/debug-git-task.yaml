@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: debug-git-task
+  labels:
+    app.kubernetes.io/version: "0.3"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.21.0"
+    tekton.dev/displayName: "debug-task"
+spec:
+  description: >-
+    debug-task
+  workspaces:
+    - name: app-source
+  steps:
+    - name: debug-task
+      image: cgr.dev/chainguard/git:root-2.39@sha256:7759f87050dd8bacabe61354d75ccd7f864d6b6f8ec42697db7159eccd491139
+      workingDir: "$(workspaces.app-source.path)"
+      command: ["sleep", "infinity"]

@@ -44,7 +44,7 @@ spec:
       script: |
         if [[ $ext_branch == refs-heads-* ]]; then
             environment=$(echo $ext_branch | cut -d '-' -f 3)
-            image_tag=$($git_revision:0:7)
+            image_tag=$(echo ${git_revision:0:7})
         elif [[ $ext_branch == refs-tags-* ]]; then
             environment=$(echo $ext_branch | cut -d '-' -f 2)
             image_tag=$(echo $ext_branch | cut -d '-' -f 3)

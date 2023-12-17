@@ -141,9 +141,9 @@ spec:
         - name: message
           value: update sit environment $image_tag
         - name: environment
-          value: $(task.get-branch-task.results.environment)
+          value: $(tasks.get-branch-task.results.environment)
         - name: image_tag
-          value: $(task.get-branch-task.results.image_tag)
+          value: $(tasks.get-branch-task.results.image_tag)
       runAfter:
         - check-branch
         - get-branch-task
@@ -151,7 +151,7 @@ spec:
         kind: ClusterTask
         name: echo
       when:
-        - input: $(task.get-branch-task.results.environment)
+        - input: $(params.environment)
           operator: in
           values:
             - tags

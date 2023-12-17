@@ -131,6 +131,7 @@ spec:
 
           [[ -n "${SONAR_LOGIN_TOKEN}" ]] && {
             echo "sonar.token=${SONAR_LOGIN_TOKEN}" >> sonar-project.properties
+            echo "sonar.java.source=/*/*" >> sonar-project.properties
           } || {
             echo "missing property SONAR_LOGIN_TOKEN"
             exit 1

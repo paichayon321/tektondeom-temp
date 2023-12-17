@@ -36,7 +36,6 @@ kind: Route
 metadata:
   name: sonarqube-route
 spec:
-  host: sonarqube.example.com
   to:
     kind: Service
     name: sonarqube

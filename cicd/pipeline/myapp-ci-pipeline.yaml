@@ -101,6 +101,26 @@ spec:
       workspaces:
         - name: app-source
           workspace: source
+    - name: get-branch-task
+      params:
+        - name: git_repo_url
+          value: $(params.git_repo_url)
+        - name: git_revision
+          value: $(params.git_revision)
+        - name: git_repo_name
+          value: $(params.git_repo_name)
+        - name: ext_branch
+          value: $(params.ext_branch)
+        - name: environment
+          value: $(params.environment)  
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: Task
+        name: get-branch-task
+      workspaces:
+        - name: app-source
+          workspace: source
     - name: update-dev
       params:
         - name: message

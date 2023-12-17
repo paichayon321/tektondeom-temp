@@ -1,0 +1,45 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: get-branch-task
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.1"
+    tekton.dev/displayName: "get-branch-task"
+spec:
+  results:
+  - name: environment
+  params:
+  - name: git_repo_url
+    type: string
+    default: ""
+  - name: git_revision
+    type: string
+    default: ""
+  - name: git_repo_name
+    type: string
+    default: ""
+  - name: ext_branch
+    type: string
+    default: ""
+  description: >-
+    get-branch-task
+  workspaces:
+    - name: app-source
+  steps:
+    - env:
+        - name: git_repo_url
+          value: $(params.git_repo_url)
+        - name: git_revision
+          value: $(params.git_revision)
+        - name: git_repo_name
+          value: $(params.git_repo_name)
+        - name: ext_branch
+          value: $(params.ext_branch)       
+      name: debug-git-task
+      image: cgr.dev/chainguard/git:root-2.39@sha256:7759f87050dd8bacabe61354d75ccd7f864d6b6f8ec42697db7159eccd491139
+      workingDir: "$(workspaces.app-source.path)"
+      script: |
+        environment=$(echo $ext_branch | cut -d '-' -f 3)
+        printf "%s" "${environment}" > "$(results.environment.path)"

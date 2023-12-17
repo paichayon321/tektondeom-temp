@@ -127,7 +127,6 @@ spec:
           value: Update dev environment
       runAfter:
         - check-branch
-        - debug-git-task
         - get-branch-task
       taskRef:
         kind: ClusterTask
@@ -147,7 +146,6 @@ spec:
           value: $(task.get-branch-task.results.image_tag)
       runAfter:
         - check-branch
-        - debug-git-task
         - get-branch-task
       taskRef:
         kind: ClusterTask

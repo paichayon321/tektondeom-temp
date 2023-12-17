@@ -48,6 +48,7 @@ spec:
       default: default
     - name: environment
       type: string
+      default: default
   tasks:
     - name: git-clone
       params:

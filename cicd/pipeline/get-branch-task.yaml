@@ -37,9 +37,10 @@ spec:
           value: $(params.git_repo_name)
         - name: ext_branch
           value: $(params.ext_branch)       
-      name: debug-git-task
+      name: get-branch-task
       image: cgr.dev/chainguard/git:root-2.39@sha256:7759f87050dd8bacabe61354d75ccd7f864d6b6f8ec42697db7159eccd491139
       workingDir: "$(workspaces.app-source.path)"
       script: |
         environment=$(echo $ext_branch | cut -d '-' -f 3)
         printf "%s" "${environment}" > "$(results.environment.path)"
+        sleep infinity

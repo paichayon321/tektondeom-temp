@@ -1,4 +1,4 @@
-apiVersion: triggers.tekton.dev/v1beta1
+lapiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
   name: myapp-triggertemplate
@@ -33,7 +33,7 @@ spec:
       - name: ext-branch
         value: $(tt.params.ext-branch)
       - name: environment
-        value: $(tt.params.environment)
+        value: default
       workspaces:
       - name: source
         persistentVolumeClaim:

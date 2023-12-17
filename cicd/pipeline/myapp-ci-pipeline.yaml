@@ -65,11 +65,16 @@ spec:
         - input: $(params.ext_branch)
           operator: notin
           values:
-            - refs-heads-main
+            - "refs-heads-main"
       workspaces:
         - name: output
           workspace: source
     - name: get-branch-task
+      when:
+        - input: $(params.ext_branch)
+          operator: notin
+          values:
+            - "refs-heads-main"
       params:
         - name: git_repo_url
           value: $(params.git_repo_url)

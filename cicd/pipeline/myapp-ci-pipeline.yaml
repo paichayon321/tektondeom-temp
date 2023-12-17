@@ -69,36 +69,6 @@ spec:
       workspaces:
         - name: output
           workspace: source
-    - name: update-dev
-      params:
-        - name: message
-          value: Update dev environment
-      runAfter:
-        - check-branch
-        - debug-git-task
-      taskRef:
-        kind: ClusterTask
-        name: echo
-      when:
-        - input: $(params.ext-branch)
-          operator: in
-          values:
-            - refs-heads-dev
-    - name: update-sit
-      params:
-        - name: message
-          value: update sit environment
-      runAfter:
-        - check-branch
-        - debug-git-task
-      taskRef:
-        kind: ClusterTask
-        name: echo
-      when:
-        - input: $(params.environment)
-          operator: in
-          values:
-            - sit
     - name: check-branch
       params:
         - name: cmd
@@ -131,6 +101,36 @@ spec:
       workspaces:
         - name: app-source
           workspace: source
+    - name: update-dev
+      params:
+        - name: message
+          value: Update dev environment
+      runAfter:
+        - check-branch
+        - debug-git-task
+      taskRef:
+        kind: ClusterTask
+        name: echo
+      when:
+        - input: $(params.ext-branch)
+          operator: in
+          values:
+            - refs-heads-dev
+    - name: update-sit
+      params:
+        - name: message
+          value: update sit environment
+      runAfter:
+        - check-branch
+        - debug-git-task
+      taskRef:
+        kind: ClusterTask
+        name: echo
+      when:
+        - input: $(params.environment)
+          operator: in
+          values:
+            - sit
   finally:
     - name: clean-taskrun
       params:

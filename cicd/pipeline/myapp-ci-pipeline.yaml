@@ -69,7 +69,7 @@ spec:
       workspaces:
         - name: output
           workspace: source
-    - name: get-branch-task
+    - name: initial-info
       when:
         - input: $(params.ext_branch)
           operator: notin
@@ -90,43 +90,43 @@ spec:
         - git-clone
       taskRef:
         kind: Task
-        name: get-branch-task
+        name: initial-info
       workspaces:
         - name: app-source
           workspace: source
     - name: update-dev
       params:
         - name: message
-          value: update dev environment with image tag $(tasks.get-branch-task.results.image_tag)
+          value: update dev environment with image tag $(tasks.initial-info.results.image_tag)
         - name: environment
-          value: $(tasks.get-branch-task.results.environment)
+          value: $(tasks.initial-info.results.environment)
         - name: image_tag
-          value: $(tasks.get-branch-task.results.image_tag)
+          value: $(tasks.initial-info.results.image_tag)
       runAfter:
-        - get-branch-task
+        - initial-info
       taskRef:
         kind: ClusterTask
         name: echo
       when:
-        - input: $(tasks.get-branch-task.results.environment)
+        - input: $(tasks.initial-info.results.environment)
           operator: in
           values:
             - "dev"
     - name: update-sit
       params:
         - name: message
-          value: update sit environment with image tag $(tasks.get-branch-task.results.image_tag)
+          value: update sit environment with image tag $(tasks.initial-info.results.image_tag)
         - name: environment
-          value: $(tasks.get-branch-task.results.environment)
+          value: $(tasks.initial-info.results.environment)
         - name: image_tag
-          value: $(tasks.get-branch-task.results.image_tag)
+          value: $(tasks.initial-info.results.image_tag)
       runAfter:
-        - get-branch-task
+        - initial-info
       taskRef:
         kind: ClusterTask
         name: echo
       when:
-        - input: $(tasks.get-branch-task.results.environment)
+        - input: $(tasks.initial-info.results.environment)
           operator: in
           values:
             - "tags"

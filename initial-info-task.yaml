@@ -1,0 +1,58 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: initial-info
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.1"
+    tekton.dev/displayName: "initial-info"
+spec:
+  results:
+  - name: environment
+  - name: image_tag
+  params:
+  - name: git_repo_url
+    type: string
+    default: ""
+  - name: git_revision
+    type: string
+    default: ""
+  - name: git_repo_name
+    type: string
+    default: ""
+  - name: ext_branch
+    type: string
+    default: ""
+  description: >-
+    initial-info
+  workspaces:
+    - name: app-source
+  steps:
+    - env:
+        - name: git_repo_url
+          value: $(params.git_repo_url)
+        - name: git_revision
+          value: $(params.git_revision)
+        - name: git_repo_name
+          value: $(params.git_repo_name)
+        - name: ext_branch
+          value: $(params.ext_branch)       
+      name: initial-info
+      image: cgr.dev/chainguard/git:root-2.39@sha256:7759f87050dd8bacabe61354d75ccd7f864d6b6f8ec42697db7159eccd491139
+      workingDir: "$(workspaces.app-source.path)"
+      script: |
+        if [[ $ext_branch == refs-heads-* ]]; then
+            environment=$(echo $ext_branch | cut -d '-' -f 3)
+            image_tag=$(echo ${git_revision:0:7})
+        elif [[ $ext_branch == refs-tags-* ]]; then
+            environment=$(echo $ext_branch | cut -d '-' -f 2)
+            image_tag=$(echo $ext_branch | cut -d '-' -f 3)
+        else
+            environment="unknown"  # Handle other cases if needed
+        fi  
+        printf "%s" "${environment}" > "$(results.environment.path)"
+        printf "%s" "${image_tag}" > "$(results.image_tag.path)"
+
+
+ 

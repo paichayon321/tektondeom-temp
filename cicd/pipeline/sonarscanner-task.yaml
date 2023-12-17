@@ -71,7 +71,9 @@ spec:
         - name: SOURCE_TO_SCAN
           value: $(params.SOURCE_TO_SCAN)
         - name: SONAR_ORGANIZATION
-          value: $(params.SONAR_ORGANIZATION)          
+          value: $(params.SONAR_ORGANIZATION)       
+        - name: SONAR_LOGIN_TOKEN
+          value: $(params.SONAR_LOGIN_TOKEN)       
       image: 'registry.access.redhat.com/ubi8/ubi-minimal:8.2'
       name: sonar-properties-create
       resources: {}

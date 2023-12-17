@@ -140,9 +140,11 @@ spec:
     - name: update-sit
       params:
         - name: message
-          value: update sit environment
+          value: update sit environment $image_tag
         - name: environment
           value: $(task.get-branch-task.results.environment)
+        - name: image_tag
+          value: $(task.get-branch-task.results.image_tag)
       runAfter:
         - check-branch
         - debug-git-task

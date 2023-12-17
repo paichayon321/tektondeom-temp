@@ -10,6 +10,7 @@ metadata:
 spec:
   results:
   - name: environment
+  - name: image_tag
   params:
   - name: git_repo_url
     type: string
@@ -41,6 +42,14 @@ spec:
       image: cgr.dev/chainguard/git:root-2.39@sha256:7759f87050dd8bacabe61354d75ccd7f864d6b6f8ec42697db7159eccd491139
       workingDir: "$(workspaces.app-source.path)"
       script: |
-        environment=$(echo $ext_branch | cut -d '-' -f 3)
+        if [[ $ext_branch == refs-heads-* ]]; then
+            environment=$(echo $ext_branch | cut -d '-' -f 3)
+        elif [[ $ext_branch == refs-tags-* ]]; then
+            environment=$(echo $ext_branch | cut -d '-' -f 2)
+            image_tag=$(echo $ext_branch | cut -d '-' -f 3)
+        else
+            environment="unknown"  # Handle other cases if needed
+        fi  
         printf "%s" "${environment}" > "$(results.environment.path)"
+        printf "%s" "${image_tag}" > "$(results.image_tag.path)"
  

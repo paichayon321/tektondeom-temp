@@ -137,7 +137,7 @@ spec:
         - name: SONAR_HOST_URL
           value: 'http://sonarqube-route-devopstools.apps.524vf.dynamic.opentlc.com/'
         - name: SONAR_PROJECT_KEY
-          value: $(params.git_repo_name)
+          value: $(params.git_repo_name)-$(params.ext_branch)
         - name: PROJECT_VERSION
           value: $(tasks.initial-info.results.image_tag)
         - name: SOURCE_TO_SCAN

@@ -94,6 +94,44 @@ spec:
       workspaces:
         - name: app-source
           workspace: source
+    - name: unitest
+      params:
+        - name: MAVEN_IMAGE
+          value: >-
+            registry.redhat.io/ubi8/openjdk-17@sha256:0d12c4097e098b62f78a7a31c0d711d78e1e5a53f4c007b9a5fc6cc6ab4dc018
+        - name: GOALS
+          value:
+            - test
+        - name: MAVEN_MIRROR_URL
+          value: ''
+        - name: SERVER_USER
+          value: ''
+        - name: SERVER_PASSWORD
+          value: ''
+        - name: PROXY_USER
+          value: ''
+        - name: PROXY_PASSWORD
+          value: ''
+        - name: PROXY_PORT
+          value: ''
+        - name: PROXY_HOST
+          value: ''
+        - name: PROXY_NON_PROXY_HOSTS
+          value: ''
+        - name: PROXY_PROTOCOL
+          value: ''
+        - name: CONTEXT_DIR
+          value: .
+      runAfter:
+        - initial-info
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: source
+        - name: maven-settings
+          workspace: source
     - name: update-dev
       params:
         - name: message

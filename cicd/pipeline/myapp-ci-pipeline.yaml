@@ -3,33 +3,6 @@ kind: Pipeline
 metadata:
   name: myapp-ci-pipeline
 spec:
-  finally:
-    - name: clean-taskrun
-      params:
-        - name: TKN_IMAGE
-          value: >-
-            registry.redhat.io/openshift-pipelines/pipelines-cli-tkn-rhel8@sha256:72394dfaed68c4b6b490c3c971fb1d9f0139f8656f6672b55b8e02ea98d1298d
-        - name: SCRIPT
-          value: tkn $@
-        - name: ARGS
-          value:
-            - taskrun delete --keep 20 -f
-      taskRef:
-        kind: ClusterTask
-        name: tkn
-    - name: clean-pipelinerun
-      params:
-        - name: TKN_IMAGE
-          value: >-
-            registry.redhat.io/openshift-pipelines/pipelines-cli-tkn-rhel8@sha256:72394dfaed68c4b6b490c3c971fb1d9f0139f8656f6672b55b8e02ea98d1298d
-        - name: SCRIPT
-          value: tkn $@
-        - name: ARGS
-          value:
-            - pipelinerun delete --keep 5 -f
-      taskRef:
-        kind: ClusterTask
-        name: tkn
   params:
     - default: 'https://github.com/paichayon321/spring-web-quickstart.git'
       description: The git repository url
@@ -158,6 +131,33 @@ spec:
       workspaces:
         - name: app-source
           workspace: source
+  finally:
+    - name: clean-taskrun
+      params:
+        - name: TKN_IMAGE
+          value: >-
+            registry.redhat.io/openshift-pipelines/pipelines-cli-tkn-rhel8@sha256:72394dfaed68c4b6b490c3c971fb1d9f0139f8656f6672b55b8e02ea98d1298d
+        - name: SCRIPT
+          value: tkn $@
+        - name: ARGS
+          value:
+            - taskrun delete --keep 20 -f
+      taskRef:
+        kind: ClusterTask
+        name: tkn
+    - name: clean-pipelinerun
+      params:
+        - name: TKN_IMAGE
+          value: >-
+            registry.redhat.io/openshift-pipelines/pipelines-cli-tkn-rhel8@sha256:72394dfaed68c4b6b490c3c971fb1d9f0139f8656f6672b55b8e02ea98d1298d
+        - name: SCRIPT
+          value: tkn $@
+        - name: ARGS
+          value:
+            - pipelinerun delete --keep 5 -f
+      taskRef:
+        kind: ClusterTask
+        name: tkn
   workspaces:
     - name: source
 

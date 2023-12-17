@@ -4,11 +4,11 @@ metadata:
   name: myapp-triggerbinding
 spec:
   params:
-  - name: git-repo-url
+  - name: git_repo_url
     value: $(body.repository.url)
-  - name: git-repo-name
+  - name: git_repo_name
     value: $(body.repository.name)
-  - name: git-revision
+  - name: git_revision
     value: $(body.head_commit.id)
-  - name: ext-branch 
+  - name: ext_branch 
     value: $(extensions.branch)

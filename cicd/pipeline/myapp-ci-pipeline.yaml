@@ -6,17 +6,17 @@ spec:
   params:
     - default: 'https://github.com/paichayon321/spring-web-quickstart.git'
       description: The git repository url
-      name: git-repo-url
+      name: git_repo_url
       type: string
     - default: main
       description: The git revision
-      name: git-revision
+      name: git_revision
       type: string
     - default: spring-web-quickstart
       description: The name of the deployment to be created / patched
-      name: git-repo-name
+      name: git_repo_name
       type: string
-    - name: ext-branch
+    - name: ext_branch
       type: string
       default: default
     - name: environment
@@ -26,9 +26,9 @@ spec:
     - name: git-clone
       params:
         - name: url
-          value: $(params.git-repo-url)
+          value: $(params.git_repo_url)
         - name: revision
-          value: $(params.git-revision)
+          value: $(params.git_revision)
         - name: refspec
           value: ''
         - name: submodules
@@ -62,7 +62,7 @@ spec:
         kind: ClusterTask
         name: git-clone
       when:
-        - input: $(params.ext-branch)
+        - input: $(params.ext_branch)
           operator: notin
           values:
             - refs-heads-main
@@ -72,7 +72,7 @@ spec:
     - name: check-branch
       params:
         - name: cmd
-          value: echo " branch = $(params.ext-branch)"
+          value: echo " branch = $(params.ext_branch)"
       runAfter:
         - git-clone
       taskRef:
@@ -83,14 +83,14 @@ spec:
           workspace: source
     - name: debug-git-task
       params:
-        - name: git-repo-url
-          value: $(params.git-repo-url)
-        - name: git-revision
-          value: $(params.git-revision)
-        - name: git-repo-name
-          value: $(params.git-repo-name)
-        - name: ext-branch
-          value: $(params.ext-branch)
+        - name: git_repo_url
+          value: $(params.git_repo_url)
+        - name: git_revision
+          value: $(params.git_revision)
+        - name: git_repo_name
+          value: $(params.git_repo_name)
+        - name: ext_branch
+          value: $(params.ext_branch)
         - name: environment
           value: $(params.environment)  
       runAfter:
@@ -112,7 +112,7 @@ spec:
         kind: ClusterTask
         name: echo
       when:
-        - input: $(params.ext-branch)
+        - input: $(params.ext_branch)
           operator: in
           values:
             - refs-heads-dev

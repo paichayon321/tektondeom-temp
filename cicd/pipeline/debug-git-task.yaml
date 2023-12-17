@@ -9,16 +9,16 @@ metadata:
     tekton.dev/displayName: "debug-git-task"
 spec:
   params:
-  - name: git-repo-url
+  - name: git_repo_url
     type: string
     default: ""
-  - name: git-revision
+  - name: git_revision
     type: string
     default: ""
-  - name: git-repo-name
+  - name: git_repo_name
     type: string
     default: ""
-  - name: ext-branch
+  - name: ext_branch
     type: string
     default: ""
   - name: environment
@@ -30,14 +30,14 @@ spec:
     - name: app-source
   steps:
     - env:
-        - name: git-repo-url
-          value: $(params.git-repo-url)
-        - name: git-revision
-          value: $(params.git-revision)
-        - name: git-repo-name
-          value: $(params.git-repo-name)
-        - name: ext-branch
-          value: $(params.ext-branch)
+        - name: git_repo_url
+          value: $(params.git_repo_url)
+        - name: git_revision
+          value: $(params.git_revision)
+        - name: git_repo_name
+          value: $(params.git_repo_name)
+        - name: ext_branch
+          value: $(params.ext_branch)
         - name: environment
           value: $(params.environment)          
       name: debug-git-task

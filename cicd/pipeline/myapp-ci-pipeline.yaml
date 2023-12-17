@@ -92,17 +92,21 @@ spec:
     - name: update-dev
       params:
         - name: message
-          value: Update dev environment
+          value: update dev environment with image tag $(tasks.get-branch-task.results.image_tag)
+        - name: environment
+          value: $(tasks.get-branch-task.results.environment)
+        - name: image_tag
+          value: $(tasks.get-branch-task.results.image_tag)
       runAfter:
         - get-branch-task
       taskRef:
         kind: ClusterTask
         name: echo
       when:
-        - input: $(params.ext_branch)
+        - input: $(tasks.get-branch-task.results.environment)
           operator: in
           values:
-            - refs-heads-dev
+            - "dev"
     - name: update-sit
       params:
         - name: message

@@ -69,38 +69,6 @@ spec:
       workspaces:
         - name: output
           workspace: source
-    - name: check-branch
-      params:
-        - name: cmd
-          value: echo " branch = $(params.ext_branch)"
-      runAfter:
-        - git-clone
-      taskRef:
-        kind: ClusterTask
-        name: bash
-      workspaces:
-        - name: source
-          workspace: source
-    - name: debug-git-task
-      params:
-        - name: git_repo_url
-          value: $(params.git_repo_url)
-        - name: git_revision
-          value: $(params.git_revision)
-        - name: git_repo_name
-          value: $(params.git_repo_name)
-        - name: ext_branch
-          value: $(params.ext_branch)
-        - name: environment
-          value: $(params.environment)  
-      runAfter:
-        - git-clone
-      taskRef:
-        kind: Task
-        name: debug-git-task
-      workspaces:
-        - name: app-source
-          workspace: source
     - name: get-branch-task
       params:
         - name: git_repo_url
@@ -126,7 +94,6 @@ spec:
         - name: message
           value: Update dev environment
       runAfter:
-        - check-branch
         - get-branch-task
       taskRef:
         kind: ClusterTask
@@ -139,13 +106,12 @@ spec:
     - name: update-sit
       params:
         - name: message
-          value: update sit environment $image_tag
+          value: update sit environment with image tag $(tasks.get-branch-task.results.image_tag)
         - name: environment
           value: $(tasks.get-branch-task.results.environment)
         - name: image_tag
           value: $(tasks.get-branch-task.results.image_tag)
       runAfter:
-        - check-branch
         - get-branch-task
       taskRef:
         kind: ClusterTask

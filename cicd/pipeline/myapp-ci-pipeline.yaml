@@ -132,6 +132,11 @@ spec:
             - "tags"
   finally:
     - name: clean-taskrun
+      when:
+        - input: $(params.ext_branch)
+          operator: notin
+          values:
+            - "refs-heads-main"    
       params:
         - name: TKN_IMAGE
           value: >-
@@ -145,6 +150,11 @@ spec:
         kind: ClusterTask
         name: tkn
     - name: clean-pipelinerun
+      when:
+        - input: $(params.ext_branch)
+          operator: notin
+          values:
+            - "refs-heads-main"
       params:
         - name: TKN_IMAGE
           value: >-

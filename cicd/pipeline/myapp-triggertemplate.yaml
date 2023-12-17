@@ -33,7 +33,7 @@ spec:
       - name: ext-branch
         value: $(tt.params.ext-branch)
       - name: environment
-        value: $(tt.params.environment)
+        value: "Default"
       workspaces:
       - name: source
         persistentVolumeClaim:

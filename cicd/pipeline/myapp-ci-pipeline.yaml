@@ -128,6 +128,7 @@ spec:
       runAfter:
         - check-branch
         - debug-git-task
+        - get-branch-task
       taskRef:
         kind: ClusterTask
         name: echo
@@ -140,9 +141,12 @@ spec:
       params:
         - name: message
           value: update sit environment
+        - name: environment
+          value: $(task.get-branch-task.results.environment)
       runAfter:
         - check-branch
         - debug-git-task
+        - get-branch-task
       taskRef:
         kind: ClusterTask
         name: echo
@@ -150,7 +154,7 @@ spec:
         - input: $(params.environment)
           operator: in
           values:
-            - sit
+            - tags
   finally:
     - name: clean-taskrun
       params:

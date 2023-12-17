@@ -43,4 +43,4 @@ spec:
       script: |
         environment=$(echo $ext_branch | cut -d '-' -f 3)
         printf "%s" "${environment}" > "$(results.environment.path)"
-        sleep infinity
+ 

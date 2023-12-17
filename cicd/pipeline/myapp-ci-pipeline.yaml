@@ -151,7 +151,7 @@ spec:
         kind: ClusterTask
         name: echo
       when:
-        - input: $(params.environment)
+        - input: $(task.get-branch-task.results.environment)
           operator: in
           values:
             - tags

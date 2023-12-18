@@ -257,6 +257,8 @@ spec:
       workspaces:
         - name: source
           workspace: source
+        - name: secret
+          workspace: secret
     - name: update-dev
       params:
         - name: message

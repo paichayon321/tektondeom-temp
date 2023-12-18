@@ -215,11 +215,11 @@ spec:
         - name: STORAGE_DRIVER
           value: vfs
         - name: DOCKERFILE
-          value: ./Dockerfile
+          value: ./docker/Dockerfile
         - name: CONTEXT
           value: .
         - name: TLSVERIFY
-          value: 'true'
+          value: 'false'
         - name: FORMAT
           value: oci
         - name: BUILD_EXTRA_ARGS

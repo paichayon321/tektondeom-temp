@@ -71,7 +71,8 @@ spec:
         echo $(params.DOCKERFILE) 
         echo $(params.IMAGE)
         echo $(params.CONTEXT)
-        echoh $(params.TLSVERIFY)
+        echo $(params.TLSVERIFY)
+        pause
         buildah --storage-driver=$(params.STORAGE_DRIVER) build \
           $(params.BUILD_EXTRA_ARGS) --format=$(params.FORMAT) \
           --tls-verify=$(params.TLSVERIFY) --no-cache \

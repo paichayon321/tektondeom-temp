@@ -2,23 +2,41 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: myapp
+  namespace: dev
   labels:
     app: myapp
 spec:
-  serviceAccountName: pipeline
   replicas: 1
   selector:
     matchLabels:
       app: myapp
   template:
     metadata:
+      creationTimestamp: null
       labels:
         app: myapp
+        deployment: myapp
     spec:
       containers:
         - name: myapp
-          image: image-registry.openshift-image-registry.svc:5000/cicd/spring-web-quickstart:dsdsds
-          imagePullPolicy: Always
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/cicd/spring-web-quickstart:dsdsds
           ports:
             - containerPort: 8080
               protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8778
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

@@ -34,7 +34,8 @@ spec:
         GIT_CREDS_USR=$(cat $(workspaces.secret.path)/user)
         echo $GIT_CREDS_USR
         GIT_CREDS_PSW=$(cat $(workspaces.secret.path)/token)
-        git clone https://$(GIT_CREDS_USR):$(GIT_CREDS_PSW)@github.com/paichayon321/tekton-pipeline.git
+        echo $GIT_CREDS_PWD
+        git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git
         cd tekton-pipeline
         git checkout origin/main
         

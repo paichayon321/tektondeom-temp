@@ -8,3 +8,6 @@ buildah --storage-driver=vfs push --format oci --tls-verify=false default-route-
 
 
 oc policy add-role-to-user system:image-puller system:serviceaccount:dev:default --namespace=cicd
+
+
+kubeseal < github-pat-secret.yaml  > github-pat-secret-sealed.yaml  -o yaml -n cicd

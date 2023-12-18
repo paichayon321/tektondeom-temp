@@ -205,6 +205,40 @@ spec:
           workspace: source
         - name: maven-settings
           workspace: source
+    - name: buildimage
+      params:
+        - name: IMAGE
+          value: default
+        - name: BUILDER_IMAGE
+          value: >-
+            registry.redhat.io/rhel8/buildah@sha256:3c2ea396a114221575a4031d90d28c43563f7b96288374e0ba8b22de3ed97b5a
+        - name: STORAGE_DRIVER
+          value: vfs
+        - name: DOCKERFILE
+          value: ./Dockerfile
+        - name: CONTEXT
+          value: ./docker
+        - name: TLSVERIFY
+          value: 'true'
+        - name: FORMAT
+          value: oci
+        - name: BUILD_EXTRA_ARGS
+          value: ''
+        - name: PUSH_EXTRA_ARGS
+          value: ''
+        - name: SKIP_PUSH
+          value: 'false'
+      runAfter:
+        - compile-mvn
+        - sonarqube-scanner
+      taskRef:
+        kind: Task
+        name: buildah-custom
+      workspaces:
+        - name: source
+          workspace: source
+        - name: dockerconfig
+          workspace: source
     - name: update-dev
       params:
         - name: message
@@ -214,8 +248,7 @@ spec:
         - name: image_tag
           value: $(tasks.initial-info.results.image_tag)
       runAfter:
-        - sonarqube-scanner
-        - compile-mvn
+        - buildimage
       taskRef:
         kind: ClusterTask
         name: echo
@@ -233,8 +266,7 @@ spec:
         - name: image_tag
           value: $(tasks.initial-info.results.image_tag)
       runAfter:
-        - sonarqube-scanner
-        - compile-mvn
+        - buildimage
       taskRef:
         kind: ClusterTask
         name: echo

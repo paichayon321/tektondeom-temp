@@ -5,7 +5,7 @@ metadata:
     operator.tekton.dev/last-applied-hash: a1002d2bf1b4bfa198fa9d68e4a2754e0e742068a26d29656d95331b714ad0b8
     tekton.dev/pipelines.minVersion: 0.12.1
     tekton.dev/tags: image-build-push
-  name: buildah
+  name: buildah-custom
   labels:
     app.kubernetes.io/version: '0.1'
     operator.tekton.dev/operand-name: openshift-pipelines-addons

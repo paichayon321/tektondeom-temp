@@ -38,3 +38,7 @@ spec:
       - name: source
         persistentVolumeClaim:
           claimName: myapp-source
+      - name: secret
+        secret:
+          secretName: github-pat-secret
+        

@@ -150,9 +150,9 @@ spec:
         - name: SONAR_LOGIN_KEY
           value: admin
         - name: SONAR_PASSWORD_KEY
-          value: squ_fe4c04a044073af1ca06776b7227774102786ca8
+          value: squ_8f7ec6ef6d6d83ba222a3cdfaf42ed5d31b790ed
         - name: SONAR_LOGIN_TOKEN
-          value: squ_fe4c04a044073af1ca06776b7227774102786ca8
+          value: squ_8f7ec6ef6d6d83ba222a3cdfaf42ed5d31b790ed
       runAfter:
         - unitest
       taskRef:

@@ -68,7 +68,7 @@ spec:
       script: |
         pwd
         ls -la
-        buildah --storage-driver=$(params.STORAGE_DRIVER) bud \
+        buildah --storage-driver=$(params.STORAGE_DRIVER) build \
           $(params.BUILD_EXTRA_ARGS) --format=$(params.FORMAT) \
           --tls-verify=$(params.TLSVERIFY) --no-cache \
           -f $(params.DOCKERFILE) -t $(params.IMAGE) $(params.CONTEXT)

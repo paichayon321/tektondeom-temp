@@ -28,4 +28,4 @@ spec:
         pwd
         ls -la
         git --help
-        jq
+        sleep infinity

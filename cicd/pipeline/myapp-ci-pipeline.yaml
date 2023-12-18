@@ -165,24 +165,6 @@ spec:
           workspace: source
         - name: sonar-credentials
           workspace: source
-    - name: update-dev
-      params:
-        - name: message
-          value: update dev environment with image tag $(tasks.initial-info.results.image_tag)
-        - name: environment
-          value: $(tasks.initial-info.results.environment)
-        - name: image_tag
-          value: $(tasks.initial-info.results.image_tag)
-      runAfter:
-        - sonarqube-scanner
-      taskRef:
-        kind: ClusterTask
-        name: echo
-      when:
-        - input: $(tasks.initial-info.results.environment)
-          operator: in
-          values:
-            - "dev"
     - name: compile-mvn
       params:
         - name: MAVEN_IMAGE
@@ -214,7 +196,7 @@ spec:
         - name: CONTEXT_DIR
           value: .
       runAfter:
-        - sonarqube-scanner
+        - unitest
       taskRef:
         kind: ClusterTask
         name: maven
@@ -223,6 +205,25 @@ spec:
           workspace: source
         - name: maven-settings
           workspace: source
+    - name: update-dev
+      params:
+        - name: message
+          value: update dev environment with image tag $(tasks.initial-info.results.image_tag)
+        - name: environment
+          value: $(tasks.initial-info.results.environment)
+        - name: image_tag
+          value: $(tasks.initial-info.results.image_tag)
+      runAfter:
+        - sonarqube-scanner
+        - compile-mvn
+      taskRef:
+        kind: ClusterTask
+        name: echo
+      when:
+        - input: $(tasks.initial-info.results.environment)
+          operator: in
+          values:
+            - "dev"
     - name: update-sit
       params:
         - name: message
@@ -233,6 +234,7 @@ spec:
           value: $(tasks.initial-info.results.image_tag)
       runAfter:
         - sonarqube-scanner
+        - compile-mvn
       taskRef:
         kind: ClusterTask
         name: echo

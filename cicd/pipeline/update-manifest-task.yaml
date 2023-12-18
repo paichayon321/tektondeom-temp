@@ -29,10 +29,22 @@ spec:
         ls -la
         git --help
         git clone https://github.com/paichayon321/tekton-pipeline.git
+        #git clone https://${GIT_CREDS_USR}:${GIT_CREDS_PSW}@192.168.77.24/devops/platform.git
+        #cd platform
+        #git checkout origin/main
+        #yq -i '.spec.template.spec.containers[0].image = "'''+image_name_tag+'''"' prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
+        #git add prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
+        #git commit -m 'update image '''+image_name_tag+''' on '''+environment+''' environment'
+        #git push https://${GIT_CREDS_USR}:${GIT_CREDS_PSW}@192.168.77.24/devops/platform.git HEAD:main.   
+
     - name: update-manifest
       image: stedolan/jq
       workingDir: $(workspaces.source.path)      
       script: |
         pwd
         ls -la
-        jq
+    - name: sleep
+      image: registry.redhat.io/ubi7/ubi-minimal
+      workingDir: $(workspaces.source.path)  
+      script: |
+        sleep infinity

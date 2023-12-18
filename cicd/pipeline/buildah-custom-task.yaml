@@ -24,7 +24,7 @@ spec:
       description: Set buildah storage driver
       name: STORAGE_DRIVER
       type: string
-    - default: ./Dockerfile
+    - default: ./docker/Dockerfile
       description: Path to the Dockerfile to build.
       name: DOCKERFILE
       type: string

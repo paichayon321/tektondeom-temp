@@ -332,4 +332,5 @@ spec:
         name: tkn
   workspaces:
     - name: source
+    - name: secret
 

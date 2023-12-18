@@ -66,44 +66,13 @@ spec:
       name: build-and-push
       resources: {}
       script: |
-        pwd
-        ls -la
-        echo $(params.DOCKERFILE) 
-        echo $(params.IMAGE)
-        echo $(params.CONTEXT)
-        echo $(params.TLSVERIFY)
-        sleep infinity
-        buildah --storage-driver=$(params.STORAGE_DRIVER) build \
-          $(params.BUILD_EXTRA_ARGS) --format=$(params.FORMAT) \
-          --tls-verify=$(params.TLSVERIFY) --no-cache \
-          -f $(params.DOCKERFILE) -t $(params.IMAGE) $(params.CONTEXT)
+        buildah --storage-driver=vfs build --format oci --tls-verify=false --no-cache \
+         -f ./docker/Dockerfile  \ 
+         -t image-registry.openshift-image-registry.svc:5000/cicd/$(params.git_repo_name):$(tasks.initial-info.results.image_tag)
+        
+        buildah --storage-driver=vfs push --format oci --tls-verify=false \
+         image-registry.openshift-image-registry.svc:5000/cicd/$(params.git_repo_name):$(tasks.initial-info.results.image_tag) docker://$(params.git_repo_name):$(tasks.initial-info.results.image_tag)
 
-        [[ "$(params.SKIP_PUSH)" == "true" ]] && echo "Push skipped" && exit 0
-
-        if [[ "$(workspaces.dockerconfig.bound)" == "true" ]]; then
-
-          # if config.json exists at workspace root, we use that
-          if test -f "$(workspaces.dockerconfig.path)/config.json"; then
-            export DOCKER_CONFIG="$(workspaces.dockerconfig.path)"
-
-          # else we look for .dockerconfigjson at the root
-          elif test -f "$(workspaces.dockerconfig.path)/.dockerconfigjson"; then
-            cp "$(workspaces.dockerconfig.path)/.dockerconfigjson" "$HOME/.docker/config.json"
-            export DOCKER_CONFIG="$HOME/.docker"
-
-          # need to error out if neither files are present
-          else
-            echo "neither 'config.json' nor '.dockerconfigjson' found at workspace root"
-            exit 1
-          fi
-        fi
-
-        buildah --storage-driver=$(params.STORAGE_DRIVER) push \
-          $(params.PUSH_EXTRA_ARGS) --tls-verify=$(params.TLSVERIFY) \
-          --digestfile /tmp/image-digest $(params.IMAGE) \
-          docker://$(params.IMAGE)
-        cat /tmp/image-digest | tee $(results.IMAGE_DIGEST.path)
-        echo "$(params.IMAGE)" | tee $(results.IMAGE_URL.path)
       securityContext:
         capabilities:
           add:

@@ -15,34 +15,37 @@ spec:
   description: >-
     update-manifest-task
   workspaces:
-    - description: Workspace containing the code
-      name: source
+    - name: source
+      description: Workspace containing the code
+    - name: secret
+      description: GITHUB PAT secret - user and token 
   steps:
     - env:
         - name: git_repo_name
           value: $(params.git_repo_name)       
-      name: clone-repo
+      name: clone-platform-repo
       image: cgr.dev/chainguard/git:root-2.39@sha256:7759f87050dd8bacabe61354d75ccd7f864d6b6f8ec42697db7159eccd491139
       workingDir: $(workspaces.source.path)
       script: |
-        pwd
-        ls -la
-        git --help
-        git clone https://github.com/paichayon321/tekton-pipeline.git
-        #git clone https://${GIT_CREDS_USR}:${GIT_CREDS_PSW}@192.168.77.24/devops/platform.git
-        #cd platform
-        #git checkout origin/main
+        #git clone https://github.com/paichayon321/tekton-pipeline.git
+        GIT_CREDS_USR=$(cat $(workspaces.secret.path)/user)
+        GIT_CREDS_PSW=$(cat $(workspaces.secret.path)/token)
+        git clone https://$(GIT_CREDS_USR):$(GIT_CREDS_PSW)@github.com/paichayon321/tekton-pipeline.git
+        cd tekton-pipeline
+        git checkout origin/main
+        
         #yq -i '.spec.template.spec.containers[0].image = "'''+image_name_tag+'''"' prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
         #git add prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
         #git commit -m 'update image '''+image_name_tag+''' on '''+environment+''' environment'
         #git push https://${GIT_CREDS_USR}:${GIT_CREDS_PSW}@192.168.77.24/devops/platform.git HEAD:main.   
 
     - name: update-manifest
-      image: stedolan/jq
+      image: docker.io/mikefarah/yq:4.27.5@sha256:2be3626ed633fbe1fc33ee9343a1256a6be53334412b2251b9a859f8c145bb53
       workingDir: $(workspaces.source.path)      
       script: |
-        pwd
-        ls -la
+        yq -i '.spec.template.spec.containers[0].image = "xxxx"' tekton-pipeline/app/myapp/env/dev/deployment.yaml
+        #git add prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
+
     - name: sleep
       image: registry.redhat.io/ubi7/ubi-minimal
       workingDir: $(workspaces.source.path)  

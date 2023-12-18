@@ -5,7 +5,7 @@ metadata:
   labels:
     app: myapp
 spec:
-  serviceaccount: pipeline
+  serviceAccountName: pipeline
   replicas: 1
   selector:
     matchLabels:

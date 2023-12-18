@@ -217,7 +217,7 @@ spec:
         - name: DOCKERFILE
           value: ./Dockerfile
         - name: CONTEXT
-          value: ./docker
+          value: .
         - name: TLSVERIFY
           value: 'true'
         - name: FORMAT

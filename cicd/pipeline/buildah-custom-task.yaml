@@ -13,6 +13,8 @@ metadata:
 spec:
   params:
     - name: image_tag
+    - name: app_name
+    - name: image_repo_url
     - description: Reference of the image buildah will produce.
       name: IMAGE
       type: string
@@ -67,9 +69,9 @@ spec:
       name: build-and-push
       resources: {}
       script: |
-        buildah --storage-driver=vfs build --format oci --tls-verify=false --no-cache -f ./docker/Dockerfile  -t default-route-openshift-image-registry.apps.524vf.dynamic.opentlc.com/cicd/spring-web-quickstart:$(params.image_tag)
-
-        buildah --storage-driver=vfs push --format oci --tls-verify=false default-route-openshift-image-registry.apps.524vf.dynamic.opentlc.com/cicd/spring-web-quickstart:$(params.image_tag) docker://default-route-openshift-image-registry.apps.524vf.dynamic.opentlc.com/cicd/spring-web-quickstart:$(params.image_tag)
+        buildah --storage-driver=vfs build --format oci --tls-verify=false --no-cache -f ./docker/Dockerfile  -t $(params.image_repo_url)/$(params.app_name):$(params.image_tag)
+        # default-route-openshift-image-registry.apps.524vf.dynamic.opentlc.com/cicd
+        buildah --storage-driver=vfs push --format oci --tls-verify=false $(params.image_repo_url)/$(params.app_name):$(params.image_tag) docker://$(params.image_repo_url)/$(params.app_name):$(params.image_tag)
 
       securityContext:
         capabilities:

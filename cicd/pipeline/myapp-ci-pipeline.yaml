@@ -212,7 +212,7 @@ spec:
         - name: app_name
           value: $(params.git_repo_name)
         - name: image_repo_url
-          value: ''
+          value: default-route-openshift-image-registry.apps.524vf.dynamic.opentlc.com/cicd
         - name: IMAGE
           value: default
         - name: BUILDER_IMAGE

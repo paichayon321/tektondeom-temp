@@ -212,7 +212,7 @@ spec:
         - name: app_name
           value: $(params.git_repo_name)
         - name: image_repo_url
-          value: 'default-route-openshift-image-registry.apps.524vf.dynamic.opentlc.com/cicd'
+          value: ''
         - name: IMAGE
           value: default
         - name: BUILDER_IMAGE
@@ -244,6 +244,18 @@ spec:
         - name: source
           workspace: source
         - name: dockerconfig
+          workspace: source
+    - name: update-manifest-task
+      params:
+        - name: git_repo_name
+          value: spring
+      runAfter:
+        - buildimage
+      taskRef:
+        kind: Task
+        name: update-manifest-task
+      workspaces:
+        - name: source
           workspace: source
     - name: update-dev
       params:

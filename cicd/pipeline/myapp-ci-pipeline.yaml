@@ -207,6 +207,8 @@ spec:
           workspace: source
     - name: buildimage
       params:
+        - name: image_tag
+          value: $(tasks.initial-info.results.image_tag)
         - name: IMAGE
           value: default
         - name: BUILDER_IMAGE

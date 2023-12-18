@@ -1,0 +1,18 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: test
+  namespace: dev
+  labels:
+    app: myapp
+spec:
+  path: /greeting
+  to:
+    kind: Service
+    name: myapp
+    weight: 100
+  port:
+    targetPort: port-1
+  tls:
+    termination: edge
+  wildcardPolicy: None

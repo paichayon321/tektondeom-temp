@@ -2,7 +2,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: myapp
-  namespace: dev
   labels:
     app: myapp
     app.kubernetes.io/instance: myapp-dev

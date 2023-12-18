@@ -68,10 +68,10 @@ spec:
       script: |
         buildah --storage-driver=vfs build --format oci --tls-verify=false --no-cache \
          -f ./docker/Dockerfile  \ 
-         -t image-registry.openshift-image-registry.svc:5000/cicd/$(params.git_repo_name):$(tasks.initial-info.results.image_tag)
+         -t image-registry.openshift-image-registry.svc.5000/cicd/$(params.git_repo_name):$(tasks.initial-info.results.image_tag)
         
         buildah --storage-driver=vfs push --format oci --tls-verify=false \
-         image-registry.openshift-image-registry.svc:5000/cicd/$(params.git_repo_name):$(tasks.initial-info.results.image_tag) \
+         image-registry.openshift-image-registry.svc.5000/cicd/$(params.git_repo_name):$(tasks.initial-info.results.image_tag) \
           docker://$(params.git_repo_name):$(tasks.initial-info.results.image_tag)
 
       securityContext:

@@ -72,7 +72,7 @@ spec:
         echo $(params.IMAGE)
         echo $(params.CONTEXT)
         echo $(params.TLSVERIFY)
-        pause
+        sleep infinity
         buildah --storage-driver=$(params.STORAGE_DRIVER) build \
           $(params.BUILD_EXTRA_ARGS) --format=$(params.FORMAT) \
           --tls-verify=$(params.TLSVERIFY) --no-cache \

@@ -51,7 +51,7 @@ spec:
         whoami
         ls -la 
         ls -la tekton-pipeline/app/myapp/env/dev
-        yq -i '.spec.template.spec.containers[0].image = "xxxx"' tekton-pipeline/app/myapp/env/dev/deployment.yaml
+        yq -i '.spec.template.spec.containers[0].image = xxxx' tekton-pipeline/app/myapp/env/dev/deployment.yaml
         #git add prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
 
     - name: sleep

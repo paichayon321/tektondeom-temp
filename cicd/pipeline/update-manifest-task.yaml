@@ -28,6 +28,7 @@ spec:
         pwd
         ls -la
         git --help
+        git clone https://github.com/paichayon321/tekton-pipeline.git
     - name: update-manifest
       image: stedolan/jq
       workingDir: $(workspaces.source.path)      

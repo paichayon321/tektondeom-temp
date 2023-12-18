@@ -68,6 +68,10 @@ spec:
       script: |
         pwd
         ls -la
+        echo $(params.DOCKERFILE) 
+        echo $(params.IMAGE)
+        echo $(params.CONTEXT)
+        echoh $(params.TLSVERIFY)
         buildah --storage-driver=$(params.STORAGE_DRIVER) build \
           $(params.BUILD_EXTRA_ARGS) --format=$(params.FORMAT) \
           --tls-verify=$(params.TLSVERIFY) --no-cache \

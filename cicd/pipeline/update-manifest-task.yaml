@@ -45,6 +45,9 @@ spec:
       image: docker.io/mikefarah/yq:4.27.5@sha256:2be3626ed633fbe1fc33ee9343a1256a6be53334412b2251b9a859f8c145bb53
       workingDir: $(workspaces.source.path)      
       script: |
+        whoami
+        ls -la 
+        ls -la tekton-pipeline/app/myapp/env/dev
         yq -i '.spec.template.spec.containers[0].image = "xxxx"' tekton-pipeline/app/myapp/env/dev/deployment.yaml
         #git add prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
 

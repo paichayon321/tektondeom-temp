@@ -15,6 +15,7 @@ spec:
     - name: image_tag
     - name: app_name
     - name: image_repo_url
+    - name: environment
     - description: Reference of the image buildah will produce.
       name: IMAGE
       type: string
@@ -71,6 +72,7 @@ spec:
       script: |
         buildah --storage-driver=vfs build --format oci --tls-verify=false --no-cache -f ./docker/Dockerfile  -t $(params.image_repo_url)/$(params.app_name):$(params.image_tag)
         # default-route-openshift-image-registry.apps.524vf.dynamic.opentlc.com/cicd
+        echo $(param.environment)
         buildah --storage-driver=vfs push --format oci --tls-verify=false $(params.image_repo_url)/$(params.app_name):$(params.image_tag) docker://$(params.image_repo_url)/$(params.app_name):$(params.image_tag)
 
       securityContext:

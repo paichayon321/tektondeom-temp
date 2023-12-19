@@ -245,7 +245,7 @@ spec:
           workspace: source
         - name: dockerconfig
           workspace: source
-    - name: update-manifest-task
+    - name: update-manifest-dev
       params:
         - name: git_repo_name
           value: $(params.git_repo_name)
@@ -265,37 +265,31 @@ spec:
           workspace: source
         - name: secret
           workspace: secret
-    - name: update-dev
-      params:
-        - name: message
-          value: update dev environment with image tag $(tasks.initial-info.results.image_tag)
-        - name: environment
-          value: $(tasks.initial-info.results.environment)
-        - name: image_tag
-          value: $(tasks.initial-info.results.image_tag)
-      runAfter:
-        - buildimage
-      taskRef:
-        kind: ClusterTask
-        name: echo
       when:
         - input: $(tasks.initial-info.results.environment)
           operator: in
           values:
             - "dev"
-    - name: update-sit
+    - name: update-manifest-sit
       params:
-        - name: message
-          value: update sit environment with image tag $(tasks.initial-info.results.image_tag)
+        - name: git_repo_name
+          value: $(params.git_repo_name)
         - name: environment
           value: $(tasks.initial-info.results.environment)
         - name: image_tag
           value: $(tasks.initial-info.results.image_tag)
+        - name: image_repo_url
+          value: image-registry.openshift-image-registry.svc:5000/cicd
       runAfter:
         - buildimage
       taskRef:
-        kind: ClusterTask
-        name: echo
+        kind: Task
+        name: update-manifest-task
+      workspaces:
+        - name: source
+          workspace: source
+        - name: secret
+          workspace: secret
       when:
         - input: $(tasks.initial-info.results.environment)
           operator: in

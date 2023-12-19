@@ -72,7 +72,9 @@ spec:
       script: |
         buildah --storage-driver=vfs build --format oci --tls-verify=false --no-cache -f ./docker/Dockerfile  -t $(params.image_repo_url)/$(params.app_name):$(params.image_tag)
         # default-route-openshift-image-registry.apps.524vf.dynamic.opentlc.com/cicd
+        echo "####################"
         echo $(param.environment)
+        echo "####################"
         buildah --storage-driver=vfs push --format oci --tls-verify=false $(params.image_repo_url)/$(params.app_name):$(params.image_tag) docker://$(params.image_repo_url)/$(params.app_name):$(params.image_tag)
 
       securityContext:

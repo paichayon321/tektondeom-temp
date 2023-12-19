@@ -26,7 +26,7 @@ spec:
         - name: environment
           value: $(params.environment) 
         - name: image_tag
-          value: $(image_tag)               
+          value: $(params.image_tag)               
         - name: GIT_CREDS_USR
         - name: GIT_CREDS_PSW
       name: clone-platform-repo
@@ -45,10 +45,10 @@ spec:
         git config --global user.name "tekton_pipeline"
         git config --global user.email "tektonPipeline@domain.local"
         ls -la /workspace/source/tekton-pipeline/app/myapp/env/dev
-        yq -i '.spec.template.spec.containers[0].image = "tretre:xxx"' /workspace/source/tekton-pipeline/app/myapp/env/dev/deployment.yaml
+        yq -i '.spec.template.spec.containers[0].image = "$(params.git_repo_name):$(params.image_tag)"' /workspace/source/tekton-pipeline/app/myapp/env/dev/deployment.yaml
         #cat tekton-pipeline/app/myapp/env/dev/deployment.yaml
         #yq -i '.spec.template.spec.containers[0].image = "'''+image_name_tag+'''"' prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
         git add /workspace/source/tekton-pipeline/app/myapp/env/dev/deployment.yaml
         git commit -m 'update image'
-        git push https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git HEAD:main.   
+        git push https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git HEAD:main   
 

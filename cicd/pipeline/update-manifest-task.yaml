@@ -38,10 +38,9 @@ spec:
         git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git
         cd tekton-pipeline
         git checkout origin/main
-        ls -la
         
-        #ls -la tekton-pipeline/app/myapp/env/dev
-        #yq -i ".spec.template.spec.containers[0].image = xxxx" tekton-pipeline/app/myapp/env/dev/deployment.yaml
+        ls -la /workspace/source/tekton-pipeline/app/myapp/env/dev
+        yq -i '.spec.template.spec.containers[0].image = "tretre:xxx"' /workspace/source/tekton-pipeline/app/myapp/env/dev/deployment.yaml
         #cat tekton-pipeline/app/myapp/env/dev/deployment.yaml
         #yq -i '.spec.template.spec.containers[0].image = "'''+image_name_tag+'''"' prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
         #git add prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml

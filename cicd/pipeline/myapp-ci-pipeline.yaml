@@ -248,7 +248,11 @@ spec:
     - name: update-manifest-task
       params:
         - name: git_repo_name
-          value: spring
+          value: $(params.git_repo_name)
+        - name: environment
+          value: $(tasks.initial-info.results.environment)
+        - name: image_tag
+          value: $(tasks.initial-info.results.image_tag)
       runAfter:
         - buildimage
       taskRef:

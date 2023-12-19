@@ -95,6 +95,11 @@ spec:
         - name: app-source
           workspace: source
     - name: unitest
+      when:
+        - input: $(params.ext_branch)
+          operator: notin
+          values:
+            - "refs-heads-main"
       params:
         - name: MAVEN_IMAGE
           value: >-
@@ -133,6 +138,11 @@ spec:
         - name: maven-settings
           workspace: source
     - name: sonarqube-scanner
+      when:
+        - input: $(params.ext_branch)
+          operator: notin
+          values:
+            - "refs-heads-main"
       params:
         - name: SONAR_HOST_URL
           value: 'http://sonarqube-route-devopstools.apps.524vf.dynamic.opentlc.com/'
@@ -166,6 +176,11 @@ spec:
         - name: sonar-credentials
           workspace: source
     - name: compile-mvn
+      when:
+        - input: $(params.ext_branch)
+          operator: notin
+          values:
+            - "refs-heads-main"
       params:
         - name: MAVEN_IMAGE
           value: >-

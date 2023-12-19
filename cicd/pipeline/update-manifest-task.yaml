@@ -12,6 +12,7 @@ spec:
   - name: git_repo_name
   - name: environment
   - name: image_tag
+  - name: image_repo_url
   description: >-
     update-manifest-task
   workspaces:
@@ -45,7 +46,7 @@ spec:
         git config --global user.name "tekton_pipeline"
         git config --global user.email "tektonPipeline@domain.local"
         ls -la /workspace/source/tekton-pipeline/app/myapp/env/dev
-        yq -i '.spec.template.spec.containers[0].image = "$(params.git_repo_name):$(params.image_tag)"' /workspace/source/tekton-pipeline/app/myapp/env/dev/deployment.yaml
+        yq -i '.spec.template.spec.containers[0].image = "$(params.image_repo_url)/$(params.git_repo_name):$(params.image_tag)"' /workspace/source/tekton-pipeline/app/myapp/env/dev/deployment.yaml
         #cat tekton-pipeline/app/myapp/env/dev/deployment.yaml
         #yq -i '.spec.template.spec.containers[0].image = "'''+image_name_tag+'''"' prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
         git add /workspace/source/tekton-pipeline/app/myapp/env/dev/deployment.yaml

@@ -221,6 +221,11 @@ spec:
         - name: maven-settings
           workspace: source
     - name: buildimage
+      when:
+        - input: $(params.ext_branch)
+          operator: notin
+          values:
+            - "refs-heads-main"
       params:
         - name: image_tag
           value: $(tasks.initial-info.results.image_tag)

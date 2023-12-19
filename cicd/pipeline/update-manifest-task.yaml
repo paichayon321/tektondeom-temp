@@ -10,8 +10,8 @@ metadata:
 spec:
   params:
   - name: git_repo_name
-    type: string
-    default: ""
+  - name: environment
+  - name: image_tag
   description: >-
     update-manifest-task
   workspaces:
@@ -22,7 +22,11 @@ spec:
   steps:
     - env:
         - name: git_repo_name
-          value: $(params.git_repo_name)     
+          value: $(params.git_repo_name) 
+        - name: environment
+          value: $(params.environment) 
+        - name: image_tag
+          value: $(image_tag)               
         - name: GIT_CREDS_USR
         - name: GIT_CREDS_PSW
       name: clone-platform-repo
@@ -38,7 +42,8 @@ spec:
         git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git
         cd tekton-pipeline
         git checkout origin/main
-        
+        git config --global user.name "tekton_pipeline"
+        git config --global user.email "tektonPipeline@domain.local"
         ls -la /workspace/source/tekton-pipeline/app/myapp/env/dev
         yq -i '.spec.template.spec.containers[0].image = "tretre:xxx"' /workspace/source/tekton-pipeline/app/myapp/env/dev/deployment.yaml
         #cat tekton-pipeline/app/myapp/env/dev/deployment.yaml

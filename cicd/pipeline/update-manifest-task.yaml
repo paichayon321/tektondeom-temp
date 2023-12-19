@@ -26,7 +26,7 @@ spec:
         - name: GIT_CREDS_USR
         - name: GIT_CREDS_PSW
       name: clone-platform-repo
-      image: cgr.dev/chainguard/git:root-2.39@sha256:7759f87050dd8bacabe61354d75ccd7f864d6b6f8ec42697db7159eccd491139
+      image: docker.io/paichayon1/multitools:ubi7
       workingDir: $(workspaces.source.path)
       script: |
         #git clone https://github.com/paichayon321/tekton-pipeline.git
@@ -38,24 +38,12 @@ spec:
         git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git
         cd tekton-pipeline
         git checkout origin/main
-        
+        ls -la tekton-pipeline/app/myapp/env/dev
+        yq -i ".spec.template.spec.containers[0].image = xxxx" tekton-pipeline/app/myapp/env/dev/deployment.yaml
+        cat tekton-pipeline/app/myapp/env/dev/deployment.yaml
         #yq -i '.spec.template.spec.containers[0].image = "'''+image_name_tag+'''"' prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
         #git add prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
         #git commit -m 'update image '''+image_name_tag+''' on '''+environment+''' environment'
         #git push https://${GIT_CREDS_USR}:${GIT_CREDS_PSW}@192.168.77.24/devops/platform.git HEAD:main.   
 
-    - name: update-manifest
-      image: docker.io/mikefarah/yq:4.16.2@sha256:0d4f6e27bdcac7316f635acd524ab0eecc4ad50834b54d10322268650c7712cb
-      workingDir: $(workspaces.source.path)      
-      script: |
-        whoami
-        ls -la 
-        ls -la tekton-pipeline/app/myapp/env/dev
-        yq -i '.spec.template.spec.containers[0].image = xxxx' tekton-pipeline/app/myapp/env/dev/deployment.yaml
-        #git add prescreening/backend/openshift/environment/'''+environment+'''/deployment.yaml
-
-    - name: sleep
-      image: registry.redhat.io/ubi7/ubi-minimal
-      workingDir: $(workspaces.source.path)  
-      script: |
         sleep infinity

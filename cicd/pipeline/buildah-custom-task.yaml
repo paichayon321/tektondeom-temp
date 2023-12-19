@@ -75,8 +75,9 @@ spec:
         echo "####################"
         echo $(params.environment)
         echo "####################"
-        buildah --storage-driver=vfs push --format oci --tls-verify=false $(params.image_repo_url)/$(params.app_name):$(params.image_tag) docker://$(params.image_repo_url)/$(params.app_name):$(params.image_tag)
-
+        if [[ $(params.environment) == dev || $(params.environment) == tags  ]]; then
+          buildah --storage-driver=vfs push --format oci --tls-verify=false $(params.image_repo_url)/$(params.app_name):$(params.image_tag) docker://$(params.image_repo_url)/$(params.app_name):$(params.image_tag)
+        fi
       securityContext:
         capabilities:
           add:

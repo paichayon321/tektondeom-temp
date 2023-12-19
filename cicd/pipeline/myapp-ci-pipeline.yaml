@@ -254,7 +254,7 @@ spec:
         - name: image_tag
           value: $(tasks.initial-info.results.image_tag)
         - name: image_repo_url
-          value: default-route-openshift-image-registry.apps.524vf.dynamic.opentlc.com/cicd
+          value: image-registry.openshift-image-registry.svc:5000/cicd
       runAfter:
         - buildimage
       taskRef:

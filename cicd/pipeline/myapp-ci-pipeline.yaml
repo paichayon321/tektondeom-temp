@@ -23,6 +23,7 @@ spec:
       type: string
       default: default
   tasks:
+# Clone 
     - name: git-clone
       params:
         - name: url
@@ -69,6 +70,7 @@ spec:
       workspaces:
         - name: output
           workspace: source
+# Get Info
     - name: initial-info
       when:
         - input: $(params.ext_branch)
@@ -94,6 +96,7 @@ spec:
       workspaces:
         - name: app-source
           workspace: source
+# UniTest
     - name: unitest
       when:
         - input: $(params.ext_branch)
@@ -137,6 +140,7 @@ spec:
           workspace: source
         - name: maven-settings
           workspace: source
+# Scan SonarQube
     - name: sonarqube-scanner
       when:
         - input: $(params.ext_branch)
@@ -175,6 +179,7 @@ spec:
           workspace: source
         - name: sonar-credentials
           workspace: source
+# Compile
     - name: compile-mvn
       when:
         - input: $(params.ext_branch)
@@ -220,6 +225,7 @@ spec:
           workspace: source
         - name: maven-settings
           workspace: source
+# Build Image
     - name: buildimage
       when:
         - input: $(params.ext_branch)
@@ -267,6 +273,7 @@ spec:
           workspace: source
         - name: dockerconfig
           workspace: source
+# Update Dev
     - name: update-manifest-dev
       params:
         - name: git_repo_name
@@ -292,6 +299,7 @@ spec:
           operator: in
           values:
             - "dev"
+# Update SIT
     - name: update-manifest-sit
       params:
         - name: git_repo_name

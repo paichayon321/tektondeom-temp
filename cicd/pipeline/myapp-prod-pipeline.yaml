@@ -11,7 +11,6 @@ spec:
       type: string
       default: prod
     - name: image_tag
-      default: "0.0.0"
     - name: image_repo_url
       default: image-registry.openshift-image-registry.svc:5000/cicd
   tasks:
@@ -23,7 +22,7 @@ spec:
         - name: environment
           value: $(params.environment)
         - name: image_tag
-          value: "test"
+          value: $(params.image_tag)
         - name: image_repo_url
           value: $(params.image_repo_url)
       taskRef:

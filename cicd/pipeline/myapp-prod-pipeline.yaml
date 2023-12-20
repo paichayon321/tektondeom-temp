@@ -26,8 +26,6 @@ spec:
           value: "test"
         - name: image_repo_url
           value: $(params.image_repo_url)
-      runAfter:
-        - buildimage
       taskRef:
         kind: Task
         name: update-manifest-task

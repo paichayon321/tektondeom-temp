@@ -1,0 +1,59 @@
+apiVersion: tekton.dev/v1beta1
+kind: ClusterTask
+metadata:
+  annotations:
+    operator.tekton.dev/last-applied-hash: 82cbda20cf833bb27b157e91a090463caaabb0176b6a7054b068234f1fef5fce
+    tekton.dev/categories: Deployment
+    tekton.dev/displayName: argocd
+    tekton.dev/pipelines.minVersion: 0.12.1
+    tekton.dev/platforms: linux/amd64
+    tekton.dev/tags: deploy
+  name: argocd-task-sync-and-wait
+  labels:
+    app.kubernetes.io/version: '0.2'
+    operator.tekton.dev/provider-type: community
+spec:
+  description: >-
+    This task syncs (deploys) an Argo CD application and waits for it to be
+    healthy.
+
+    To do so, it requires the address of the Argo CD server and some form of
+    authentication either a username/password or an authentication token.
+  params:
+    - description: name of the application to sync
+      name: application-name
+      type: string
+    - default: HEAD
+      description: the revision to sync to
+      name: revision
+      type: string
+    - default: '--'
+      name: flags
+      type: string
+    - default: v2.2.2
+      name: argocd-version
+      type: string
+  steps:
+    - image: 'quay.io/argoproj/argocd:$(params.argocd-version)'
+      name: login
+      env:
+        - name: AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: token
+              name: $(params.secret-key-ref)
+      resources: {}
+      script: >
+        if [ -z "$ARGOCD_AUTH_TOKEN" ]; then
+          #yes | argocd login "$ARGOCD_SERVER" --username="$ARGOCD_USERNAME" --password="$ARGOCD_PASSWORD";
+          yes | argocd login "openshift-gitops-server-openshift-gitops.apps.524vf.dynamic.opentlc.com:443" --username="admin" --password="Fs93pCDeGZmHyOn4BtvJqEPIkMbLrf60";
+          
+        fi
+
+        argocd app sync "$(params.application-name)" --revision
+        "$(params.revision)" "$(params.flags)"
+
+        argocd app wait "$(params.application-name)" --health "$(params.flags)"
+      workingDir: $(workspaces.temp.path)
+  workspaces:
+    - name: temp

@@ -17,15 +17,15 @@ spec:
       default: image-registry.openshift-image-registry.svc:5000/cicd
       description: Image registry repository where image existing
   tasks:
-# Update PROD
+# Update Manifest
     - name: update-manifest
       params:
+        - name: image_tag
+          value: $(params.image_tag)
         - name: git_repo_name
           value: $(params.git_repo_name)
         - name: environment
           value: $(params.environment)
-        - name: image_tag
-          value: $(params.image_tag)
         - name: image_repo_url
           value: $(params.image_repo_url)
       taskRef:
@@ -65,5 +65,7 @@ spec:
         name: tkn
   workspaces:
     - name: secret
+      description: Select Secret > github-pat-secret
     - name: temp
+      description: Use Empty Directory
 

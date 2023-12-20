@@ -9,7 +9,7 @@ spec:
       description: The name of the deployment to be created
     - name: environment
       type: string
-      default: uat
+      default: prod
     - name: image_tag
       default: "0.0.0"
     - name: image_repo_url

@@ -1,0 +1,68 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: myapp-prod-pipeline
+spec:
+  params:
+    - name: git_repo_name
+      default: spring-web-quickstart
+      description: The name of the deployment to be created
+    - name: environment
+      type: string
+      default: uat
+    - name: image_tag
+      default: 
+    - name: image_repo_url
+      default: image-registry.openshift-image-registry.svc:5000/cicd
+  tasks:
+# Update PROD
+    - name: update-manifest-prod
+      params:
+        - name: git_repo_name
+          value: $(params.git_repo_name)
+        - name: environment
+          value: $(params.environment)
+        - name: image_tag
+        - name: image_repo_url
+          value: $(params.image_repo_url)
+      runAfter:
+        - buildimage
+      taskRef:
+        kind: Task
+        name: update-manifest-task
+      workspaces:
+        - name: temp
+          workspace: temp
+        - name: secret
+          workspace: secret
+  finally:
+    - name: clean-taskrun
+      params:
+        - name: TKN_IMAGE
+          value: >-
+            registry.redhat.io/openshift-pipelines/pipelines-cli-tkn-rhel8@sha256:72394dfaed68c4b6b490c3c971fb1d9f0139f8656f6672b55b8e02ea98d1298d
+        - name: SCRIPT
+          value: tkn $@
+        - name: ARGS
+          value:
+            - taskrun delete --keep 20 -f
+      taskRef:
+        kind: ClusterTask
+        name: tkn
+    - name: clean-pipelinerun
+      params:
+        - name: TKN_IMAGE
+          value: >-
+            registry.redhat.io/openshift-pipelines/pipelines-cli-tkn-rhel8@sha256:72394dfaed68c4b6b490c3c971fb1d9f0139f8656f6672b55b8e02ea98d1298d
+        - name: SCRIPT
+          value: tkn $@
+        - name: ARGS
+          value:
+            - pipelinerun delete --keep 5 -f
+      taskRef:
+        kind: ClusterTask
+        name: tkn
+  workspaces:
+    - name: secret
+    - name: temp
+

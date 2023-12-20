@@ -43,6 +43,12 @@ spec:
             deploy_env=dev
         elif [[ $(params.environment) == tags ]]; then
             deploy_env=sit
+        elif [[ $(params.environment) == uat ]]; then
+            deploy_env=uat
+        elif [[ $(params.environment) == prod ]]; then
+            deploy_env=prod
+        elif [[ $(params.environment) == dr ]]; then
+            deploy_env=dr
         else
             exit 1
         fi  

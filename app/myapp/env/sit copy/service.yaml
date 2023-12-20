@@ -4,6 +4,7 @@ metadata:
   name: myapp
   labels:
     app: myapp
+    app.kubernetes.io/instance: myapp-dev
 spec:
   ports:
     - name: port-1

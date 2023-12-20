@@ -30,6 +30,7 @@ spec:
           value: $(params.image_tag)               
         - name: GIT_CREDS_USR
         - name: GIT_CREDS_PSW
+        - name: deploy_env
       name: clone-platform-repo
       image: docker.io/paichayon1/multitools:ubi7
       workingDir: $(workspaces.source.path)
@@ -37,9 +38,6 @@ spec:
         echo "####################"
         echo $(params.environment)
         echo "####################"
-        if [[ $(params.environment) == dev || $(params.environment) == tags  ]]; then
-          deploy_env=
-        fi
 
         if [[ $(params.environment) == dev ]]; then
             deploy_env=dev

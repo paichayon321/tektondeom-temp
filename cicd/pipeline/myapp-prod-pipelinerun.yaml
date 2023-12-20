@@ -1,6 +1,41 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
+  generateName: myapp-$(params.git_repo_name)-prod-$(params.image_tag)-
+  labels:
+    app.kubernetes.io/instance: myapp-cicd
+    tekton.dev/pipeline: myapp-prod-pipeline
+spec:
+  params:
+    - name: git_repo_name
+      value: spring-web-quickstart
+    - name: environment
+      value: prod
+    - name: image_tag
+      value: 1.0.1
+    - name: image_repo_url
+      value: 'image-registry.openshift-image-registry.svc:5000/cicd'
+  pipelineRef:
+    name: myapp-prod-pipeline
+  serviceAccountName: pipeline
+  timeouts:
+    pipeline: 1h0m0s
+  workspaces:
+    - name: secret
+      secret:
+        secretName: github-pat-secret
+    - emptyDir: {}
+      name: temp
+
+
+
+
+
+
+
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
   generateName: myapp-$(params.git_repo_name)-$(params.image_tag)-
 spec:
   serviceAccountName: pipeline

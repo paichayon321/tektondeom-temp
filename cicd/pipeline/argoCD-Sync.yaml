@@ -42,12 +42,6 @@ spec:
   steps:
     - image: 'quay.io/argoproj/argocd:$(params.argocd-version)'
       name: login
-      env:
-        - name: AUTH_TOKEN
-          valueFrom:
-            secretKeyRef:
-              key: token
-              name: $(params.secret-key-ref)
       resources: {}
       script: >
         if [ -z "$ARGOCD_AUTH_TOKEN" ]; then

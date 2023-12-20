@@ -11,6 +11,7 @@ spec:
       type: string
       default: uat
     - name: image_tag
+      default: 0.0.0
     - name: image_repo_url
       default: image-registry.openshift-image-registry.svc:5000/cicd
   tasks:

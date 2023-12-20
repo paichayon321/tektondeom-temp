@@ -18,7 +18,7 @@ spec:
       description: Image registry repository where image existing
   tasks:
 # Update PROD
-    - name: update-manifest-prod
+    - name: update-manifest
       params:
         - name: git_repo_name
           value: $(params.git_repo_name)

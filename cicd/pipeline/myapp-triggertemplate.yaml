@@ -41,4 +41,6 @@ spec:
       - name: secret
         secret:
           secretName: github-pat-secret
+      - name: temp
+          emptyDir: {}
         

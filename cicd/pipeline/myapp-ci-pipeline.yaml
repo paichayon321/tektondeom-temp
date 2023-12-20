@@ -283,8 +283,8 @@ spec:
         kind: Task
         name: update-manifest-task
       workspaces:
-        - name: source
-          workspace: source
+        - name: temp
+          workspace: temp
         - name: secret
           workspace: secret
       when:
@@ -308,8 +308,8 @@ spec:
         kind: Task
         name: update-manifest-task
       workspaces:
-        - name: source
-          workspace: source
+        - name: temp
+          workspace: temp
         - name: secret
           workspace: secret
       when:

@@ -14,3 +14,23 @@ oc policy add-role-to-user system:image-puller system:serviceaccount:myapp-prod:
 oc policy add-role-to-user system:image-puller system:serviceaccount:myapp-dr:default --namespace=cicd
 
 kubeseal < github-pat-secret.yaml  > github-pat-secret-sealed.yaml  -o yaml -n cicd
+
+
+
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-env-configmap
+data:
+  ARGOCD_SERVER: <Argo CD server address>
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: argocd-env-secret
+data:
+  # choose one of username/password or auth token
+  ARGOCD_USERNAME: <username>
+  ARGOCD_PASSWORD: <password>
+  ARGOCD_AUTH_TOKEN: <token>

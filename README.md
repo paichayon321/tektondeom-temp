@@ -7,7 +7,10 @@ buildah --storage-driver=vfs build --format oci --tls-verify=false --no-cache -f
 buildah --storage-driver=vfs push --format oci --tls-verify=false default-route-openshift-image-registry.apps.524vf.dynamic.opentlc.com/cicd/spring-web-quickstart:dsdsds docker://default-route-openshift-image-registry.apps.524vf.dynamic.opentlc.com/cicd/spring-web-quickstart:dsdsds
 
 # To imagestream from another project, Need to add system:image-puller to default service account user
-oc policy add-role-to-user system:image-puller system:serviceaccount:dev:default --namespace=cicd
-
+oc policy add-role-to-user system:image-puller system:serviceaccount:myapp-dev:default --namespace=cicd
+oc policy add-role-to-user system:image-puller system:serviceaccount:myapp-sit:default --namespace=cicd
+oc policy add-role-to-user system:image-puller system:serviceaccount:myapp-uat:default --namespace=cicd
+oc policy add-role-to-user system:image-puller system:serviceaccount:myapp-prod:default --namespace=cicd
+oc policy add-role-to-user system:image-puller system:serviceaccount:myapp-dr:default --namespace=cicd
 
 kubeseal < github-pat-secret.yaml  > github-pat-secret-sealed.yaml  -o yaml -n cicd

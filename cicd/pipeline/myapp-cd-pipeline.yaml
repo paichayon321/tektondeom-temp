@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: myapp-prod-pipeline
+  name: myapp-cd-pipeline
 spec:
   params:
     - name: git_repo_name
@@ -9,10 +9,13 @@ spec:
       description: The name of the deployment to be created
     - name: environment
       type: string
-      default: prod
+      default: uat
+      description: Deploy environment name "uat" or "prod"
     - name: image_tag
+      description: image version number in format x.y.z for example 1.0.0
     - name: image_repo_url
       default: image-registry.openshift-image-registry.svc:5000/cicd
+      description: Image registry repository where image existing
   tasks:
 # Update PROD
     - name: update-manifest-prod

@@ -42,5 +42,5 @@ spec:
         secret:
           secretName: github-pat-secret
       - name: temp
-          emptyDir: {}
+        emptyDir: {}
         

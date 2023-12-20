@@ -357,4 +357,5 @@ spec:
   workspaces:
     - name: source
     - name: secret
+    - name: temp
 

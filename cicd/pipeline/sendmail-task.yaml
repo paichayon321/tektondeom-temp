@@ -38,9 +38,8 @@ spec:
     image: docker.io/paichayon1/sendgmail-py:0.1
     script: |
       # Usage: python sendgmail.py sender_mail, sender_password, recipient_email, subject, body 
-      env
-      sender_mail =  "gpc.pai0001@gmail.com"
-      sender_password = ""
+      sender_mail =  "$user"
+      sender_password = "$password"
       recipient_email = "ptanvann@redhat.com "
       subject = " Test Subject"
       body = " Test Boby "

@@ -49,7 +49,7 @@ spec:
 
         #appname=$(params.application-name)-$(params.environment)
         
-        argocd app sync myapp-uat
+        argocd app --help
 
         #argocd app sync "$appname" --revision main
 

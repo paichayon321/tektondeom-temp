@@ -52,7 +52,9 @@ spec:
 
         appname=$(params.application-name)-$(params.environment)
 
-        argocd app sync "$appname" --revision "$(params.revision)"
+        argocd app sync "$appname" --revision main
+
+        #argocd app sync "$appname" --revision "$(params.revision)"
 
         #sleep 20
 

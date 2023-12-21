@@ -6,7 +6,7 @@ metadata:
 spec:
   params:
     - name: server
-      default: smtp.gmail.com
+      default: mailserver
     - name: subject
       default: 'test'
     - name: body

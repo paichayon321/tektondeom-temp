@@ -70,7 +70,7 @@ data:
 kind: Secret
 apiVersion: v1
 metadata:
-  name: server-secret
+  name: mailserver-secret
 stringData:
   url: "smtp.server.com"
   port: "25"

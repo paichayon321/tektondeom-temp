@@ -17,9 +17,6 @@ spec:
     - name: temp
       description: Workspace for temporary
   params:
-#  - name: server
-#    type: string
-#    description: secret name for SMTP server information (url, port, password)
   - name: subject
     type: string
     description: plain text email subject
@@ -40,11 +37,6 @@ spec:
   - name: send
     image: docker.io/paichayon1/sendgmail-py:0.1
     script: |
-      sender_email = "$user"
-      sender_password = "$password"
-      recipient_email = "recipient@gmail.com"
-      subject = "Hello from Python"
-      bode = "TEST"
       python sendgmail.py
 
 

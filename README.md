@@ -64,7 +64,7 @@ data:
 ----
 
 
-# Send Mail Task
+# Send Mail Task - Secret
 
 ```
 kind: Secret

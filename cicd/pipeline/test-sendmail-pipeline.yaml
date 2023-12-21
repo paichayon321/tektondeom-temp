@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: sendmail-pipeline
+  namespace: cicd
+spec:
+  tasks:
+    - name: sendmail
+      params:
+        - name: server
+          value: ''
+        - name: subejct
+          value: ''
+        - name: body
+          value: ''
+        - name: recipients
+          value: ''
+      taskRef:
+        kind: Task
+        name: sendmail
+      workspaces:
+        - name: temp
+          workspace: temp
+  workspaces:
+    - description: Use Empty Directory
+      name: temp

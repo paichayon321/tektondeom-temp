@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: app/myapp/env/prod
+    path: app/myapp/env/uat
     repoURL: https://github.com/paichayon321/tekton-pipeline.git
     targetRevision: main
   syncPolicy:

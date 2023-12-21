@@ -9,4 +9,4 @@ RUN wget https://github.com/argoproj/argo-cd/releases/latest/download/argocd-lin
     chmod +x /usr/bin/argocd 
 EOF
 
-podman build -t docker.io/paichayon1/multitools:ubi7  .
+podman build -t docker.io/paichayon1/multitools-argocd:ubi7  .

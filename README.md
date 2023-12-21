@@ -70,13 +70,13 @@ data:
 kind: Secret
 apiVersion: v1
 metadata:
-  name: mailserver-secret
+  name: gmail-secret
 stringData:
-  url: "smtp.server.com"
-  port: "25"
-  user: "userid"
+  url: "smtp.gmail.com"
+  port: "465"
+  user: "gcp.pai0001@gmail.com"
   password: "password"
-  tls: "False"
+  tls: "True"
 ```
 ----
 

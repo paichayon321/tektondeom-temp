@@ -38,6 +38,7 @@ spec:
     script: |
       #!/usr/bin/env python3
       import smtplib, ssl, os
+      #from email.mime.text import MIMEText
       port = os.getenv('PORT')
       smtp_server = os.getenv('SERVER')
       sender_email = "$(params.sender)"
@@ -61,6 +62,7 @@ spec:
           server.login(user, password)
       for receiver in [item for item in receiver_emails.split(' ') if item]:
           server.sendmail(sender_email, receiver, message.encode('utf-8'))
+          # server.sendmail(sender_email, receiver, message.as_string())
       server.quit()
     env:
     - name: USER

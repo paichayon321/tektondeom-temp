@@ -27,7 +27,7 @@ spec:
       description: the revision to sync to
       name: revision
       type: string
-    - default: '--'
+    - default: ''
       name: flags
       type: string
     - default: v2.2.2

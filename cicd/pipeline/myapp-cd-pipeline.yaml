@@ -64,8 +64,8 @@ spec:
         kind: ClusterTask
         name: tkn
   workspaces:
-    - name: secret
-      description: Select Secret > github-pat-secret
+#    - name: secret
+#      description: Select Secret > github-pat-secret
     - name: temp
       description: Use Empty Directory
 

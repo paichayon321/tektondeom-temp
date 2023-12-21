@@ -13,7 +13,9 @@ metadata:
 spec:
   description: >-
     This task sends a simple email to receivers via SMTP server
-
+  workspaces:
+    - name: temp
+      description: Workspace for temporary
   params:
   - name: server
     type: string

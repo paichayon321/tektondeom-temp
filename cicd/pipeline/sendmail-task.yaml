@@ -40,9 +40,11 @@ spec:
       # Usage: python sendgmail.py sender_mail, sender_password, recipient_email, subject, body 
       #sender_mail="$user"
       #sender_password="$password"
+      echo "$user"
+      echo "$password"
       recipient_email="ptanvann@redhat.com "
       subject=" Test Subject"
       body=" Test Boby "
-      python sendgmail.py "$user", "$password", "$recipient_email", "$subject", "$body" 
+      #python sendgmail.py "$user", "$password", "$recipient_email", "$subject", "$body" 
 
 

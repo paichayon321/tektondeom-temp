@@ -54,10 +54,10 @@ spec:
 
         argocd app sync "$appname" --revision "$(params.revision)"
 
-        sleep 20
+        #sleep 20
 
-        argocd app wait "$appname" --health
-        
+        #argocd app wait "$appname" --health
+
       workingDir: $(workspaces.temp.path)
   workspaces:
     - name: temp

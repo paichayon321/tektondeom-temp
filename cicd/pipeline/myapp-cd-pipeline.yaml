@@ -34,8 +34,6 @@ spec:
       workspaces:
         - name: temp
           workspace: temp
-#        - name: secret
-#          workspace: secret
   finally:
     - name: clean-taskrun
       params:
@@ -64,8 +62,6 @@ spec:
         kind: ClusterTask
         name: tkn
   workspaces:
-#    - name: secret
-#      description: Select Secret > github-pat-secret
     - name: temp
       description: Use Empty Directory
 

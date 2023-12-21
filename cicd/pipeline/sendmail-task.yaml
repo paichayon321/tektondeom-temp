@@ -37,14 +37,14 @@ spec:
   - name: send
     image: docker.io/paichayon1/sendgmail-py:0.1
     script: |
-      # Usage: python sendgmail.py sender_mail, sender_password, recipient_email, subject, body 
+      # Usage: python sendgmail.py sender_mail sender_password recipient_email subject body 
       #sender_mail="$user"
       #sender_password="$password"
-      echo "$user"
-      echo "$password"
+      #echo "$user"
+      #echo "$password"
       recipient_email="ptanvann@redhat.com "
       subject=" Test Subject"
       body=" Test Boby "
-      #python sendgmail.py "$user", "$password", "$recipient_email", "$subject", "$body" 
+      python sendgmail.py "$user" "$password" "$recipient_email" "$subject" "$body" 
 
 

@@ -51,4 +51,17 @@ data:
 ----
 
 
-echo $?
+# Send Mail Task
+kind: Secret
+apiVersion: v1
+metadata:
+  name: server-secret
+stringData:
+  url: "smtp.server.com"
+  port: "25"
+  user: "userid"
+  password: "password"
+  tls: "False"
+
+  ----
+

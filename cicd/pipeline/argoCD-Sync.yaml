@@ -54,4 +54,6 @@ spec:
         "$(params.revision)" "$(params.flags)"
 
         argocd app wait "$(params.application-name)" --health "$(params.flags)"
-
+      workingDir: $(workspaces.temp.path)
+  workspaces:
+    - name: temp

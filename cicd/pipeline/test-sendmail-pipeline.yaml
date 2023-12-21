@@ -4,6 +4,18 @@ metadata:
   name: sendmail-pipeline
   namespace: cicd
 spec:
+  params:
+    - name: server
+      default: spring-web-quickstart
+    - name: subejct
+      default: 'test'
+    - name: body
+      default: 'test'
+    - name: recipients
+      default: 'test'
+    - name: sender
+      default: 'test'
+
   tasks:
     - name: sendmail
       params:

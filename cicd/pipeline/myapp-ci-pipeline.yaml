@@ -292,8 +292,6 @@ spec:
       workspaces:
         - name: temp
           workspace: temp
-        - name: secret
-          workspace: secret
       when:
         - input: $(tasks.initial-info.results.environment)
           operator: in
@@ -318,8 +316,6 @@ spec:
       workspaces:
         - name: temp
           workspace: temp
-        - name: secret
-          workspace: secret
       when:
         - input: $(tasks.initial-info.results.environment)
           operator: in
@@ -364,6 +360,5 @@ spec:
         name: tkn
   workspaces:
     - name: source
-    - name: secret
     - name: temp
 

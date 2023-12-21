@@ -30,6 +30,7 @@ data:
 
 ----
 # Prerequire configmap and Secret for Arcocd Sync Task
+# **** Image from https://quay.io/repository/argoproj/argocd not working sync success but alway return fail*****
 
 apiVersion: v1
 kind: ConfigMap

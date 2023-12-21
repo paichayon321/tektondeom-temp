@@ -43,13 +43,13 @@ spec:
       #!/usr/bin/env python3
       import smtplib, ssl, os
       #from email.mime.text import MIMEText
-      port = $port
-      smtp_server = $url
+      port = "$port"
+      smtp_server = "$url"
       sender_email = "$(params.sender)"
       receiver_emails = "$(params.recipients)"
-      user = $user
-      password = $password
-      tls = $tls
+      user = "$user"
+      password = "$password"
+      tls = "$tls"
       message = f"""\
       Subject: $(params.subject)
       To: {receiver_emails}

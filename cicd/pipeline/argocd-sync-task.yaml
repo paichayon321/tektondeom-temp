@@ -44,7 +44,7 @@ spec:
     - image: 'quay.io/argoproj/argocd:$(params.argocd-version)'
       name: login
       resources: {}
-      script: >
+      script: |
         argocd login "$ARGOCD_SERVER" --username="$ARGOCD_USERNAME" --password="$ARGOCD_PASSWORD" --insecure
 
         #appname=$(params.application-name)-$(params.environment)

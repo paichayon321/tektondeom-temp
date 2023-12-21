@@ -10,3 +10,14 @@ RUN wget https://github.com/argoproj/argo-cd/releases/latest/download/argocd-lin
 EOF
 
 podman build -t docker.io/paichayon1/multitools-argocd:ubi7  .
+
+
+cat << EOF > Dockerfile
+FROM python:3.9-slim
+ADD sendgmail.py ./
+EOF
+
+podman build -t docker.io/paichayon1/sendgmail-py:0.1  .
+podman push docker.io/paichayon1/sendgmail-py:0.1
+
+

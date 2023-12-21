@@ -8,13 +8,15 @@ spec:
     - name: sendmail
       params:
         - name: server
-          value: ''
+          value: 'test'
         - name: subejct
-          value: ''
+          value: 'test'
         - name: body
-          value: ''
+          value: 'test'
         - name: recipients
-          value: ''
+          value: 'test'
+        - name: sender
+          value: 'test'
       taskRef:
         kind: Task
         name: sendmail

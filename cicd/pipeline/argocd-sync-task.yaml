@@ -1,5 +1,5 @@
 apiVersion: tekton.dev/v1beta1
-kind: ClusterTask
+kind: Task
 metadata:
   annotations:
     operator.tekton.dev/last-applied-hash: 82cbda20cf833bb27b157e91a090463caaabb0176b6a7054b068234f1fef5fce

@@ -46,7 +46,7 @@ spec:
         - name: argocd-version
           value: v2.2.2
       taskRef:
-        kind: ClusterTask
+        kind: Task
         name: argocd-task-sync-and-wait
       runAfter:
         - update-manifest

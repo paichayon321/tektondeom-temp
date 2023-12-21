@@ -17,6 +17,8 @@ kubeseal < github-pat-secret.yaml  > github-pat-secret-sealed.yaml  -o yaml -n c
 
 
 
+----
+# Prerequire configmap and Secret for Arcocd Sync Task
 
 apiVersion: v1
 kind: ConfigMap
@@ -34,3 +36,4 @@ data:
   ARGOCD_USERNAME: <username>
   ARGOCD_PASSWORD: <password>
   ARGOCD_AUTH_TOKEN: <token>
+----

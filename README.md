@@ -17,6 +17,17 @@ kubeseal < github-pat-secret.yaml  > github-pat-secret-sealed.yaml  -o yaml -n c
 
 
 
+# Prerequire Secret for Update Manifest Task
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-pat-secret
+data:
+  # User name and PAT token
+  GIT_CREDS_USR: <username>
+  GIT_CREDS_PSW: <password>
+
+
 ----
 # Prerequire configmap and Secret for Arcocd Sync Task
 

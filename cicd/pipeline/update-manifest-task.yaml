@@ -15,11 +15,15 @@ spec:
   - name: image_repo_url
   description: >-
     update-manifest-task
+  stepTemplate:
+    envFrom:
+      - secretRef:
+          name: github-pat-secret  # github-pat
   workspaces:
     - name: temp
       description: Workspace for temporary
-    - name: secret
-      description: GITHUB PAT secret - user and token 
+    # - name: secret
+    #  description: GITHUB PAT secret - user and token 
   steps:
     - env:
         - name: git_repo_name
@@ -28,8 +32,8 @@ spec:
           value: $(params.environment) 
         - name: image_tag
           value: $(params.image_tag)               
-        - name: GIT_CREDS_USR
-        - name: GIT_CREDS_PSW
+        #- name: GIT_CREDS_USR
+        #- name: GIT_CREDS_PSW
         - name: deploy_env
       name: clone-platform-repo
       image: docker.io/paichayon1/multitools:ubi7
@@ -54,8 +58,8 @@ spec:
         fi  
 
 
-        GIT_CREDS_USR=$(cat $(workspaces.secret.path)/user)
-        GIT_CREDS_PSW=$(cat $(workspaces.secret.path)/token)
+        #GIT_CREDS_USR=$(cat $(workspaces.secret.path)/user)
+        #GIT_CREDS_PSW=$(cat $(workspaces.secret.path)/token)
         git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git
         cd tekton-pipeline
         git checkout origin/main

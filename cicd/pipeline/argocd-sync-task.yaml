@@ -20,18 +20,8 @@ spec:
     To do so, it requires the address of the Argo CD server and some form of
     authentication either a username/password or an authentication token.
   params:
-    - description: name of the application to sync
+    - description: ArgoCD Application Prefix name
       name: application-name
-      type: string
-    - default: HEAD
-      description: the revision to sync to
-      name: revision
-      type: string
-    - default: ''
-      name: flags
-      type: string
-    - default: v2.9.2
-      name: argocd-version
       type: string
     - name: environment
   stepTemplate:
@@ -51,10 +41,6 @@ spec:
         appname=$(params.application-name)-$(params.environment)
         
         argocd app sync "$appname" --revision main
-
-        #argocd app sync "$appname" --revision "$(params.revision)"
-
-        #sleep 20
 
         argocd app wait "$appname" --health
 

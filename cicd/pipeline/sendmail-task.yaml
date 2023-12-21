@@ -32,6 +32,6 @@ spec:
       #recipient_email="ptanvann@redhat.com"
       subject="Pipeline Status:"
       body="<b>Job Name: </b>  xxxx <br> <b>Status: </b> yyyy <br>"
-      python sendgmail.py "$user" "$password" "$(params.recipients)" "$subject" "$.body" 
+      python sendgmail.py "$user" "$password" "$(params.recipients)" "$subject" "$body" 
 
 

@@ -54,6 +54,7 @@ spec:
       Subject: $(params.subject)
       To: {receiver_emails}
       From: {sender_email}
+      TLS: {tls}
 
       $(params.body)"""
       print(message)

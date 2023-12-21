@@ -5,8 +5,6 @@ metadata:
   namespace: cicd
 spec:
   params:
-    - name: server
-      default: mailserver
     - name: subject
       default: 'test'
     - name: body
@@ -19,8 +17,6 @@ spec:
   tasks:
     - name: sendmail
       params:
-        - name: server
-          value: $(params.server)
         - name: subject
           value: $(params.subject)
         - name: body

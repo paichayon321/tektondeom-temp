@@ -17,9 +17,9 @@ spec:
     - name: temp
       description: Workspace for temporary
   params:
-  - name: server
-    type: string
-    description: secret name for SMTP server information (url, port, password)
+#  - name: server
+#    type: string
+#    description: secret name for SMTP server information (url, port, password)
   - name: subject
     type: string
     description: plain text email subject
@@ -32,6 +32,10 @@ spec:
   - name: recipients
     type: string
     description: recipient email addresses (space delimited list)
+  stepTemplate:
+    envFrom:
+      - secretRef:
+          name: gmail-secret 
   steps:
   - name: send
     image: docker.io/library/python:3.8-alpine@sha256:e11bbd37d4371894e954421b85dbe8dd4eb7198d7cb4ed144ab529f19f57c3f1 #tag: 3.8-alpine
@@ -39,13 +43,13 @@ spec:
       #!/usr/bin/env python3
       import smtplib, ssl, os
       #from email.mime.text import MIMEText
-      port = os.getenv('PORT')
-      smtp_server = os.getenv('SERVER')
+      port = $port
+      smtp_server = $url
       sender_email = "$(params.sender)"
       receiver_emails = "$(params.recipients)"
-      user = os.getenv('USER')
-      password = os.getenv('PASSWORD')
-      tls = os.getenv('TLS')
+      user = $user
+      password = $password
+      tls = $tls
       message = f"""\
       Subject: $(params.subject)
       To: {receiver_emails}
@@ -64,29 +68,3 @@ spec:
           server.sendmail(sender_email, receiver, message.encode('utf-8'))
           # server.sendmail(sender_email, receiver, message.as_string())
       server.quit()
-    env:
-    - name: USER
-      valueFrom:
-        secretKeyRef:
-          name: $(params.server)
-          key: user
-    - name: PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: $(params.server)
-          key: password
-    - name: TLS
-      valueFrom:
-        secretKeyRef:
-          name: $(params.server)
-          key: tls
-    - name: SERVER
-      valueFrom:
-        secretKeyRef:
-          name: $(params.server)
-          key: url
-    - name: PORT
-      valueFrom:
-        secretKeyRef:
-          name: $(params.server)
-          key: port

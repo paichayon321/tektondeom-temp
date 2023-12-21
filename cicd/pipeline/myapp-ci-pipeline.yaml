@@ -297,6 +297,22 @@ spec:
           operator: in
           values:
             - "dev"
+# ArgoCD SyncApp
+    - name: argocd-task-sync-and-wait-dev
+      params:
+        - name: application-name #ArgoCD Application Prefix name
+          value: myapp
+        - name: environment
+          value: $(tasks.initial-info.results.environment)
+      taskRef:
+        kind: Task
+        name: argocd-task-sync-and-wait
+      runAfter:
+        - update-manifest-dev
+      workspaces:
+        - name: temp
+          workspace: temp
+
 # Update SIT
     - name: update-manifest-sit
       params:
@@ -321,6 +337,21 @@ spec:
           operator: in
           values:
             - "tags"
+# ArgoCD SyncApp
+    - name: argocd-task-sync-and-wait-sit
+      params:
+        - name: application-name #ArgoCD Application Prefix name
+          value: myapp
+        - name: environment
+          value: $(tasks.initial-info.results.environment)
+      taskRef:
+        kind: Task
+        name: argocd-task-sync-and-wait
+      runAfter:
+        - update-manifest-sit
+      workspaces:
+        - name: temp
+          workspace: temp
   finally:
     - name: clean-taskrun
       when:

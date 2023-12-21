@@ -43,6 +43,6 @@ spec:
       recipient_email="ptanvann@redhat.com "
       subject=" Test Subject"
       body=" Test Boby "
-      python sendgmail.py $user, $password, $recipient_email, $subject, $body 
+      python sendgmail.py "$user", "$password", "$recipient_email", "$subject", "$body" 
 
 

@@ -50,15 +50,13 @@ spec:
 
         appname=$(params.application-name)-$(params.environment)
         
-        argocd app --help
-
-        #argocd app sync "$appname" --revision main
+        argocd app sync "$appname" --revision main
 
         #argocd app sync "$appname" --revision "$(params.revision)"
 
         #sleep 20
 
-        #argocd app wait "$appname" --health
+        argocd app wait "$appname" --health
 
       workingDir: $(workspaces.temp.path)
   workspaces:

@@ -5,7 +5,8 @@ RUN wget https://github.com/jqlang/jq/releases/download/jq-1.7/jq-linux-amd64 -O
     chmod +x /usr/bin/jq
 RUN wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
     chmod +x /usr/bin/yq
+RUN wget https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -O /usr/bin/argocd &&\
+    chmod +x /usr/bin/argocd 
 EOF
 
 podman build -t docker.io/paichayon1/multitools:ubi7  .
-

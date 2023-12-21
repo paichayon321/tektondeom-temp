@@ -62,20 +62,4 @@ spec:
         git add /workspace/temp/tekton-pipeline/app/myapp/env/$deploy_env/deployment.yaml
         git commit -m "update image $(params.git_repo_name):$(params.image_tag) on $deploy_env"
         git push https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git HEAD:main   
-# ArgoCD App Sync        
-    - name: argocd-task-sync-and-wait
-      params:
-        - name: application-name
-          value: myapp-dev
-        - name: revision
-          value: main
-        - name: flags
-          value: '--'
-        - name: argocd-version
-          value: v2.2.2
-      taskRef:
-        kind: ClusterTask
-        name: argocd-task-sync-and-wait
-      workspaces:
-        - name: temp
-          workspace: temp
+

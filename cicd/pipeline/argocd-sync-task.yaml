@@ -46,7 +46,6 @@ spec:
       script: >
         if [ -z "$ARGOCD_AUTH_TOKEN" ]; then
           yes | argocd login "$ARGOCD_SERVER" --username="$ARGOCD_USERNAME" --password="$ARGOCD_PASSWORD";
-          #yes | argocd login "openshift-gitops-server-openshift-gitops.apps.524vf.dynamic.opentlc.com:443" --username="admin" --password="Fs93pCDeGZmHyOn4BtvJqEPIkMbLrf60";
           
         fi
 

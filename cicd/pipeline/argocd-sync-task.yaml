@@ -42,7 +42,7 @@ spec:
           name: argocd-env-secret  # used for authentication (username/password or auth token)
   steps:
 #    - image: 'quay.io/argoproj/argocd:$(params.argocd-version)'
-    - image: docker.io/paichayon1/multitools:ubi7
+    - image: docker.io/paichayon1/multitools-argocd:ubi7
       name: login
       resources: {}
       script: |

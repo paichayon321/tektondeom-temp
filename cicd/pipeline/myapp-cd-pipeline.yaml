@@ -34,6 +34,27 @@ spec:
       workspaces:
         - name: temp
           workspace: temp
+# ArgoCD SyncApp
+    - name: argocd-task-sync-and-wait
+      params:
+        - name: application-name
+          value: myapp-dev
+        - name: revision
+          value: main
+        - name: flags
+          value: '--'
+        - name: argocd-version
+          value: v2.2.2
+      taskRef:
+        kind: ClusterTask
+        name: argocd-task-sync-and-wait
+      runAfter:
+        - update-manifest
+      workspaces:
+        - name: temp
+          workspace: temp
+          
+  workspaces:
   finally:
     - name: clean-taskrun
       params:

@@ -34,8 +34,8 @@ spec:
       workspaces:
         - name: temp
           workspace: temp
-        - name: secret
-          workspace: secret
+#        - name: secret
+#          workspace: secret
   finally:
     - name: clean-taskrun
       params:

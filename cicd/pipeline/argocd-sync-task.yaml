@@ -52,8 +52,6 @@ spec:
         
         argocd app --help
 
-        cat log.txt
-
         #argocd app sync "$appname" --revision main
 
         #argocd app sync "$appname" --revision "$(params.revision)"

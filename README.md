@@ -48,3 +48,6 @@ data:
   ARGOCD_PASSWORD: <password>
   ARGOCD_AUTH_TOKEN: <token>
 ----
+
+
+echo $?

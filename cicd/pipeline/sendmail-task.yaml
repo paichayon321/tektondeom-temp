@@ -49,7 +49,7 @@ spec:
       receiver_emails = "$(params.recipients)"
       user = "$user"
       password = "$password"
-      tls = '$tls'
+      tls = 'True'
       message = f"""\
       Subject: $(params.subject)
       To: {receiver_emails}

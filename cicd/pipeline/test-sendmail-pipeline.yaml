@@ -6,29 +6,29 @@ metadata:
 spec:
   params:
     - name: server
-      default: spring-web-quickstart
-    - name: subejct
+      default: smtp.gmail.com
+    - name: subject
       default: 'test'
     - name: body
       default: 'test'
     - name: recipients
-      default: 'test'
+      default: 'ptanvann@redhat.com'
     - name: sender
-      default: 'test'
+      default: 'tekton@demo.com'
 
   tasks:
     - name: sendmail
       params:
         - name: server
-          value: 'test'
-        - name: subejct
-          value: 'test'
+          value: $(params.server)
+        - name: subject
+          value: $(params.subject)
         - name: body
-          value: 'test'
+          value: $(params.body)
         - name: recipients
-          value: 'test'
+          value: $(params.recipients)
         - name: sender
-          value: 'test'
+          value: $(params.sender)
       taskRef:
         kind: Task
         name: sendmail

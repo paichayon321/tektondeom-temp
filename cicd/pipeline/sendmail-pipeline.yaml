@@ -5,26 +5,13 @@ metadata:
   namespace: cicd
 spec:
   params:
-    - name: subject
-      default: 'test'
-    - name: body
-      default: 'test'
     - name: recipients
       default: 'ptanvann@redhat.com'
-    - name: sender
-      default: 'tekton@demo.com'
-
   tasks:
     - name: sendmail
       params:
-        - name: subject
-          value: $(params.subject)
-        - name: body
-          value: $(params.body)
         - name: recipients
           value: $(params.recipients)
-        - name: sender
-          value: $(params.sender)
       taskRef:
         kind: Task
         name: sendmail

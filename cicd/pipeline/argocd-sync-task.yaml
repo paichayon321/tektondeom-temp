@@ -30,7 +30,7 @@ spec:
     - default: ''
       name: flags
       type: string
-    - default: v2.2.2
+    - default: v2.9.2
       name: argocd-version
       type: string
     - name: environment

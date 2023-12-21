@@ -37,14 +37,16 @@ spec:
 # ArgoCD SyncApp
     - name: argocd-task-sync-and-wait
       params:
-        - name: application-name
-          value: myapp-dev
+        - name: application-name #ArgoCD Application Prefix name
+          value: myapp
         - name: revision
           value: main
         - name: flags
           value: '--'
         - name: argocd-version
           value: v2.2.2
+        - name: environment
+          value: $(params.environment)
       taskRef:
         kind: Task
         name: argocd-task-sync-and-wait

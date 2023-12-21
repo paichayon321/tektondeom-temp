@@ -33,6 +33,7 @@ spec:
     - default: v2.2.2
       name: argocd-version
       type: string
+    - name: environment
   stepTemplate:
     envFrom:
       - configMapRef:
@@ -48,11 +49,11 @@ spec:
           yes | argocd login "$ARGOCD_SERVER" --username="$ARGOCD_USERNAME" --password="$ARGOCD_PASSWORD";
           
         fi
-
-        argocd app sync "$(params.application-name)" --revision
+        appname=$(params.application-name)-$(params.environment)
+        argocd app sync "$appname" --revision
         "$(params.revision)" "$(params.flags)"
 
-        argocd app wait "$(params.application-name)" --health "$(params.flags)"
+        argocd app wait "$appname" --health "$(params.flags)"
       workingDir: $(workspaces.temp.path)
   workspaces:
     - name: temp

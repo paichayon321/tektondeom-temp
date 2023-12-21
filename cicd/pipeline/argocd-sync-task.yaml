@@ -49,7 +49,7 @@ spec:
 
         #appname=$(params.application-name)-$(params.environment)
         
-        argocd app sync
+        argocd app 
 
         cat log.txt
 

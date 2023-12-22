@@ -52,14 +52,7 @@ spec:
           
   workspaces:
   finally:
-    - name: notification
-      displayName: "Notify"
-      taskRef:
-        name: notification
-    - name: notification-using-context-variable
-      displayName: "Notification from $(context.pipeline.name)"
-      taskRef:
-        name: notification
+
 #    - name: update-status
 #      params:
 #        - name: update-status
@@ -90,13 +83,14 @@ spec:
       taskRef:
         kind: ClusterTask
         name: tkn
-    - name: sendmail
-      taskRef:
-        kind: Task
-        name: sendmail-cd
+    - name: notification-using-context-variable
+      displayName: "Notification from $(context.pipeline.name)"
       params:
         - name: recipients
           value: ptanvann@redhat.com
+      taskRef:
+        kind: Task
+        name: sendmail
   workspaces:
     - name: temp
       description: Use Empty Directory

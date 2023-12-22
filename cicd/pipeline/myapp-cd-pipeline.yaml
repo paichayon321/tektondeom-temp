@@ -78,13 +78,13 @@ spec:
       taskRef:
         kind: ClusterTask
         name: tkn
-    - name: notifymail
-      params: 
-        - name: recipients
-          value: 'ptanvann@redhat.com'
-      tarkRef:
-        kind: Task
-        name: sendmail
+#    - name: notifymail
+#      params: 
+#        - name: recipients
+#          value: 'ptanvann@redhat.com'
+#      tarkRef:
+#        kind: Task
+#        name: sendmail
   workspaces:
     - name: temp
       description: Use Empty Directory

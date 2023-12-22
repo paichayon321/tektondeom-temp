@@ -52,6 +52,10 @@ spec:
           
   workspaces:
   finally:
+    - name: update-status
+      params:
+        - name: update-status
+          value: $(tasks.update-manifest.status)
     - name: clean-taskrun
       params:
         - name: TKN_IMAGE
@@ -81,7 +85,7 @@ spec:
     - name: sendmail
       taskRef:
         kind: Task
-        name: sendmail
+        name: sendmail-cd
       params:
         - name: recipients
           value: ptanvann@redhat.com

@@ -1,3 +1,4 @@
+#####
 cat << EOF > Dockerfile
 FROM registry.access.redhat.com/ubi7/ubi-minimal:latest
 RUN microdnf install git wget zip unzip
@@ -10,8 +11,10 @@ RUN wget https://github.com/argoproj/argo-cd/releases/latest/download/argocd-lin
 EOF
 
 podman build -t docker.io/paichayon1/multitools-argocd:ubi7  .
+podman push docker.io/paichayon1/multitools-argocd:ubi7
 
 
+######
 cat << EOF > Dockerfile
 FROM python:3.9-slim
 ADD sendgmail.py ./
@@ -21,3 +24,30 @@ podman build -t docker.io/paichayon1/sendgmail-py:0.1  .
 podman push docker.io/paichayon1/sendgmail-py:0.1
 
 
+#####
+# Expose image registry route, the following command can be run:
+oc patch configs.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
+
+REGISTRY="$(oc get route/default-route -n openshift-image-registry -o=jsonpath='{.spec.host}')/openshift"
+echo $REGISTRY
+
+# Use podman create new image and push to registry
+# Login to openshift console and copy login command
+ 
+podman login --tls-verify=false -u unused -p $(oc whoami -t)  ${REGISTRY}
+
+mkdir maven-temp
+cd maven-temp
+curl -o apache-maven-3.9.6-bin.tar.gz https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
+tar xzf apache-maven-3.9.6-bin.tar.gz
+
+cat << EOF > Dockerfile
+FROM registry.access.redhat.com/ubi8/openjdk-8:1.3
+USER root
+RUN rm -rf /usr/share/maven
+COPY apache-maven-3.9.6 /usr/share/maven
+USER jboss
+EOF 
+
+podman build -t ${REGISTRY}/maven:3.9.6 .
+podman push --tls-verify=false ${REGISTRY}/maven:3.9.6

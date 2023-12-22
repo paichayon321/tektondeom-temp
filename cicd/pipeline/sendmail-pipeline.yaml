@@ -15,9 +15,9 @@ spec:
       taskRef:
         kind: Task
         name: sendmail
-      workspaces:
-        - name: temp
-          workspace: temp
-  workspaces:
-    - description: Use Empty Directory
-      name: temp
+#      workspaces:
+#        - name: temp
+#          workspace: temp
+#  workspaces:
+#    - description: Use Empty Directory
+#      name: temp

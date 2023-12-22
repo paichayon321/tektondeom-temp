@@ -1,4 +1,4 @@
-#####
+##### Build Mulitools Image (weget jq ya argocd git zip unzip)
 cat << EOF > Dockerfile
 FROM registry.access.redhat.com/ubi7/ubi-minimal:latest
 RUN microdnf install git wget zip unzip
@@ -14,7 +14,7 @@ podman build -t docker.io/paichayon1/multitools-argocd:ubi7  .
 podman push docker.io/paichayon1/multitools-argocd:ubi7
 
 
-######
+###### Build Sendmail Image by python script
 cat << EOF > Dockerfile
 FROM python:3.9-slim
 ADD sendgmail.py ./
@@ -24,7 +24,7 @@ podman build -t docker.io/paichayon1/sendgmail-py:0.1  .
 podman push docker.io/paichayon1/sendgmail-py:0.1
 
 
-#####
+##### Build Maven New version 3.9.6 and Push to internal registry
 # Expose image registry route, the following command can be run:
 oc patch configs.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
 

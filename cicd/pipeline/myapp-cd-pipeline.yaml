@@ -52,6 +52,14 @@ spec:
           
   workspaces:
   finally:
+    - name: notification
+      displayName: "Notify"
+      taskRef:
+        name: notification
+    - name: notification-using-context-variable
+      displayName: "Notification from $(context.pipeline.name)"
+      taskRef:
+        name: notification
 #    - name: update-status
 #      params:
 #        - name: update-status

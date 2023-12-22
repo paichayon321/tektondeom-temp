@@ -52,10 +52,10 @@ spec:
           
   workspaces:
   finally:
-    - name: update-status
-      params:
-        - name: update-status
-          value: $(tasks.update-manifest.status)
+#    - name: update-status
+#      params:
+#        - name: update-status
+#          value: $(tasks.update-manifest.status)
     - name: clean-taskrun
       params:
         - name: TKN_IMAGE

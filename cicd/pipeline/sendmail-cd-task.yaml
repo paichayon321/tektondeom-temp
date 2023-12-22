@@ -21,7 +21,7 @@ spec:
     type: string
     description: recipient email addresses
   - name: message
-    type: string
+    type: array
     description: message
   stepTemplate:
     envFrom:

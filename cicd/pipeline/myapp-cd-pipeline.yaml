@@ -90,7 +90,7 @@ spec:
           value: ptanvann@redhat.com
       taskRef:
         kind: Task
-        name: sendmail
+        name: sendmail-cd
   workspaces:
     - name: temp
       description: Use Empty Directory

@@ -18,7 +18,7 @@ spec:
       description: Image registry repository where image existing
   tasks:
 # Update Manifest
-    - name: update-manifest
+    - name: update-manifest-task
       params:
         - name: image_tag
           value: $(params.image_tag)
@@ -89,7 +89,7 @@ spec:
         - name: recipients
           value: ptanvann@redhat.com
         - name: message
-          value: $(context.pipeline.name)-$(context.pipelineRun.name)-$(tasks.status)-$(tasks.argocd-task-sync-and-wait.status)
+          value: "Pipeline Name: $(context.pipeline.name)<br> PipelineRun Name: $(context.pipelineRun.name)<br> <p>Task Status:<br>update-manifest: $(tasks.update-manifest-task.status)<br>argocd-task-sync: $(tasks.argocd-task-sync-and-wait.status)"
       taskRef:
         kind: Task
         name: sendmail-cd

@@ -312,7 +312,11 @@ spec:
       workspaces:
         - name: temp
           workspace: temp
-
+      when:
+        - input: $(tasks.initial-info.results.environment)
+          operator: in
+          values:
+            - "dev"
 # Update SIT
     - name: update-manifest-sit
       params:
@@ -352,6 +356,11 @@ spec:
       workspaces:
         - name: temp
           workspace: temp
+      when:
+        - input: $(tasks.initial-info.results.environment)
+          operator: in
+          values:
+            - "tags"
   finally:
     - name: clean-taskrun
       when:

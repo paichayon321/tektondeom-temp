@@ -90,7 +90,7 @@ spec:
         - name: recipients
           value: ptanvann@redhat.com
         - name: message
-          value: 'Pipeline Name: "$(context.pipeline.name)"'
+          value: $(context.pipeline.name)
           # <br> PipelineRun Name: $(context.pipelineRun.name) <br> <p>Task Status:<br>update-manifest: $(tasks.update-manifest-task.status) <br>argocd-task-sync: $(tasks.argocd-task-sync-and-wait.status)"
       taskRef:
         kind: Task

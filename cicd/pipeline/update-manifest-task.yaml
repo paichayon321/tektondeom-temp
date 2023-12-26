@@ -54,13 +54,11 @@ spec:
         fi  
 
         git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git
-        cd tekton-pipeline
-        pwd
         git checkout origin/main
         git config --global user.name "tekton_pipeline"
         git config --global user.email "tektonPipeline@domain.local"
-        yq -i '.spec.template.spec.containers[0].image = "$(params.image_repo_url)/$(params.git_repo_name):$(params.image_tag)"' /workspace/temp/tekton-pipeline/app/myapp/env/$deploy_env/deployment.yaml
-        git add /workspace/temp/tekton-pipeline/app/myapp/env/$deploy_env/deployment.yaml
+        yq -i '.spec.template.spec.containers[0].image = "$(params.image_repo_url)/$(params.git_repo_name):$(params.image_tag)"' tekton-pipeline/app/myapp/env/$deploy_env/deployment.yaml
+        git add tekton-pipeline/app/myapp/env/$deploy_env/deployment.yaml
         git commit -m "update image $(params.git_repo_name):$(params.image_tag) on $deploy_env"
         git push https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git HEAD:main   
 

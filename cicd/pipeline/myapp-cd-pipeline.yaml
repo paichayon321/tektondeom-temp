@@ -85,7 +85,7 @@ spec:
         kind: ClusterTask
         name: tkn
     - name: notification-using-context-variable
-      displayName: "Notification from $(context.pipeline.name)"
+      # displayName: "Notification from $(context.pipeline.name)"
       params:
         - name: recipients
           value: ptanvann@redhat.com

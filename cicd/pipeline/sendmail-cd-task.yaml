@@ -31,12 +31,13 @@ spec:
   - name: send
     image: docker.io/paichayon1/sendgmail-py:0.1
     script: |
-      echo ${params.message}
+      echo $(context.pipeline.name) 
+      #echo ${params.message}
       # Usage: python sendgmail.py sender_mail sender_password recipient_email subject body 
       #recipient_email="ptanvann@redhat.com"
-      subject="Pipeline Status:"
+      #subject="Pipeline Status:"
       # body="<b>Summary Pipeline Status</b><br>$(params.message)<br>"
-      body="test"
-      python sendgmail.py "$user" "$password" "$(params.recipients)" "$subject" "$body" 
+      #body="test"
+      #python sendgmail.py "$user" "$password" "$(params.recipients)" "$subject" "$body" 
 
 

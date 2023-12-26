@@ -45,7 +45,6 @@ spec:
       runAfter:
         - update-manifest-task
           
-  workspaces:
   finally:
     - name: clean-taskrun
       params:
@@ -79,7 +78,7 @@ spec:
         - name: recipients
           value: ptanvann@redhat.com
         - name: message
-          value: "TEST"
+          value: "Test Message from Pipeline"
           # <br> PipelineRun Name:$(context.pipeline.name)  $(context.pipelineRun.name) <br> <p>Task Status:<br>update-manifest: $(tasks.update-manifest-task.status) <br>argocd-task-sync: $(tasks.argocd-task-sync-and-wait.status)"
       taskRef:
         kind: Task

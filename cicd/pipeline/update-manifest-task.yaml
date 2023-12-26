@@ -19,9 +19,9 @@ spec:
     envFrom:
       - secretRef:
           name: github-pat-secret  # github-pat
-  workspaces:
-    - name: temp
-      description: Workspace for temporary
+#  workspaces:
+#    - name: temp
+#      description: Workspace for temporary
   steps:
     - name: clone-platform-repo
       env:
@@ -33,8 +33,10 @@ spec:
           value: $(params.image_tag)               
         - name: deploy_env
       image: docker.io/paichayon1/multitools:ubi7
-      workingDir: $(workspaces.temp.path)
+ #     workingDir: $(workspaces.temp.path)
       script: |
+        ls -la
+        pwd
         echo "####################"
         echo $(params.environment)
         echo "####################"

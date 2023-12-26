@@ -31,9 +31,9 @@ spec:
       taskRef:
         kind: Task
         name: update-manifest-task
-      workspaces:
-        - name: temp
-          workspace: temp
+#      workspaces:
+#        - name: temp
+#          workspace: temp
 # ArgoCD SyncApp
     - name: argocd-task-sync-and-wait
       params:
@@ -45,10 +45,11 @@ spec:
         kind: Task
         name: argocd-task-sync-and-wait
       runAfter:
-        - update-manifest-task
-      workspaces:
-        - name: temp
-          workspace: temp
+        - update-manifest
+#      workspaces:
+#        - name: temp
+#          workspace: temp
+
           
   workspaces:
   finally:
@@ -93,7 +94,7 @@ spec:
       taskRef:
         kind: Task
         name: sendmail-cd
-  workspaces:
-    - name: temp
-      description: Use Empty Directory
+#  workspaces:
+#    - name: temp
+#      description: Use Empty Directory
 

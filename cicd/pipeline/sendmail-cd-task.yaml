@@ -31,6 +31,7 @@ spec:
       # echo "$(context.pipeline.name)"
       echo "message:tttt"
       echo $(params.message)
+      echo $(context.pipeline.name)
       # Usage: python sendgmail.py sender_mail sender_password recipient_email subject body 
       #recipient_email="ptanvann@redhat.com"
       #subject="Pipeline Status:"

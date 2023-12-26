@@ -45,7 +45,7 @@ spec:
         kind: Task
         name: argocd-task-sync-and-wait
       runAfter:
-        - update-manifest
+        - update-manifest-task
 #      workspaces:
 #        - name: temp
 #          workspace: temp

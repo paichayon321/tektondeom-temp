@@ -31,9 +31,7 @@ spec:
       taskRef:
         kind: Task
         name: update-manifest-task
-#      workspaces:
-#        - name: temp
-#          workspace: temp
+
 # ArgoCD SyncApp
     - name: argocd-task-sync-and-wait
       params:
@@ -46,18 +44,9 @@ spec:
         name: argocd-task-sync-and-wait
       runAfter:
         - update-manifest-task
-#      workspaces:
-#        - name: temp
-#          workspace: temp
-
           
   workspaces:
   finally:
-
-#    - name: update-status
-#      params:
-#        - name: update-status
-#          value: $(tasks.update-manifest.status)
     - name: clean-taskrun
       params:
         - name: TKN_IMAGE
@@ -95,7 +84,4 @@ spec:
       taskRef:
         kind: Task
         name: sendmail-cd
-#  workspaces:
-#    - name: temp
-#      description: Use Empty Directory
 

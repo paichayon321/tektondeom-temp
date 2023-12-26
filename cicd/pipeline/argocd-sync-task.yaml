@@ -44,6 +44,4 @@ spec:
 
         argocd app wait "$appname" --health
 
-#      workingDir: $(workspaces.temp.path)
-#  workspaces:
-#    - name: temp
+

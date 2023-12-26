@@ -21,7 +21,9 @@ spec:
     type: string
     description: message
   - name: pipeline_name
-  - name: pipelinerun_name  
+    type: string
+  - name: pipelinerun_name
+    type: string  
   stepTemplate:
     envFrom:
       - secretRef:

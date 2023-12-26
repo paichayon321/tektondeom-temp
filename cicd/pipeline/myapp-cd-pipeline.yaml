@@ -78,7 +78,7 @@ spec:
         - name: recipients
           value: ptanvann@redhat.com
         - name: message
-          value: '<br>Update Manifest:'  $(tasks.update-manifest-task.status) '<br>ArgoCD Sync:' $(tasks.argocd-task-sync-and-wait.status)
+          value: $(tasks.update-manifest-task.status)|$(tasks.argocd-task-sync-and-wait.status)
         - name: pipeline_name
           value: $(context.pipeline.name) 
         - name: pipelinerun_name

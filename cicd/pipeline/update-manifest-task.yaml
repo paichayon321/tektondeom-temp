@@ -66,7 +66,7 @@ spec:
         git add ./app/myapp/env/$deploy_env/deployment.yaml
 
         echo "##### Check Diff ######"
-        dif=$(git diff)
+        export dif=$(git diff)
         env
         if [[ $dif == "" ]]; then
             echo "Not Dif"

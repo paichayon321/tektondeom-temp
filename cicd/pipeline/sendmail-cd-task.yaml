@@ -33,6 +33,8 @@ spec:
     image: docker.io/paichayon1/sendgmail-py:0.1
     script: |
       echo $(params.message)
+      image_tag=$(echo $(params.message) | cut -d'|' -f1 | tr -d '|')
+      echo $image_tag
       echo $(params.pipeline_name)
       echo $(params.pipelinerun_name)
       #body_temp="test <br> ''' $(params.message) ''' " <br> " + $(params.pipeline_name)

@@ -41,7 +41,7 @@ spec:
       task_status=$(echo $(params.message) | cut -d'|' -f3- | sed 's/|/<br>/g')
       
       subject="Pipeline: $(params.pipeline_name) with run name: $(params.pipelinerun_name) for $environment status"
-      body="<p> Pipeline Status: <p> PipelineRun name: $(params.pipelinerun_name) <br> Image: $image_tag <br> Environment: $environment <br> Task: <br> $task_status"
+      body="<p><h1><b> Pipeline Status:</b></h1> <p> <b>PipelineRun name:</b> $(params.pipelinerun_name) <br> <b>Image:</b> $image_tag <br> Environment: $environment <br><h2><b> Task: </b></h2><br> $task_status"
       
       echo "$subject"
       echo "$body"

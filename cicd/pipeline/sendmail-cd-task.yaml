@@ -22,7 +22,7 @@ spec:
     description: message
   - name: pipeline_name
     type: string
-  - name: pipelineRun_name
+  - name: pipelinerun_name
     type: string  
   stepTemplate:
     envFrom:
@@ -36,7 +36,7 @@ spec:
       echo "message:tttt"
       echo $(params.message)
       echo $(params.pipeline_name)
-      echo $(params.pipelineRun_name)
+      echo $(params.pipelinerun_name)
       # Usage: python sendgmail.py sender_mail sender_password recipient_email subject body 
       #recipient_email="ptanvann@redhat.com"
       #subject="Pipeline Status:"

@@ -67,6 +67,7 @@ spec:
 
         echo "##### Check Diff ######"
         dif=$(git diff)
+        env
         if [[ $dif == "" ]]; then
             echo "Not Dif"
         else

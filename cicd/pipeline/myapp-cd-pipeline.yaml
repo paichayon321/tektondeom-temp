@@ -80,7 +80,7 @@ spec:
         - name: message
           value: $(tasks.update-manifest-task.results.image_tag) "|" $(tasks.update-manifest-task.results.environment) "|" $(tasks.update-manifest-task.status) "|" $(tasks.argocd-task-sync-and-wait.status)
         - name: pipeline_name
-          value: $(context.pipeline.name) 
+          value: '<br>' $(context.pipeline.name) 
         - name: pipelinerun_name
           value: $(context.pipelineRun.name)             
           # <br> PipelineRun Name:$(context.pipeline.name)  $(context.pipelineRun.name) <br> <p>Task Status:<br>update-manifest: $(tasks.update-manifest-task.status) <br>argocd-task-sync: $(tasks.argocd-task-sync-and-wait.status)"

@@ -68,11 +68,8 @@ spec:
         git add ./app/myapp/env/$deploy_env/deployment.yaml
 
         echo "##### Check Diff ######"
-        export dif=$(git diff)
-        git diff --help
-        git diff
-        git diff > dif.txt
         git status
+        echo "#######################"
         ls -la
         cat dif.txt
         env

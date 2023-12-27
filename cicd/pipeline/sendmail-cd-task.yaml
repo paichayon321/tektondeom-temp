@@ -38,7 +38,7 @@ spec:
       #echo $(params.pipelinerun_name)
       image_tag=$(echo $(params.message) | cut -d'|' -f1)
       environment=$(echo $(params.message) | cut -d'|' -f2)
-      task_status=$(echo $(params.message) | cut -d'|' -f3- | tr '|' "<br>")
+      task_status=$(echo $(params.message) | cut -d'|' -f3- | sed 's/|/<br>/g')
       
       subject="Pipeline: $(params.pipeline_name) with run name: $(params.pipelinerun_name) for $environment status"
       body_temp="<p> Pipeline Status: <p> PipelineRun name: $(params.pipelinerun_name) <br> Image: $image_tag <br> Environment: $environment <br> Task: <br> $task_status"

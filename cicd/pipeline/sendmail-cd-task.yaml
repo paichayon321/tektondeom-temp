@@ -35,11 +35,12 @@ spec:
       echo $(params.message)
       image_tag=$(echo $(params.message) | cut -d'|' -f1)
       environment=$(echo $(params.message) | cut -d'|' -f2)
+      update_manifest_status=$(echo $(params.message) | cut -d'|' -f3)
       echo $image_tag
       echo $(params.pipeline_name)
       echo $(params.pipelinerun_name)
       #body_temp="test <br> ''' $(params.message) ''' " <br> " + $(params.pipeline_name)
-      body_temp="test <br> $image_tag <br> $environment"
+      body_temp="test <br> $image_tag <br> $environment <br> $update_manifest_status"
       echo "$body_temp"
       # Usage: python sendgmail.py sender_mail sender_password recipient_email subject body 
       # recipient_email="ptanvann@redhat.com"

@@ -69,6 +69,7 @@ spec:
 
         echo "##### Check Diff ######"
         export dif=$(git diff)
+        git diff
         git diff > dif.txt
         ls -la
         cat dif.txt

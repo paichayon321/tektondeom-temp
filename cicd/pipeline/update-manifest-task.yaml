@@ -66,8 +66,8 @@ spec:
         git add ./app/myapp/env/$deploy_env/deployment.yaml
 
         echo "##### Check Diff ######"
-        dif=$(git diff)
-        echo "$dif"
+        git diff > chk.txt
+        cat chk.txt
         echo "######################"
 
         #git commit -m "update image $(params.git_repo_name):$(params.image_tag) on $deploy_env"

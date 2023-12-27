@@ -68,7 +68,7 @@ spec:
         echo "##### Check Diff ######"
         dif=$(git diff)
         echo "$dif"
-        echo "######################""
+        echo "######################"
 
         #git commit -m "update image $(params.git_repo_name):$(params.image_tag) on $deploy_env"
         #git push https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git HEAD:main

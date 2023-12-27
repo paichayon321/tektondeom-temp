@@ -386,4 +386,6 @@ spec:
       taskRef:
         kind: ClusterTask
         name: tkn
-
+  workspaces:
+    - name: source
+    - name: secret

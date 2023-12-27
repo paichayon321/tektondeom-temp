@@ -31,6 +31,7 @@ spec:
         - name: deploy_env
       image: docker.io/paichayon1/multitools:ubi7
       script: |
+        #!/usr/bin/env bash
         echo "####################"
         echo $(params.environment)
         echo "####################"

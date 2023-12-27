@@ -79,6 +79,6 @@ spec:
             echo "Dif"
         fi  
 
-        
-        #git push https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git HEAD:main
+
+        git push https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git HEAD:main
 

@@ -35,7 +35,7 @@ spec:
       echo $(params.message)
       image_tag=$(echo $(params.message) | cut -d'|' -f1)
       environment=$(echo $(params.message) | cut -d'|' -f2)
-      update_manifest_status=$(echo $(params.message) | cut -d'|' -f3)
+      update_manifest_status=$(echo $(params.message) | cut -d'|' -f3-)
       echo $image_tag
       echo $(params.pipeline_name)
       echo $(params.pipelinerun_name)

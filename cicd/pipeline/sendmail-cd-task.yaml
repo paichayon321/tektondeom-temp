@@ -38,16 +38,14 @@ spec:
       #echo $(params.pipelinerun_name)
       image_tag=$(echo $(params.message) | cut -d'|' -f1)
       environment=$(echo $(params.message) | cut -d'|' -f2)
-      task_status=$(echo $(params.message) | cut -d'|' -f3- | tr '|' '<br>')
-
-      body_temp="test <br> $image_tag <br> $environment <br> $task_status"
+      task_status=$(echo $(params.message) | cut -d'|' -f3- | tr '|' "<br>")
+      
+      subject="Pipeline: $(params.pipeline_name) with run name: $(params.pipelinerun_name) for $environment status"
+      body_temp="<p> Pipeline Status: <p> PipelineRun name: $(params.pipelinerun_name) <br> Image: $image_tag <br> Environment: $environment <br> Task: <br> $task_status"
+      
+      echo "$subject"
       echo "$body_temp"
       # Usage: python sendgmail.py sender_mail sender_password recipient_email subject body 
-      # recipient_email="ptanvann@redhat.com"
-      subject="Pipeline status of $(params.pipeline_name) - $(params.pipelinerun_name)"
-      echo "$subject"
-      #body="<b>Summary Pipeline Status</b><br>$(params.message)<br>"
-      #body="test"
       #python sendgmail.py "$user" "$password" "$(params.recipients)" "$subject" "$body" 
 
 

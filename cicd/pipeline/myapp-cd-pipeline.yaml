@@ -72,7 +72,7 @@ spec:
       taskRef:
         kind: ClusterTask
         name: tkn
-    - name: notification-using-context-variable
+    - name: notification-mail
       # displayName: "Notification from $(context.pipeline.name)"
       params:
         - name: recipients

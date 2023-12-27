@@ -41,10 +41,10 @@ spec:
       task_status=$(echo $(params.message) | cut -d'|' -f3- | sed 's/|/<br>/g')
       
       subject="Pipeline: $(params.pipeline_name) with run name: $(params.pipelinerun_name) for $environment status"
-      body_temp="<p> Pipeline Status: <p> PipelineRun name: $(params.pipelinerun_name) <br> Image: $image_tag <br> Environment: $environment <br> Task: <br> $task_status"
+      body="<p> Pipeline Status: <p> PipelineRun name: $(params.pipelinerun_name) <br> Image: $image_tag <br> Environment: $environment <br> Task: <br> $task_status"
       
       echo "$subject"
-      echo "$body_temp"
+      echo "$body"
       # Usage: python sendgmail.py sender_mail sender_password recipient_email subject body 
       python sendgmail.py "$user" "$password" "$(params.recipients)" "$subject" "$body" 
 

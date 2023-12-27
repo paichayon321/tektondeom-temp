@@ -60,9 +60,9 @@ spec:
         git commit -m "update image $(params.git_repo_name):$(params.image_tag) on $deploy_env"
         git push https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git HEAD:main
 
-        # echo "##### Check Diff ######"
-        # git status
-        # echo "#######################"
+        echo "##### Check Diff ######"
+        git status
+        echo "#######################"
         # if [[ $dif == "" ]]; then
         #     echo "Not Dif"
         # else

@@ -58,6 +58,7 @@ spec:
         yq -i '.spec.template.spec.containers[0].image = "$(params.image_repo_url)/$(params.git_repo_name):$(params.image_tag)"' ./app/myapp/env/$deploy_env/deployment.yaml
         git add --ignore-errors ./app/myapp/env/$deploy_env/deployment.yaml
         git status
+        git diff
         git commit -m "update image $(params.git_repo_name):$(params.image_tag) on $deploy_env"
         git push https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git HEAD:main
 

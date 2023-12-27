@@ -55,6 +55,7 @@ spec:
         git checkout origin/main
         git config --global user.name "tekton_pipeline"
         git config --global user.email "tektonPipeline@domain.local"
+        echo "will update $(params.git_repo_name):$(params.image_tag) on $deploy_env"
         yq -i '.spec.template.spec.containers[0].image = "$(params.image_repo_url)/$(params.git_repo_name):$(params.image_tag)"' ./app/myapp/env/$deploy_env/deployment.yaml
         git add --ignore-errors ./app/myapp/env/$deploy_env/deployment.yaml
         git status

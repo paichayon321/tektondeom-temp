@@ -289,9 +289,6 @@ spec:
       taskRef:
         kind: Task
         name: update-manifest-task
-      workspaces:
-        - name: temp
-          workspace: temp
       when:
         - input: $(tasks.initial-info.results.environment)
           operator: in
@@ -309,9 +306,6 @@ spec:
         name: argocd-task-sync-and-wait
       runAfter:
         - update-manifest-dev
-      workspaces:
-        - name: temp
-          workspace: temp
       when:
         - input: $(tasks.initial-info.results.environment)
           operator: in
@@ -333,9 +327,6 @@ spec:
       taskRef:
         kind: Task
         name: update-manifest-task
-      workspaces:
-        - name: temp
-          workspace: temp
       when:
         - input: $(tasks.initial-info.results.environment)
           operator: in
@@ -353,9 +344,6 @@ spec:
         name: argocd-task-sync-and-wait
       runAfter:
         - update-manifest-sit
-      workspaces:
-        - name: temp
-          workspace: temp
       when:
         - input: $(tasks.initial-info.results.environment)
           operator: in
@@ -398,7 +386,4 @@ spec:
       taskRef:
         kind: ClusterTask
         name: tkn
-  workspaces:
-    - name: source
-    - name: temp
 

@@ -32,8 +32,6 @@ spec:
   - name: send
     image: docker.io/paichayon1/sendgmail-py:0.1
     script: |
-      # echo "$(context.pipeline.name)"
-      echo "message:tttt"
       echo $(params.message)
       echo $(params.pipeline_name)
       echo $(params.pipelinerun_name)

@@ -8,6 +8,9 @@ metadata:
     tekton.dev/pipelines.minVersion: "0.1"
     tekton.dev/displayName: "update-manifest-task"
 spec:
+  results:
+  - name: environment
+  - name: image_tag
   params:
   - name: git_repo_name
   - name: environment
@@ -63,6 +66,8 @@ spec:
         git commit -m "update image $(params.image_repo_url)/$(params.git_repo_name):$(params.image_tag) on $deploy_env"
         git push https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git HEAD:main
 
+        printf "%s" "$deploy_env" > "$(results.environment.path)"
+        printf "%s" "$(params.image_repo_url)/$(params.git_repo_name):$(params.image_tag)" > "$(results.image_tag.path)"
 
 
 

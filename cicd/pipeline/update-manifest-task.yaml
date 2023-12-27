@@ -72,6 +72,7 @@ spec:
         git diff --help
         git diff
         git diff > dif.txt
+        git status
         ls -la
         cat dif.txt
         env

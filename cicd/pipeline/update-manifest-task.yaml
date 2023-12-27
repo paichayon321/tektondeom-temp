@@ -61,7 +61,7 @@ spec:
         change=$(git status | grep changed)
         echo "#######################"
         echo "xxxxxxxxxxxxxxxxxxxxxx"      
-        echo $change
+        echo "$change"
         echo "xxxxxxxxxxxxxxxxxxxxxx"
         # if [[ $dif == "" ]]; then
         #     echo "Not Dif"

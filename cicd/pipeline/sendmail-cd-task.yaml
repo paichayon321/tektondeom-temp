@@ -46,6 +46,6 @@ spec:
       echo "$subject"
       echo "$body_temp"
       # Usage: python sendgmail.py sender_mail sender_password recipient_email subject body 
-      #python sendgmail.py "$user" "$password" "$(params.recipients)" "$subject" "$body" 
+      python sendgmail.py "$user" "$password" "$(params.recipients)" "$subject" "$body" 
 
 

@@ -52,17 +52,17 @@ spec:
         git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tekton-pipeline.git
         cd tekton-pipeline
         
-        echo "##### checkout ######""
+        echo "##### checkout ######"
         git checkout origin/main
         
-        echo "##### config ######""
+        echo "##### config ######"
         git config --global user.name "tekton_pipeline"
         git config --global user.email "tektonPipeline@domain.local"
         
         echo "##### yq ######""
         yq -i '.spec.template.spec.containers[0].image = "$(params.image_repo_url)/$(params.git_repo_name):$(params.image_tag)"' ./app/myapp/env/$deploy_env/deployment.yaml
         
-        echo "##### add ######""
+        echo "##### add ######"
         git add ./app/myapp/env/$deploy_env/deployment.yaml
 
         echo "##### Check Diff ######"

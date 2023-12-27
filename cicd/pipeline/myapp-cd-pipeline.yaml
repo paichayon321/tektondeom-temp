@@ -72,13 +72,13 @@ spec:
       taskRef:
         kind: ClusterTask
         name: tkn
-    - name: notification-mail
+    - name: mail-notify
       # displayName: "Notification from $(context.pipeline.name)"
       params:
         - name: recipients
           value: ptanvann@redhat.com
         - name: message
-          value: $(tasks.update-manifest-task.results.image_tag) "|" $(tasks.update-manifest-task.results.image_tag) "|" $(tasks.update-manifest-task.status) "|" $(tasks.argocd-task-sync-and-wait.status)
+          value: $(tasks.update-manifest-task.results.image_tag) "|" $(tasks.update-manifest-task.results.environment) "|" $(tasks.update-manifest-task.status) "|" $(tasks.argocd-task-sync-and-wait.status)
         - name: pipeline_name
           value: $(context.pipeline.name) 
         - name: pipelinerun_name

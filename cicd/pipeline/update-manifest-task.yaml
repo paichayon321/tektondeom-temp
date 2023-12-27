@@ -32,7 +32,6 @@ spec:
       image: docker.io/paichayon1/multitools:ubi7
       script: |
         #!/usr/bin/env bash
-        set +e
         echo "####################"
         echo $(params.environment)
         echo "####################"

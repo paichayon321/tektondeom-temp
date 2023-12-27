@@ -58,7 +58,7 @@ spec:
         yq -i '.spec.template.spec.containers[0].image = "$(params.image_repo_url)/$(params.git_repo_name):$(params.image_tag)"' ./app/myapp/env/$deploy_env/deployment.yaml
         git add --ignore-errors ./app/myapp/env/$deploy_env/deployment.yaml
         echo "##### Git Status 1 ######"
-        change=$(git status --ignore-errors | grep changed) || { echo "Error getting git status"; exit 1; }
+        change=$(git status | grep changed) || { echo "Error getting git status"; exit 1; }
         echo "#######################"
         echo "xxxxxxxxxxxxxxxxxxxxxx"      
         echo "$change"

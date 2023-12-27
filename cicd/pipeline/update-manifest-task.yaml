@@ -32,6 +32,7 @@ spec:
       image: docker.io/paichayon1/multitools:ubi7
       script: |
         #!/usr/bin/env bash
+        set +e
         echo "####################"
         echo $(params.environment)
         echo "####################"
@@ -69,6 +70,7 @@ spec:
         echo "##### Check Diff ######"
         export dif=$(git diff)
         env
+        echo $dif
         if [[ $dif == "" ]]; then
             echo "Not Dif"
         else

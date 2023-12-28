@@ -457,6 +457,26 @@ spec:
       taskRef:
         kind: Task
         name: sendmail-ci
+    - name: mail-notify-other
+      when:
+        - input: $(params.ext_branch)
+          operator: notin
+          values:
+            - "refs-heads-main"
+            - "dev"
+            - "tags"
+      params:
+        - name: recipients
+          value: ptanvann@redhat.com
+        - name: message
+          value: $(params.ext_branch) "| Other "  "| Unit Test task :" $(tasks.unitest.status) "| Compile MVN task :" $(tasks.compile-mvn.status) "| SonarQube Scanner task :" $(tasks.sonarqube-scanner.status) "| Build Image task :" $(tasks.buildimage.status)   "| update-manifest-task :" $(tasks.update-manifest-task.status) "| argocd-task-sync :" $(tasks.argocd-task-sync-and-wait.status)
+        - name: pipeline_name
+          value: $(context.pipeline.name) 
+        - name: pipelinerun_name
+          value: $(context.pipelineRun.name)             
+      taskRef:
+        kind: Task
+        name: sendmail-ci        
   workspaces:
     - name: source
     - name: secret

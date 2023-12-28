@@ -4,24 +4,30 @@ metadata:
   name: myapp-ci-pipeline
 spec:
   params:
-    - default: 'https://github.com/paichayon321/spring-web-quickstart.git'
+    - name: git_repo_url
+      default: 'https://github.com/paichayon321/spring-web-quickstart.git'
       description: The git repository url
-      name: git_repo_url
       type: string
-    - default: main
+    - name: git_revision
+      default: main
       description: The git revision
-      name: git_revision
-      type: string
-    - default: spring-web-quickstart
-      description: The name of the deployment to be created / patched
-      name: git_repo_name
       type: string
     - name: ext_branch
       type: string
       default: default
+# Param for update manifest
+    - name: git_repo_name
+      default: spring-web-quickstart
+      description: The name of the deployment to be created
     - name: environment
       type: string
-      default: default
+      default: defaut
+      description: Deploy environment name "uat" or "prod"
+    - name: image_tag
+      description: image version number in format x.y.z for example 1.0.0
+    - name: image_repo_url
+      default: image-registry.openshift-image-registry.svc:5000/cicd
+      description: Image registry repository where image existing
   tasks:
 # Clone 
     - name: git-clone
@@ -273,82 +279,122 @@ spec:
           workspace: source
         - name: dockerconfig
           workspace: source
+    - name: update-manifest-task
+      params:
+        - name: git_repo_name
+          value: $(params.git_repo_name)
+        - name: environment
+          value: $(tasks.initial-info.results.environment)
+        - name: image_tag
+          value: $(tasks.initial-info.results.image_tag)
+        - name: image_repo_url
+          value: image-registry.openshift-image-registry.svc:5000/cicd
+      runAfter:
+        - buildimage
+      taskRef:
+        kind: Task
+        name: update-manifest-task
+      when:
+        - input: $(tasks.initial-info.results.environment)
+          operator: in
+          values:
+            - "dev"
+            - "tags"
+# ArgoCD SyncApp
+    - name: argocd-task-sync-and-wait
+      params:
+        - name: application-name #ArgoCD Application Prefix name
+          value: myapp
+        - name: environment
+          value: $(tasks.initial-info.results.environment)
+      taskRef:
+        kind: Task
+        name: argocd-task-sync-and-wait
+      runAfter:
+        - update-manifest-task
+      when:
+        - input: $(tasks.initial-info.results.environment)
+          operator: in
+          values:
+            - "dev"
+            - "tags"
+
 # Update Dev
-    - name: update-manifest-dev
-      params:
-        - name: git_repo_name
-          value: $(params.git_repo_name)
-        - name: environment
-          value: $(tasks.initial-info.results.environment)
-        - name: image_tag
-          value: $(tasks.initial-info.results.image_tag)
-        - name: image_repo_url
-          value: image-registry.openshift-image-registry.svc:5000/cicd
-      runAfter:
-        - buildimage
-      taskRef:
-        kind: Task
-        name: update-manifest-task
-      when:
-        - input: $(tasks.initial-info.results.environment)
-          operator: in
-          values:
-            - "dev"
+    # - name: update-manifest-dev
+      # params:
+        # - name: git_repo_name
+          # value: $(params.git_repo_name)
+        # - name: environment
+          # value: $(tasks.initial-info.results.environment)
+        # - name: image_tag
+          # value: $(tasks.initial-info.results.image_tag)
+        # - name: image_repo_url
+          # value: image-registry.openshift-image-registry.svc:5000/cicd
+      # runAfter:
+        # - buildimage
+      # taskRef:
+        # kind: Task
+        # name: update-manifest-task
+      # when:
+        # - input: $(tasks.initial-info.results.environment)
+          # operator: in
+          # values:
+            # - "dev"
 # ArgoCD SyncApp
-    - name: argocd-task-sync-and-wait-dev
-      params:
-        - name: application-name #ArgoCD Application Prefix name
-          value: myapp
-        - name: environment
-          value: $(tasks.initial-info.results.environment)
-      taskRef:
-        kind: Task
-        name: argocd-task-sync-and-wait
-      runAfter:
-        - update-manifest-dev
-      when:
-        - input: $(tasks.initial-info.results.environment)
-          operator: in
-          values:
-            - "dev"
+    # - name: argocd-task-sync-and-wait-dev
+      # params:
+        # - name: application-name #ArgoCD Application Prefix name
+          # value: myapp
+        # - name: environment
+          # value: $(tasks.initial-info.results.environment)
+      # taskRef:
+        # kind: Task
+        # name: argocd-task-sync-and-wait
+      # runAfter:
+        # - update-manifest-dev
+      # when:
+        # - input: $(tasks.initial-info.results.environment)
+          # operator: in
+          # values:
+            # - "dev"
 # Update SIT
-    - name: update-manifest-sit
-      params:
-        - name: git_repo_name
-          value: $(params.git_repo_name)
-        - name: environment
-          value: $(tasks.initial-info.results.environment)
-        - name: image_tag
-          value: $(tasks.initial-info.results.image_tag)
-        - name: image_repo_url
-          value: image-registry.openshift-image-registry.svc:5000/cicd
-      runAfter:
-        - buildimage
-      taskRef:
-        kind: Task
-        name: update-manifest-task
-      when:
-        - input: $(tasks.initial-info.results.environment)
-          operator: in
-          values:
-            - "tags"
+    # - name: update-manifest-sit
+      # params:
+        # - name: git_repo_name
+          # value: $(params.git_repo_name)
+        # - name: environment
+          # value: $(tasks.initial-info.results.environment)
+        # - name: image_tag
+          # value: $(tasks.initial-info.results.image_tag)
+        # - name: image_repo_url
+          # value: image-registry.openshift-image-registry.svc:5000/cicd
+      # runAfter:
+        # - buildimage
+      # taskRef:
+        # kind: Task
+        # name: update-manifest-task
+      # when:
+        # - input: $(tasks.initial-info.results.environment)
+          # operator: in
+          # values:
+            # - "tags"
 # ArgoCD SyncApp
-    - name: argocd-task-sync-and-wait-sit
-      params:
-        - name: application-name #ArgoCD Application Prefix name
-          value: myapp
-        - name: environment
-          value: $(tasks.initial-info.results.environment)
-      taskRef:
-        kind: Task
-        name: argocd-task-sync-and-wait
-      runAfter:
-        - update-manifest-sit
-      when:
-        - input: $(tasks.initial-info.results.environment)
-          operator: in
-          values:
-            - "tags"
+    # - name: argocd-task-sync-and-wait-sit
+      # params:
+        # - name: application-name #ArgoCD Application Prefix name
+          # value: myapp
+        # - name: environment
+          # value: $(tasks.initial-info.results.environment)
+      # taskRef:
+        # kind: Task
+        # name: argocd-task-sync-and-wait
+      # runAfter:
+        # - update-manifest-sit
+      # when:
+        # - input: $(tasks.initial-info.results.environment)
+          # operator: in
+          # values:
+            # - "tags"
   finally:
     - name: clean-taskrun
       when:

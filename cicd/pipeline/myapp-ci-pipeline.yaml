@@ -445,8 +445,7 @@ spec:
         - name: recipients
           value: ptanvann@redhat.com
         - name: message
-          #value: "test"
-          value: $(tasks.update-manifest-task.results.image_tag) "|" $(tasks.update-manifest-task.results.environment) "| update-manifest-task :" $(tasks.update-manifest-task.status) "| argocd-task-sync :" $(tasks.argocd-task-sync-and-wait.status)
+          value: $(tasks.update-manifest-task.results.image_tag) "|" $(tasks.update-manifest-task.results.environment) "| Unit Test task :" $(tasks.unittest.status) "| Compile MVN task :" $(tasks.compile-mvn.status) "| SonarQube Scanner task :" $(tasks.sonarqube-scanner.status) "| Build Image task :" $(tasks.buildimage.status)   "| update-manifest-task :" $(tasks.update-manifest-task.status) "| argocd-task-sync :" $(tasks.argocd-task-sync-and-wait.status)
         - name: pipeline_name
           value: $(context.pipeline.name) 
         - name: pipelinerun_name

@@ -36,10 +36,30 @@ spec:
       name: login
       resources: {}
       script: |
+        #!/usr/bin/env bash
+        echo "####################"
+        echo $(params.environment)
+        echo "####################"
+
+        if [[ $(params.environment) == dev ]]; then
+            deploy_env=dev
+        elif [[ $(params.environment) == tags ]]; then
+            deploy_env=sit
+        elif [[ $(params.environment) == uat ]]; then
+            deploy_env=uat
+        elif [[ $(params.environment) == prod ]]; then
+            deploy_env=prod
+        elif [[ $(params.environment) == dr ]]; then
+            deploy_env=dr
+        else
+            exit 1
+        fi  
+
         argocd login "$ARGOCD_SERVER" --username="$ARGOCD_USERNAME" --password="$ARGOCD_PASSWORD" --insecure
 
-        appname=$(params.application-name)-$(params.environment)
-        
+        # appname=$(params.application-name)-$(params.environment)
+        appname=$(params.application-name)-$deploy_env
+
         argocd app sync "$appname" --revision main
 
         argocd app wait "$appname" --health

@@ -365,43 +365,43 @@ spec:
           # values:
             # - "dev"
 # Update SIT
-    - name: update-manifest-sit
-      params:
-        - name: git_repo_name
-          value: $(params.git_repo_name)
-        - name: environment
-          value: $(tasks.initial-info.results.environment)
-        - name: image_tag
-          value: $(tasks.initial-info.results.image_tag)
-        - name: image_repo_url
-          value: image-registry.openshift-image-registry.svc:5000/cicd
-      runAfter:
-        - buildimage
-      taskRef:
-        kind: Task
-        name: update-manifest-task
-      when:
-        - input: $(tasks.initial-info.results.environment)
-          operator: in
-          values:
-            - "tags"
+    # - name: update-manifest-sit
+    #   params:
+    #     - name: git_repo_name
+    #       value: $(params.git_repo_name)
+    #     - name: environment
+    #       value: $(tasks.initial-info.results.environment)
+    #     - name: image_tag
+    #       value: $(tasks.initial-info.results.image_tag)
+    #     - name: image_repo_url
+    #       value: image-registry.openshift-image-registry.svc:5000/cicd
+    #   runAfter:
+    #     - buildimage
+    #   taskRef:
+    #     kind: Task
+    #     name: update-manifest-task
+    #   when:
+    #     - input: $(tasks.initial-info.results.environment)
+    #       operator: in
+    #       values:
+    #         - "tags"
 # ArgoCD SyncApp
-    - name: argocd-task-sync-and-wait-sit
-      params:
-        - name: application-name #ArgoCD Application Prefix name
-          value: myapp
-        - name: environment
-          value: $(tasks.initial-info.results.environment)
-      taskRef:
-        kind: Task
-        name: argocd-task-sync-and-wait
-      runAfter:
-        - update-manifest-sit
-      when:
-        - input: $(tasks.initial-info.results.environment)
-          operator: in
-          values:
-            - "tags"
+    # - name: argocd-task-sync-and-wait-sit
+    #   params:
+    #     - name: application-name #ArgoCD Application Prefix name
+    #       value: myapp
+    #     - name: environment
+    #       value: $(tasks.initial-info.results.environment)
+    #   taskRef:
+    #     kind: Task
+    #     name: argocd-task-sync-and-wait
+    #   runAfter:
+    #     - update-manifest-sit
+    #   when:
+    #     - input: $(tasks.initial-info.results.environment)
+    #       operator: in
+    #       values:
+    #         - "tags"
   finally:
     - name: clean-taskrun
       when:

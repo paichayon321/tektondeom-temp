@@ -4,30 +4,37 @@ metadata:
   name: myapp-ci-pipeline
 spec:
   params:
-    - name: git_repo_url
-      default: 'https://github.com/paichayon321/spring-web-quickstart.git'
+    - default: 'https://github.com/paichayon321/spring-web-quickstart.git'
       description: The git repository url
+      name: git_repo_url
       type: string
-    - name: git_revision
-      default: main
+    - default: main
       description: The git revision
+      name: git_revision
+      type: string
+    - default: spring-web-quickstart
+      description: The name of the deployment to be created / patched
+      name: git_repo_name
       type: string
     - name: ext_branch
       type: string
       default: default
-# Param for update manifest
-    - name: git_repo_name
-      default: spring-web-quickstart
-      description: The name of the deployment to be created
     - name: environment
       type: string
-      default: defaut
-      description: Deploy environment name "uat" or "prod"
-    - name: image_tag
-      description: image version number in format x.y.z for example 1.0.0
-    - name: image_repo_url
-      default: image-registry.openshift-image-registry.svc:5000/cicd
-      description: Image registry repository where image existing
+      default: default
+# Param for update manifest
+    # - name: git_repo_name
+    #   default: spring-web-quickstart
+    #   description: The name of the deployment to be created
+    # - name: environment
+    #   type: string
+    #   default: defaut
+    #   description: Deploy environment name "uat" or "prod"
+    # - name: image_tag
+    #   description: image version number in format x.y.z for example 1.0.0
+    # - name: image_repo_url
+    #   default: image-registry.openshift-image-registry.svc:5000/cicd
+    #   description: Image registry repository where image existing
   tasks:
 # Clone 
     - name: git-clone

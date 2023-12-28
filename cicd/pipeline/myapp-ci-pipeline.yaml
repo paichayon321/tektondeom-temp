@@ -441,6 +441,11 @@ spec:
         name: tkn
     - name: mail-notify
       # displayName: "Notification from $(context.pipeline.name)"
+      when:
+        - input: $(params.ext_branch)
+          operator: notin
+          values:
+            - "refs-heads-main"
       params:
         - name: recipients
           value: ptanvann@redhat.com

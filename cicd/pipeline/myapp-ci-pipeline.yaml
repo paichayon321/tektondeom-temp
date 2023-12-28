@@ -387,7 +387,7 @@ spec:
           values:
             - "unknown"
             - "dev"
-            - "tages"
+            - "tags"
       params:
         - name: recipients
           value: ptanvann@redhat.com

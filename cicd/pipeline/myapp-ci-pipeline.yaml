@@ -382,11 +382,12 @@ spec:
         name: sendmail-ci
     - name: mail-notify-other
       when:
-        - input: $(params.ext_branch)
+        - input: $(tasks.update-manifest-task.results.image_tag)
           operator: notin
           values:
-            - "refs-heads-main"
-            - "refs-heads-dev"
+            - "unknown"
+            - "dev"
+            - "tages"
       params:
         - name: recipients
           value: ptanvann@redhat.com

@@ -382,7 +382,7 @@ spec:
         name: sendmail-ci
     - name: mail-notify-other
       when:
-        - input: $(tasks.update-manifest-task.results.environment)
+        - input: $(tasks.initial-info.results.environment)
           operator: notin
           values:
             - "unknown"

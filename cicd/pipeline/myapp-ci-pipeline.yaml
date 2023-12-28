@@ -463,8 +463,7 @@ spec:
           operator: notin
           values:
             - "refs-heads-main"
-            - "dev"
-            - "tags"
+            - "refs-heads-dev"
       params:
         - name: recipients
           value: ptanvann@redhat.com

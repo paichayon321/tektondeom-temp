@@ -24,10 +24,10 @@ spec:
       timeouts:
         pipeline: 1h0m0s
       params:
+      - name: git_repo_url
+        value: $(tt.params.git_repo_url)
       - name: git_repo_name
         value: $(tt.params.git_repo_name)
-      - name: git_url
-        value: $(tt.params.git_repo_url)
       - name: git_revision
         value: $(tt.params.git_revision)
       - name: ext_branch

@@ -372,4 +372,4 @@ spec:
         name: sendmail-ci        
   workspaces:
     - name: source
-    # - name: secret
+

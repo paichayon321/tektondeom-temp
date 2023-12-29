@@ -34,10 +34,20 @@ spec:
         value: $(tt.params.ext_branch)
       - name: environment
         value: "Default"
+      # workspaces:
+      # - name: source
+      #   persistentVolumeClaim:
+      #     claimName: myapp-source
       workspaces:
-      - name: source
-        persistentVolumeClaim:
-          claimName: myapp-source
+        - name: source
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+              volumeMode: Filesystem
       - name: secret
         secret:
           secretName: github-pat-secret

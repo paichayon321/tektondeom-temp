@@ -9,22 +9,22 @@ spec:
       default: default
       description: The git repository url
       type: string
-    - name: git_revision
-      # default: main
-      default: default
-      description: The git revision
-      type: string
     - name: git_repo_name
       # default: spring-web-quickstart
       default: default
       description: The name of the deployment to be created / patched
       type: string
+    - name: git_revision
+      # default: main
+      default: default
+      description: The git revision
+      type: string
     - name: ext_branch
       type: string
       default: default
-    - name: environment
-      type: string
-      default: default
+    # - name: environment
+    #   type: string
+    #   default: default
 # Param for update manifest
     # - name: image_repo_url
     #   default: image-registry.openshift-image-registry.svc:5000/cicd
@@ -87,10 +87,10 @@ spec:
       params:
         - name: git_repo_url
           value: $(params.git_repo_url)
-        - name: git_revision
-          value: $(params.git_revision)
         - name: git_repo_name
           value: $(params.git_repo_name)
+        - name: git_revision
+          value: $(params.git_revision)
         - name: ext_branch
           value: $(params.ext_branch)
         - name: environment

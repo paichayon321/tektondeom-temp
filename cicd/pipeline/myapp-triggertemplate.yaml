@@ -11,7 +11,7 @@ spec:
   - name: git_revision
     description: The git revision
   - name: ext_branch
-  - name: environment
+  # - name: environment
   resourcetemplates:
   - apiVersion: tekton.dev/v1beta1
     kind: PipelineRun
@@ -32,8 +32,8 @@ spec:
         value: $(tt.params.git_revision)
       - name: ext_branch
         value: $(tt.params.ext_branch)
-      - name: environment
-        value: "Default"
+      # - name: environment
+      #   value: "Default"
 # Fix PVC
       # workspaces:
       # - name: source

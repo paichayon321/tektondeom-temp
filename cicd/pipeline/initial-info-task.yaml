@@ -12,15 +12,15 @@ spec:
   - name: environment
   - name: image_tag
   params:
-  - name: git_repo_url
-    type: string
-    default: ""
+  # - name: git_repo_url
+  #   type: string
+  #   default: ""
   - name: git_revision
     type: string
     default: ""
-  - name: git_repo_name
-    type: string
-    default: ""
+  # - name: git_repo_name
+  #   type: string
+  #   default: ""
   - name: ext_branch
     type: string
     default: ""
@@ -30,12 +30,12 @@ spec:
     - name: app-source
   steps:
     - env:
-        - name: git_repo_url
-          value: $(params.git_repo_url)
+        # - name: git_repo_url
+        #   value: $(params.git_repo_url)
         - name: git_revision
           value: $(params.git_revision)
-        - name: git_repo_name
-          value: $(params.git_repo_name)
+        # - name: git_repo_name
+        #   value: $(params.git_repo_name)
         - name: ext_branch
           value: $(params.ext_branch)       
       name: initial-info

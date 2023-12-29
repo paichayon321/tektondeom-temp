@@ -47,7 +47,7 @@ spec:
               requests:
                 storage: 1Gi
             volumeMode: Filesystem
-      - name: secret
-        secret:
-          secretName: github-pat-secret
+      # - name: secret
+      #   secret:
+      #     secretName: github-pat-secret
         

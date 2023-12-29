@@ -54,12 +54,12 @@ spec:
         workspace
       name: SONAR_PASSWORD_KEY
       type: string
-    - default: token
-      description: >-
-        Name of the file of the token within the sonarqube credentials
-        workspace
-      name: SONAR_LOGIN_TOKEN
-      type: string
+    # - default: token
+    #   description: >-
+    #     Name of the file of the token within the sonarqube credentials
+    #     workspace
+    #   name: SONAR_LOGIN_TOKEN
+    #   type: string
   stepTemplate:
     envFrom:
       - secretRef:
@@ -76,8 +76,8 @@ spec:
           value: $(params.SOURCE_TO_SCAN)
         - name: SONAR_ORGANIZATION
           value: $(params.SONAR_ORGANIZATION)       
-        - name: SONAR_LOGIN_TOKEN
-          value: $(params.SONAR_LOGIN_TOKEN)       
+        # - name: SONAR_LOGIN_TOKEN
+        #   value: $(params.SONAR_LOGIN_TOKEN)       
       image: 'registry.access.redhat.com/ubi8/ubi-minimal:8.2'
       name: sonar-properties-create
       resources: {}
@@ -133,10 +133,12 @@ spec:
             exit 1
           }
 
-          [[ -n "${SONAR_LOGIN_TOKEN}" ]] && {
-            echo "sonar.token=${SONAR_LOGIN_TOKEN}" >> sonar-project.properties
+          [[ -n "$SONAR_LOGIN_TOKEN" ]] && {
+            echo "sonar.token=$SONAR_LOGIN_TOKEN" >> sonar-project.properties
             echo "sonar.java.source=/*/*" >> sonar-project.properties
             echo "sonar.java.binaries=/*/*" >> sonar-project.properties
+            replaceValues $(workspaces.source.path)/sonar-project.properties sonar.login "${SONAR_LOGIN}"
+
           } || {
             echo "missing property SONAR_LOGIN_TOKEN"
             exit 1
@@ -159,16 +161,16 @@ spec:
           cat $(workspaces.source.path)/sonar-project.properties
         fi
 
-        if [[ "$(workspaces.sonar-credentials.bound)" == "true" ]]; then
-          if [[ -f $(workspaces.sonar-credentials.path)/$(params.SONAR_PASSWORD_KEY) ]]; then
-            SONAR_PASSWORD=`cat $(workspaces.sonar-credentials.path)/$(params.SONAR_PASSWORD_KEY)`
-            replaceValues $(workspaces.source.path)/sonar-project.properties sonar.password "${SONAR_PASSWORD}"
-          fi
-          if [[ -f $(workspaces.sonar-credentials.path)/$(params.SONAR_LOGIN_KEY) ]]; then
-            SONAR_LOGIN=`cat $(workspaces.sonar-credentials.path)/$(params.SONAR_LOGIN_KEY)`
-            replaceValues $(workspaces.source.path)/sonar-project.properties sonar.login "${SONAR_LOGIN}"
-          fi
-        fi
+        # if [[ "$(workspaces.sonar-credentials.bound)" == "true" ]]; then
+        #   if [[ -f $(workspaces.sonar-credentials.path)/$(params.SONAR_PASSWORD_KEY) ]]; then
+        #     SONAR_PASSWORD=`cat $(workspaces.sonar-credentials.path)/$(params.SONAR_PASSWORD_KEY)`
+        #     replaceValues $(workspaces.source.path)/sonar-project.properties sonar.password "${SONAR_PASSWORD}"
+        #   fi
+        #   if [[ -f $(workspaces.sonar-credentials.path)/$(params.SONAR_LOGIN_KEY) ]]; then
+        #     SONAR_LOGIN=`cat $(workspaces.sonar-credentials.path)/$(params.SONAR_LOGIN_KEY)`
+        #     replaceValues $(workspaces.source.path)/sonar-project.properties sonar.login "${SONAR_LOGIN}"
+        #   fi
+        # fi
       workingDir: $(workspaces.source.path)
     - command:
         - sonar-scanner
@@ -182,7 +184,7 @@ spec:
     - description: Optional workspace where SonarQube properties can be mounted
       name: sonar-settings
       optional: true
-    - description: |
-        A workspace containing a login or password for use within sonarqube.
-      name: sonar-credentials
-      optional: true
+    # - description: |
+    #     A workspace containing a login or password for use within sonarqube.
+    #   name: sonar-credentials
+    #   optional: true

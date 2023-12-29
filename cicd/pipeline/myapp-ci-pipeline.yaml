@@ -156,8 +156,8 @@ spec:
           value: admin
         - name: SONAR_PASSWORD_KEY
           value: squ_8f7ec6ef6d6d83ba222a3cdfaf42ed5d31b790ed
-        - name: SONAR_LOGIN_TOKEN
-          value: squ_8f7ec6ef6d6d83ba222a3cdfaf42ed5d31b790ed
+        # - name: SONAR_LOGIN_TOKEN
+        #   value: squ_8f7ec6ef6d6d83ba222a3cdfaf42ed5d31b790ed
       runAfter:
         - unitest
       taskRef:
@@ -168,8 +168,8 @@ spec:
           workspace: source
         - name: sonar-settings
           workspace: source
-        - name: sonar-credentials
-          workspace: source
+        # - name: sonar-credentials
+        #   workspace: source
 # Compile
     - name: compile-mvn
       when:

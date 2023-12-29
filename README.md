@@ -63,6 +63,17 @@ data:
 ```
 ----
 
+# SonarQube Task -Secret
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sonarqube-secret
+data:
+  SONAR_HOST_URL: <username>
+  SONAR_LOGIN_TOKEN: <password>
+```
+
 
 # Send Mail Task - Secret
 

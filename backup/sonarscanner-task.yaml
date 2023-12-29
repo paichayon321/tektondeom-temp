@@ -19,10 +19,10 @@ spec:
     JavaScript, TypeScript and C++. It detects bugs, vulnerabilities and code
     smells across project branches and pull requests.
   params:
-    # - default: ''
-    #   description: SonarQube server URL
-    #   name: SONAR_HOST_URL
-    #   type: string
+    - default: ''
+      description: SonarQube server URL
+      name: SONAR_HOST_URL
+      type: string
     - default: ''
       description: Project's unique key
       name: SONAR_PROJECT_KEY
@@ -60,14 +60,10 @@ spec:
         workspace
       name: SONAR_LOGIN_TOKEN
       type: string
-  stepTemplate:
-    envFrom:
-      - secretRef:
-          name: sonarqube-secret # Login token and Sonarqube Host URL
   steps:
     - env:
-        # - name: SONAR_HOST_URL
-        #   value: $(params.SONAR_HOST_URL)
+        - name: SONAR_HOST_URL
+          value: $(params.SONAR_HOST_URL)
         - name: SONAR_PROJECT_KEY
           value: $(params.SONAR_PROJECT_KEY)
         - name: PROJECT_VERSION
@@ -107,9 +103,9 @@ spec:
         fi
 
         if [[ -f $(workspaces.source.path)/sonar-project.properties ]]; then
-          if [[ -n "$SONAR_HOST_URL" ]]; then
+          if [[ -n "${SONAR_HOST_URL}" ]]; then
             echo "replacing sonar host URL"
-            replaceValues $(workspaces.source.path)/sonar-project.properties sonar.host.url "$SONAR_HOST_URL"
+            replaceValues $(workspaces.source.path)/sonar-project.properties sonar.host.url "${SONAR_HOST_URL}"
           fi
           if [[ -n "${SONAR_PROJECT_KEY}" ]]; then
             echo "replacing sonar project key"
@@ -126,8 +122,8 @@ spec:
             exit 1
           }
 
-          [[ -n "$SONAR_HOST_URL" ]] && {
-            echo "sonar.host.url=$SONAR_HOST_URL" >> sonar-project.properties
+          [[ -n "${SONAR_HOST_URL}" ]] && {
+            echo "sonar.host.url=${SONAR_HOST_URL}" >> sonar-project.properties
           } || {
             echo "missing property SONAR_HOST_URL"
             exit 1

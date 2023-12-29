@@ -5,7 +5,7 @@ metadata:
 spec:
   params:
     - name: git_repo_url
-      default: default. # 'https://github.com/paichayon321/spring-web-quickstart.git'
+      default: default
       description: The git repository url
       type: string
     - name: git_repo_name

@@ -85,16 +85,16 @@ spec:
           values:
             - "refs-heads-main"
       params:
-        - name: git_repo_url
-          value: $(params.git_repo_url)
-        - name: git_repo_name
-          value: $(params.git_repo_name)
+        # - name: git_repo_url
+        #   value: $(params.git_repo_url)
+        # - name: git_repo_name
+        #   value: $(params.git_repo_name)
         - name: git_revision
           value: $(params.git_revision)
         - name: ext_branch
           value: $(params.ext_branch)
-        - name: environment
-          value: $(params.environment)  
+        # - name: environment
+        #   value: $(params.environment)  
       runAfter:
         - git-clone
       taskRef:

@@ -34,10 +34,12 @@ spec:
         value: $(tt.params.ext_branch)
       - name: environment
         value: "Default"
+# Fix PVC
       # workspaces:
       # - name: source
       #   persistentVolumeClaim:
       #     claimName: myapp-source
+# Dynamic PVC
       workspaces:
       - name: source
         volumeClaimTemplate:
@@ -51,6 +53,6 @@ spec:
       - name: secret
         secret:
           secretName: github-pat-secret
-      - name: temp
-        emptyDir: {}
+      # - name: temp
+        # emptyDir: {}
         

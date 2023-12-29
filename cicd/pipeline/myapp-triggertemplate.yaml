@@ -6,10 +6,10 @@ spec:
   params:
   - name: git_repo_url
     description: The git repository url
-  - name: git_revision
-    description: The git revision
   - name: git_repo_name
     description: The name of the deployment to be created / patch
+  - name: git_revision
+    description: The git revision
   - name: ext_branch
   - name: environment
   resourcetemplates:
@@ -26,7 +26,7 @@ spec:
       params:
       - name: git_repo_name
         value: $(tt.params.git_repo_name)
-      - name: git-url
+      - name: git_url
         value: $(tt.params.git_repo_url)
       - name: git_revision
         value: $(tt.params.git_revision)

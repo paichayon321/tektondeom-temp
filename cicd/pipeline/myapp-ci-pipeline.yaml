@@ -139,8 +139,6 @@ spec:
           values:
             - "refs-heads-main"
       params:
-        # - name: SONAR_HOST_URL
-        #   value: 'http://sonarqube-route-devopstools.apps.524vf.dynamic.opentlc.com/'
         - name: SONAR_PROJECT_KEY
           value: $(params.git_repo_name)-$(params.ext_branch)
         - name: PROJECT_VERSION
@@ -152,12 +150,6 @@ spec:
         - name: SONAR_SCANNER_IMAGE
           value: >-
             docker.io/sonarsource/sonar-scanner-cli:4.6@sha256:7a976330a8bad1beca6584c1c118e946e7a25fdc5b664d5c0a869a6577d81b4f
-        - name: SONAR_LOGIN_KEY
-          value: admin
-        - name: SONAR_PASSWORD_KEY
-          value: squ_8f7ec6ef6d6d83ba222a3cdfaf42ed5d31b790ed
-        # - name: SONAR_LOGIN_TOKEN
-        #   value: squ_8f7ec6ef6d6d83ba222a3cdfaf42ed5d31b790ed
       runAfter:
         - unitest
       taskRef:
@@ -168,8 +160,6 @@ spec:
           workspace: source
         - name: sonar-settings
           workspace: source
-        # - name: sonar-credentials
-        #   workspace: source
 # Compile
     - name: compile-mvn
       when:

@@ -16,7 +16,7 @@ spec:
           # Your main script logic goes here
           approval=$(cat workspace/source/approval.txt)
           echo $approval
-          echo "Waiting for approval..."
+          echo "Waiting for approval...."
 
           sleep 3
 

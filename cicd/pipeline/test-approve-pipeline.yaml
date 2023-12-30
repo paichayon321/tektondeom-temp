@@ -27,7 +27,7 @@ spec:
     - name: after-approve
       params:
         - name: cmd
-          value: eche "Run After approve=true"
+          value: echo "Run After approve=true"
       runAfter:
         - wait-for-approve
       taskRef:

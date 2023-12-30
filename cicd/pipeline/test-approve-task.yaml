@@ -8,6 +8,8 @@ spec:
     name: wait-approve
     script: |
       # loop until approval=true
+      echo "Wait for Approval=true"
+      sleep infinity
       export approval=default
 
       # Your main loop
@@ -16,6 +18,6 @@ spec:
           echo "Waiting for approval..."
           exit 0
       done
-
+      
       echo "Approvel and Exit 0"
       

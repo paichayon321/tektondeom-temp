@@ -22,6 +22,7 @@ def index():
 def process():
     approval_code = request.form['approval_code']
     action = request.form['action']
+    print("TempCode2: ", tempcode)
 
 
     # You can add your logic here based on the action (approve or reject)

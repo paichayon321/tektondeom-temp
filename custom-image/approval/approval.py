@@ -17,6 +17,8 @@ def generate_random_approval_code():
 tempcode=generate_random_approval_code()
 print("TempCode: ", tempcode)
 
+app = Flask(__name__)
+
 # Get the parameter value from the command line
 sender_email = sys.argv[1]
 sender_password = sys.argv[2]
@@ -42,7 +44,6 @@ with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
 print("Email sent to " + recipient_email + " successfully.")
 
 
-app = Flask(__name__)
 
 @app.route('/')
 def index():

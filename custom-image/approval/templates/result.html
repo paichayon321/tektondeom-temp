@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Approval Result</title>
+    <script>
+        function closeTab() {
+            window.close();  // Close the current tab or window
+        }
+    </script>
 </head>
 <body>
     <p>{{ result }}</p>
     <form action="/shutdown" method="post">
-        <button type="submit" name="action" value="done">Done</button>
+        <button type="submit" name="action" value="done" onclick="closeTab()">Done</button>
     </form>
 </body>
 </html>

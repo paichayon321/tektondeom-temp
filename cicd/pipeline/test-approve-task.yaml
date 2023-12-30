@@ -12,7 +12,6 @@ spec:
     script: |
       # loop until approval=true
       echo "Wait for Approval=true"
-      export approval=default
 
       # Your main loop
       while [ "$approval" != true ]; do

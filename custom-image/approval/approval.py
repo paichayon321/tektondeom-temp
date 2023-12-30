@@ -5,6 +5,10 @@ import sys
 
 app = Flask(__name__)
 
+def generate_random_approval_code():
+    # Generate a random 6-digit approval code (you can adjust the length as needed)
+    return ''.join([str(random.randint(0, 9)) for _ in range(6)])
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -13,18 +17,26 @@ def index():
 def process():
     approval_code = request.form['approval_code']
     action = request.form['action']
+    tempcode = generate_random_approval_code()
+    print("TempCode: ", tempcode)
 
     # You can add your logic here based on the action (approve or reject)
     if action == 'approve':
         # Perform approval logic
-        result = f'Approval code {approval_code} approved.'
+        if approval_code == tempcode:
+          result = f'Approval code {approval_code} approved.'
+          return render_template('result.html', result=result)
+        else:
+          result = f'Invalid approve code'
     elif action == 'reject':
         # Perform rejection logic
-        result = f'Approval code {approval_code} rejected.'
+        if approval_code == tempcode:
+          result = f'Approval code {approval_code} rejected.'
+          return render_template('result.html', result=result)
     else:
         result = 'Invalid action.'
 
-    return render_template('result.html', result=result)
+    
 
 @app.route('/shutdown', methods=['POST'])
 def shutdown():

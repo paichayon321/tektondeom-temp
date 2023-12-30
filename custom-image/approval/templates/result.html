@@ -13,6 +13,7 @@
 <body>
     <p>{{ result }}</p>
     <form action="/shutdown" method="post">
+        <input type="hidden" name="approval_code" value="{{ approval_code }}">
         <button type="submit" name="action" value="done" onclick="closeTab()">Done</button>
     </form>
 </body>

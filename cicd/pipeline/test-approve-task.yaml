@@ -9,7 +9,6 @@ spec:
     script: |
       # loop until approval=true
       echo "Wait for Approval=true"
-      sleep infinity
       export approval=default
 
       # Your main loop

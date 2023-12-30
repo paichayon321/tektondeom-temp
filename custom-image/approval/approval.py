@@ -14,9 +14,6 @@ def generate_random_approval_code():
     # Generate a random 6-digit approval code (you can adjust the length as needed)
     return ''.join([str(random.randint(0, 9)) for _ in range(12)])
 
-tempcode=generate_random_approval_code()
-print("TempCode: ", tempcode)
-
 app = Flask(__name__)
 
 # Get the parameter value from the command line
@@ -82,4 +79,7 @@ def shutdown():
     return 'Server shutting down...'
 
 if __name__ == '__main__':
+    tempcode=generate_random_approval_code()
+    print("TempCode: ", tempcode)
+
     app.run(host='0.0.0.0', port=5000, debug=True)

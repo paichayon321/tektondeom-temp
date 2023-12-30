@@ -1,4 +1,7 @@
 from flask import Flask, render_template, request
+import os
+import signal
+import sys
 
 app = Flask(__name__)
 
@@ -23,5 +26,12 @@ def process():
 
     return render_template('result.html', result=result)
 
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    # This function will be called when the "Done" button is clicked
+    print("Shutting down the Flask server...")
+    os.kill(os.getpid(), signal.SIGINT)
+    return 'Server shutting down...'
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

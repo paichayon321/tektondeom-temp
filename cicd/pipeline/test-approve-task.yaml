@@ -6,6 +6,9 @@ spec:
   steps:
   - image: registry.redhat.io/ubi7/ubi-minimal
     name: wait-approve
+    env:
+      - name: approval
+        value: default
     script: |
       # loop until approval=true
       echo "Wait for Approval=true"

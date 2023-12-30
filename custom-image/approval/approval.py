@@ -10,7 +10,7 @@ def generate_random_approval_code():
     # Generate a random 6-digit approval code (you can adjust the length as needed)
     return ''.join([str(random.randint(0, 9)) for _ in range(12)])
 
-def tempcode = generate_random_approval_code()
+def tempcode=generate_random_approval_code()
 print("TempCode: ", tempcode)
 
 

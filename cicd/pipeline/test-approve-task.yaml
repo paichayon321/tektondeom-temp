@@ -8,4 +8,14 @@ spec:
     name: wait-approve
     script: |
       # loop until approval=true
+      export approval=default
+
+      # Your main loop
+      while [ "$approval" != true ]; do
+          # Your main script logic goes here
+          echo "Waiting for approval..."
+          exit 0
+      done
+
+      echo "Approvel and Exit 0"
       

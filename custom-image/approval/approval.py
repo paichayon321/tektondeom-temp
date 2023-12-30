@@ -10,11 +10,7 @@ if len(sys.argv) != 6:
     print("Usage: python sendgmail.py sender_mail sender_password recipient_email subject body ")
     sys.exit(1)
     
-    # Get the parameter value from the command line
-    sender_email = sys.argv[1]
-    sender_password = sys.argv[2]
-    recipient_email = sys.argv[3]
-    subject = sys.argv[4]
+
 
 def generate_random_approval_code():
     # Generate a random 6-digit approval code (you can adjust the length as needed)
@@ -61,7 +57,12 @@ def shutdown():
 if __name__ == '__main__':
     tempcode=generate_random_approval_code()
     print("TempCode: ", tempcode)
-
+    
+    # Get the parameter value from the command line
+    sender_email = sys.argv[1]
+    sender_password = sys.argv[2]
+    recipient_email = sys.argv[3]
+    subject = sys.argv[4]
     #body = sys.argv[5]
     body = tempcode
     #body = """

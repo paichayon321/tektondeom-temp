@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: approval
+spec:
+  steps:
+  - image: registry.redhat.io/ubi7/ubi-minimal
+    name: wait-approve
+    script: |
+      # loop until approval=true
+      

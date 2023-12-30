@@ -1,0 +1,40 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: test-approve
+  namespace: cicd
+spec:
+  tasks:
+    - name: first-step
+      params:
+        - name: cmd
+          value: echo "First"
+      taskRef:
+        kind: ClusterTask
+        name: bash
+      workspaces:
+        - name: source
+          workspace: source
+    - name: wait-for-approve
+      params:
+        - name: cmd
+          value: sleep infinity
+      runAfter:
+        - first-step
+      taskRef:
+        kind: Task
+        name: approval
+    - name: after-approve
+      params:
+        - name: cmd
+          value: eche "Run After approve=true"
+      runAfter:
+        - wait-for-approve
+      taskRef:
+        kind: ClusterTask
+        name: bash
+      workspaces:
+        - name: source
+          workspace: source
+  workspaces:
+    - name: source

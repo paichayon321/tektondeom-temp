@@ -7,7 +7,7 @@ import smtplib
 
 from email.mime.text import MIMEText
 if len(sys.argv) != 6:
-    print("Usage: python sendgmail.py sender_mail, sender_password, recipient_email, subject, body ")
+    print("Usage: python sendgmail.py sender_mail sender_password recipient_email subject body ")
     sys.exit(1)
 
 def generate_random_approval_code():
@@ -22,7 +22,8 @@ sender_email = sys.argv[1]
 sender_password = sys.argv[2]
 recipient_email = sys.argv[3]
 subject = sys.argv[4]
-body = sys.argv[5]
+#body = sys.argv[5]
+body = tempcode
 #body = """
 #<html>
 #  <body>

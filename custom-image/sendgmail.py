@@ -2,7 +2,7 @@ import smtplib
 import sys
 from email.mime.text import MIMEText
 if len(sys.argv) != 6:
-    print("Usage: python sendgmail.py sender_mail, sender_password, recipient_email, subject, body ")
+    print("Usage: python sendgmail.py sender_mail sender_password recipient_email subject body ")
     sys.exit(1)
 
 # Get the parameter value from the command line

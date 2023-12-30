@@ -8,7 +8,11 @@ app = Flask(__name__)
 
 def generate_random_approval_code():
     # Generate a random 6-digit approval code (you can adjust the length as needed)
-    return ''.join([str(random.randint(0, 9)) for _ in range(6)])
+    return ''.join([str(random.randint(0, 9)) for _ in range(12)])
+
+def tempcode = generate_random_approval_code()
+print("TempCode: ", tempcode)
+
 
 @app.route('/')
 def index():
@@ -18,8 +22,7 @@ def index():
 def process():
     approval_code = request.form['approval_code']
     action = request.form['action']
-    tempcode = generate_random_approval_code()
-    print("TempCode: ", tempcode)
+
 
     # You can add your logic here based on the action (approve or reject)
     if action == 'approve':
@@ -37,7 +40,7 @@ def process():
     else:
         result = 'Invalid action.'
 
-    
+    return render_template('index.html')
 
 @app.route('/shutdown', methods=['POST'])
 def shutdown():

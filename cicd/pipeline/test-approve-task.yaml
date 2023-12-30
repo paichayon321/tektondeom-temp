@@ -12,7 +12,7 @@ spec:
       echo "default" > workspace/source/approval.txt
 
       # Your main loop
-      while [ "$approval" != 'true' ]; do
+      while [ "$approval" != true ]; do
           # Your main script logic goes here
           approval=$(cat workspace/source/approval.txt"
           echo $approval

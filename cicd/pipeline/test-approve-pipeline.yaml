@@ -24,6 +24,9 @@ spec:
       taskRef:
         kind: Task
         name: approval
+      workspaces:
+        - name: source
+          workspace: source
     - name: after-approve
       params:
         - name: cmd

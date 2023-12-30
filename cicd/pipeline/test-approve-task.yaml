@@ -6,17 +6,15 @@ spec:
   steps:
   - image: registry.redhat.io/ubi7/ubi-minimal
     name: wait-approve
-    env:
-      - name: approval
-        value: default
     script: |
       # loop until approval=true
       echo "Wait for Approval=true"
+      echo "default" > workspace/source/approval.txt
 
       # Your main loop
       while [ "$approval" != true ]; do
           # Your main script logic goes here
-          echo $approval
+          cat workspace/source/approval.txt
           echo "Waiting for approval..."
 
           sleep 3
@@ -25,4 +23,5 @@ spec:
       
       echo "Approvel and Exit 0"
       exit 0
-      
+  workspaces:
+    - name: source

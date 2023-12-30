@@ -17,8 +17,10 @@ spec:
       # Your main loop
       while [ "$approval" != true ]; do
           # Your main script logic goes here
+          echo $approval
           echo "Waiting for approval..."
-          sleep 2
+
+          sleep 3
 
       done
       

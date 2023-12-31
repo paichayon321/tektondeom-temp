@@ -24,15 +24,15 @@ body = "This is approve code: " + tempcode
 print("Body: ", body)
 
 
-html_message = MIMEText(body, 'html')
-html_message['Subject'] = "PipelineSystem-ApproveCode"
-html_message['From'] = "PipelineSystem <" + sender_email + ">"
-html_message['To'] = recipient_email
-with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-   server.login(sender_email, sender_password)
-   server.sendmail(sender_email, recipient_email, html_message.as_string())
+# html_message = MIMEText(body, 'html')
+# html_message['Subject'] = "PipelineSystem-ApproveCode"
+# html_message['From'] = "PipelineSystem <" + sender_email + ">"
+# html_message['To'] = recipient_email
+# with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+#    server.login(sender_email, sender_password)
+#    server.sendmail(sender_email, recipient_email, html_message.as_string())
 
-print("Email sent to " + recipient_email + " successfully.")
+# print("Email sent to " + recipient_email + " successfully.")
 
 
 app = Flask(__name__)
@@ -74,4 +74,13 @@ def shutdown():
     return 'Server shutting down...'
 
 if __name__ == '__main__':
+    html_message = MIMEText(body, 'html')
+    html_message['Subject'] = "PipelineSystem-ApproveCode"
+    html_message['From'] = "PipelineSystem <" + sender_email + ">"
+    html_message['To'] = recipient_email
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+       server.login(sender_email, sender_password)
+       server.sendmail(sender_email, recipient_email, html_message.as_string())
+    
+    print("Email sent to " + recipient_email + " successfully.")
     app.run(host='0.0.0.0', port=5000, debug=True)

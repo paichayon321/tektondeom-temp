@@ -1,3 +1,20 @@
 docker run --rm -ti -v /Users/ptanvann/tekton-pipeline/custom-image/approval:/apps -p 5000:5000 python:3.9-slim bash
+
+random_number=$(shuf -i 1000000000000000-9999999999999999 -n 1)
+echo "Random 16-digit number: $random_number"
+
+
+
 pip install flask
-python apps/approval.py gcp.pai0001@gmail.com "fdfdfdfd" ptanvann@redhat.com test testbody
+python apps/approval.py <approvecode>
+
+
+###### Build Sendmail Image by python script
+cat << EOF > Dockerfile
+FROM python:3.9-slim
+RUN pip install flask
+ADD . ./
+EOF
+
+podman build -t docker.io/paichayon1/tekton-approve:0.1  .
+podman push docker.io/paichayon1/tekton-approve:0.1 

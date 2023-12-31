@@ -13,6 +13,7 @@ python apps/approval.py <approvecode>
 cat << EOF > Dockerfile
 FROM python:3.9-slim
 RUN pip install flask
+RUN apt update
 RUN apt-get -y install procps
 RUN apt-get -y install curl
 ADD . ./

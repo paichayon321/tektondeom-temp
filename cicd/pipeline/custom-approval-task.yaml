@@ -4,7 +4,7 @@ metadata:
   name: custom-approval
 spec:
   steps:
-  - image: docker.io/paichayon1/tekton-approve:0.1
+  - image: docker.io/paichayon1/tekton-approve:0.2
     name: wait-approve
     ports:
       - containerPort: 5000

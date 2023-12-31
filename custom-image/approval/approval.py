@@ -14,11 +14,15 @@ def generate_random_approval_code():
     # Generate a random 6-digit approval code (you can adjust the length as needed)
     return ''.join([str(random.randint(0, 9)) for _ in range(12)])
 
+tempcode = "2132323232321313221"
+body = "This is approve code: " + tempcode
+print("Body: ", body)
+
 app = Flask(__name__)
 
 
-#body = "This is approve code: " + tempcode
-#print("Body: ", body)
+
+
 
 # #Get the parameter value from the command line
 # sender_email = sys.argv[1]
@@ -43,7 +47,6 @@ def index():
 def process():
     approval_code = request.form['approval_code']
     action = request.form['action']
-    tempcode = generate_random_approval_code()
     print("TempCode: ", tempcode)    
 
     # You can add your logic here based on the action (approve or reject)

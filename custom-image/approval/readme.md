@@ -9,13 +9,15 @@ pip install flask
 python apps/approval.py <approvecode>
 
 
-###### Build Sendmail Image by python script
+###### Build approve Image by python script
 cat << EOF > Dockerfile
 FROM python:3.9-slim
 RUN pip install flask
+RUN apt-get -y install procps
+RUN apt-get -y install curl
 ADD . ./
 EXPOSE 5000
 EOF
 
-podman build -t docker.io/paichayon1/tekton-approve:0.2  .
-podman push docker.io/paichayon1/tekton-approve:0.2 
+podman build -t docker.io/paichayon1/tekton-approve:0.3  .
+podman push docker.io/paichayon1/tekton-approve:0.3 

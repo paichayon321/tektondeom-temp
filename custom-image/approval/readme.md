@@ -14,7 +14,8 @@ cat << EOF > Dockerfile
 FROM python:3.9-slim
 RUN pip install flask
 ADD . ./
+EXPOSE 5000
 EOF
 
-podman build -t docker.io/paichayon1/tekton-approve:0.1  .
-podman push docker.io/paichayon1/tekton-approve:0.1 
+podman build -t docker.io/paichayon1/tekton-approve:0.2  .
+podman push docker.io/paichayon1/tekton-approve:0.2 

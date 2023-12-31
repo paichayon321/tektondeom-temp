@@ -7,37 +7,36 @@ import smtplib
 
 from email.mime.text import MIMEText
 if len(sys.argv) != 6:
-    print("Usage: python sendgmail.py sender_mail sender_password recipient_email subject body ")
+    print("Usage: python sendgmail.py sender_mail sender_password recipient_email approvecode ")
     sys.exit(1)
     
-def generate_random_approval_code():
-    # Generate a random 6-digit approval code (you can adjust the length as needed)
-    return ''.join([str(random.randint(0, 9)) for _ in range(12)])
+# def generate_random_approval_code():
+#     # Generate a random 6-digit approval code (you can adjust the length as needed)
+#     return ''.join([str(random.randint(0, 9)) for _ in range(12)])
 
-tempcode = "2132323232321313221"
+#Get the parameter value from the command line
+sender_email = sys.argv[1]
+sender_password = sys.argv[2]
+recipient_email = sys.argv[3]
+approvecode = sys.argv[4]
+tempcode = approvecode
 body = "This is approve code: " + tempcode
 print("Body: ", body)
 
+
+html_message = MIMEText(body, 'html')
+html_message['Subject'] = "PipelineSystem-ApproveCode"
+html_message['From'] = "PipelineSystem <" + sender_email + ">"
+html_message['To'] = recipient_email
+with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+   server.login(sender_email, sender_password)
+   server.sendmail(sender_email, recipient_email, html_message.as_string())
+
+print("Email sent to " + recipient_email + " successfully.")
+
+
 app = Flask(__name__)
 
-
-
-
-
-# #Get the parameter value from the command line
-# sender_email = sys.argv[1]
-# sender_password = sys.argv[2]
-# recipient_email = sys.argv[3]
-# subject = sys.argv[4]
-# html_message = MIMEText(body, 'html')
-# html_message['Subject'] = subject
-# html_message['From'] = "PipelineSystem <" + sender_email + ">"
-# html_message['To'] = recipient_email
-# with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-#    server.login(sender_email, sender_password)
-#    server.sendmail(sender_email, recipient_email, html_message.as_string())
-# 
-# print("Email sent to " + recipient_email + " successfully.")
 
 @app.route('/')
 def index():

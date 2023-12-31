@@ -14,14 +14,14 @@ if len(sys.argv) != 5:
 #     # Generate a random 6-digit approval code (you can adjust the length as needed)
 #     return ''.join([str(random.randint(0, 9)) for _ in range(12)])
 
-#Get the parameter value from the command line
-sender_email = sys.argv[1]
-sender_password = sys.argv[2]
-recipient_email = sys.argv[3]
-approvecode = sys.argv[4]
-tempcode = approvecode
-body = "This is approve code: " + tempcode
-print("Body: ", body)
+# Get the parameter value from the command line
+# sender_email = sys.argv[1]
+# sender_password = sys.argv[2]
+# recipient_email = sys.argv[3]
+# approvecode = sys.argv[4]
+# tempcode = approvecode
+# body = "This is approve code: " + tempcode
+# print("Body: ", body)
 
 
 # html_message = MIMEText(body, 'html')
@@ -37,6 +37,27 @@ print("Body: ", body)
 
 app = Flask(__name__)
 
+@app.before_first_request
+def before_first_request():
+    sender_email = sys.argv[1]
+    sender_password = sys.argv[2]
+    recipient_email = sys.argv[3]
+    approvecode = sys.argv[4]
+    tempcode = approvecode
+    body = "This is approve code: " + tempcode
+    print("Body: ", body)
+    
+    html_message = MIMEText(body, 'html')
+    html_message['Subject'] = "PipelineSystem-ApproveCode"
+    html_message['From'] = "PipelineSystem <" + sender_email + ">"
+    html_message['To'] = recipient_email
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+       server.login(sender_email, sender_password)
+       server.sendmail(sender_email, recipient_email, html_message.as_string())
+    
+    print("Email sent to " + recipient_email + " successfully.")
+
+    app.logger.info("before_first_request")
 
 @app.route('/')
 def index():
@@ -75,12 +96,4 @@ def shutdown():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-    html_message = MIMEText(body, 'html')
-    html_message['Subject'] = "PipelineSystem-ApproveCode"
-    html_message['From'] = "PipelineSystem <" + sender_email + ">"
-    html_message['To'] = recipient_email
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-       server.login(sender_email, sender_password)
-       server.sendmail(sender_email, recipient_email, html_message.as_string())
-    
-    print("Email sent to " + recipient_email + " successfully.")
+

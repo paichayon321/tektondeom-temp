@@ -6,7 +6,7 @@ import sys
 import smtplib
 
 from email.mime.text import MIMEText
-if len(sys.argv) != 6:
+if len(sys.argv) != 5:
     print("Usage: python sendgmail.py sender_mail sender_password recipient_email approvecode ")
     sys.exit(1)
     

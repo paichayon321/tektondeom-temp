@@ -16,17 +16,11 @@ spec:
         - name: source
           workspace: source
     - name: wait-for-approve
-      params:
-        - name: cmd
-          value: sleep infinity
       runAfter:
         - first-step
       taskRef:
         kind: Task
-        name: approval
-      workspaces:
-        - name: source
-          workspace: source
+        name: custom-approval
     - name: after-approve
       params:
         - name: cmd

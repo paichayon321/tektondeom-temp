@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: custom-approval
+spec:
+  steps:
+  - image: docker.io/paichayon1/tekton-approve:0.1
+    name: wait-approve
+    script: |
+      # loop until approval=true
+      python approval.py 123232323232323232
+
+
+

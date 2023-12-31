@@ -74,6 +74,7 @@ def shutdown():
     return 'Server shutting down...'
 
 if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
     html_message = MIMEText(body, 'html')
     html_message['Subject'] = "PipelineSystem-ApproveCode"
     html_message['From'] = "PipelineSystem <" + sender_email + ">"
@@ -83,4 +84,3 @@ if __name__ == '__main__':
        server.sendmail(sender_email, recipient_email, html_message.as_string())
     
     print("Email sent to " + recipient_email + " successfully.")
-    app.run(host='0.0.0.0', port=5000, debug=True)

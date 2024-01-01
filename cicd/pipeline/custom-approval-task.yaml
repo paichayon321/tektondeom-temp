@@ -12,30 +12,26 @@ spec:
   - name: pipelinerun_name
     type: string  
   steps:
-    - env:
-        - name: HOME
-          value: /tekton/home
-      image: >-
-        image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
-      name: oc
-      resources: {}
-      script: |
-        #!/usr/bin/env bash
-
-        # [[ "$(workspaces.manifest-dir.bound)" == "true" ]] && \
-        # cd $(workspaces.manifest-dir.path)
-
-        # [[ "$(workspaces.kubeconfig-dir.bound)" == "true" ]] && \
-        # [[ -f $(workspaces.kubeconfig-dir.path)/kubeconfig ]] && \
-        # export KUBECONFIG=$(workspaces.kubeconfig-dir.path)/kubeconfig
-
-        # $(params.SCRIPT)
-        oc expose pod/$(params.pipelinerun_name)-wait-for-approve-pod --port 5000
-        oc expose service/$(params.pipelinerun_name)-wait-for-approve-pod
-
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65532
+  - env:
+      - name: HOME
+        value: /tekton/home
+    image: >-
+      image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+    name: oc
+    resources: {}
+    script: |
+      #!/usr/bin/env bash
+      # [[ "$(workspaces.manifest-dir.bound)" == "true" ]] && \
+      # cd $(workspaces.manifest-dir.path)
+      # [[ "$(workspaces.kubeconfig-dir.bound)" == "true" ]] && \
+      # [[ -f $(workspaces.kubeconfig-dir.path)/kubeconfig ]] && \
+      # export KUBECONFIG=$(workspaces.kubeconfig-dir.path)/kubeconfig
+      # $(params.SCRIPT)
+      oc expose pod/$(params.pipelinerun_name)-wait-for-approve-pod --port 5000
+      oc expose service/$(params.pipelinerun_name)-wait-for-approve-pod
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 65532
   - image: docker.io/paichayon1/tekton-approve:0.3
     name: wait-approve
     script: |

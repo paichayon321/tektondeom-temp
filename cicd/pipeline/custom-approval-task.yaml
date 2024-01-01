@@ -19,6 +19,10 @@ spec:
       echo $(params.recipients)
       echo $(params.pipeline_name)
       echo $(params.pipelinerun_name)
+      # oc expose pod/test-approve-11sssq-wait-for-approve-pod --port 5000
+      # oc expose service/test-approve-11sssq-wait-for-approve-pod
+      # test-approve-11sssq-wait-for-approve-pod-cicd.apps.524vf.dynamic.opentlc.com
+
       code=$(shuf -i 1000000000000000-9999999999999999 -n 1)
       echo "code number: $code" 
       python approval.py "$code"

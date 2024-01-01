@@ -8,7 +8,10 @@ spec:
     name: wait-approve
     script: |
       # loop until approval=true
-      python approval.py 123232323232323232
+      echo "$(context.pipelineRun.name)"
+      code=$(shuf -i 1000000000000000-9999999999999999 -n 1)
+      echo "code number: $code" 
+      python approval.py "$code"
 
 
 

@@ -4,7 +4,7 @@ metadata:
   name: custom-approval
 spec:
   steps:
-  - image: docker.io/paichayon1/tekton-approve:0.2
+  - image: docker.io/paichayon1/tekton-approve:0.3
     name: wait-approve
     script: |
       # loop until approval=true

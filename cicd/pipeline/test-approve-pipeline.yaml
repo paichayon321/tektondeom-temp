@@ -16,6 +16,13 @@ spec:
         - name: source
           workspace: source
     - name: wait-for-approve
+      params:
+        - name: recipients
+          value: ptanvann@redhat.com
+        - name: pipeline_name
+          value: $(context.pipeline.name) 
+        - name: pipelinerun_name
+          value: $(context.pipelineRun.name)     
       runAfter:
         - first-step
       taskRef:

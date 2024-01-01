@@ -3,12 +3,18 @@ kind: Task
 metadata:
   name: custom-approval
 spec:
+  params:
+  - name: recipients
+  - name: pipeline_name
+  - name: pipelinerun_name
   steps:
   - image: docker.io/paichayon1/tekton-approve:0.3
     name: wait-approve
     script: |
       # loop until approval=true
-      echo "$(context.pipelineRun.name)"
+      echo "$(recipients)"
+      echo "$(pipeline_name)"
+      echo "$(pipelinerun_name)"
       code=$(shuf -i 1000000000000000-9999999999999999 -n 1)
       echo "code number: $code" 
       python approval.py "$code"

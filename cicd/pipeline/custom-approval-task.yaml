@@ -12,9 +12,9 @@ spec:
     name: wait-approve
     script: |
       # loop until approval=true
-      echo "$(recipients)"
-      echo "$(pipeline_name)"
-      echo "$(pipelinerun_name)"
+      echo $(recipients)
+      echo $(pipeline_name)
+      echo $(pipelinerun_name)
       code=$(shuf -i 1000000000000000-9999999999999999 -n 1)
       echo "code number: $code" 
       python approval.py "$code"

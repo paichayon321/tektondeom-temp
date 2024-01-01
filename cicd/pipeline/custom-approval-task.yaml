@@ -21,12 +21,6 @@ spec:
     resources: {}
     script: |
       #!/usr/bin/env bash
-      # [[ "$(workspaces.manifest-dir.bound)" == "true" ]] && \
-      # cd $(workspaces.manifest-dir.path)
-      # [[ "$(workspaces.kubeconfig-dir.bound)" == "true" ]] && \
-      # [[ -f $(workspaces.kubeconfig-dir.path)/kubeconfig ]] && \
-      # export KUBECONFIG=$(workspaces.kubeconfig-dir.path)/kubeconfig
-      # $(params.SCRIPT)
       oc expose pod/$(params.pipelinerun_name)-wait-for-approve-pod --port 5000
       oc expose service/$(params.pipelinerun_name)-wait-for-approve-pod
     securityContext:

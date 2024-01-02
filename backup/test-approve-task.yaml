@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: approval
+  name: test-approval
 spec:
   steps:
   - image: registry.redhat.io/ubi7/ubi-minimal

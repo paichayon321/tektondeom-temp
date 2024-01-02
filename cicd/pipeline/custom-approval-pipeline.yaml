@@ -5,6 +5,7 @@ metadata:
   namespace: cicd
 spec:
   tasks:
+# Task Before wait to approve
     - name: first-step
       params:
         - name: cmd
@@ -15,6 +16,7 @@ spec:
       workspaces:
         - name: source
           workspace: source
+# Prepare service and route to approve URL          
     - name: custom-approval-pre-oc
       params:
         - name: recipients
@@ -28,6 +30,7 @@ spec:
       taskRef:
         kind: Task
         name: custom-approval-pre-oc
+# Waiting Task for approve
     - name: wait-for-approve
       params:
         - name: recipients
@@ -41,6 +44,7 @@ spec:
       taskRef:
         kind: Task
         name: custom-approval
+# Clean Service and Route
     - name: custom-approval-post-oc
       params:
         - name: recipients
@@ -55,6 +59,7 @@ spec:
       taskRef:
         kind: Task
         name: custom-approval-post-oc
+# Task after aprove
     - name: after-approve
       params:
         - name: cmd

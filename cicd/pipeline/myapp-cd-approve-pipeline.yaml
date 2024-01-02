@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: myapp-cd--approve-pipeline
+  name: myapp-cd-approve-pipeline
 spec:
   params:
     - name: git_repo_name
@@ -38,6 +38,27 @@ spec:
       taskRef:
         kind: Task
         name: custom-approval
+# Send Reject Mail
+    - name: reject-mail-notify
+      params:
+        - name: recipients
+          value: ptanvann@redhat.com
+        - name: message
+          value: $(params.image_tag) "|" $(params.environment) "| approval-task: reject"
+        - name: pipeline_name
+          value: $(context.pipeline.name) 
+        - name: pipelinerun_name
+          value: $(context.pipelineRun.name)             
+      taskRef:
+        kind: Task
+        name: sendmail-reject
+      runAfter:
+        - wait-for-approve
+      when:
+        - input: $(tasks.wait-for-approve.results.approve_result)
+          operator: in
+          values:
+            - "reject"
 # Clean Service and Route
     - name: custom-approval-post-oc
       params:

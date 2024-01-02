@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +11,14 @@
         }
     </script>
 </head>
-<body>
-    <p>{{ result }}</p>
-    <form action="/shutdown" method="post">
-        <input type="hidden" name="approval_code" value="{{ approval_code }}">
-        <button type="submit" name="action" value="done">Done</button> 
+
+<body bgcolor="#6495ED">
+    <p style="text-align: center;">{{ result }}</p>
+    <p style="text-align: center;">Click Done button to confirm action</p>
+    <form action="/shutdown" method="post" style="text-align: center;"><input type="hidden" name="approval_code" value="{{ approval_code }}"> <button type="submit" name="action" value="done">Done</button>
         <!-- <button type="submit" name="action" value="done" onclick="closeTab()">Done</button> 
         -->
     </form>
 </body>
+
 </html>

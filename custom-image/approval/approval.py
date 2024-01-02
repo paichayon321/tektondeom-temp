@@ -17,7 +17,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/approvepage')
-def approvepage();
+def approvepage():
     return render_template('approve.html')
 
 @app.route('/process', methods=['POST'])

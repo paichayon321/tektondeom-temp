@@ -41,20 +41,20 @@ spec:
       taskRef:
         kind: Task
         name: custom-approval
-    - name: custom-approval-post-oc
-      params:
-        - name: recipients
-          value: ptanvann@redhat.com
-        - name: pipeline_name
-          value: $(context.pipeline.name) 
-        - name: pipelinerun_name
-          value: $(context.pipelineRun.name)     
-      runAfter:
-        - wait-for-approve
-        - custom-approval-pre-oc
-      taskRef:
-        kind: Task
-        name: custom-approval-post-oc
+    # - name: custom-approval-post-oc
+    #   params:
+    #     - name: recipients
+    #       value: ptanvann@redhat.com
+    #     - name: pipeline_name
+    #       value: $(context.pipeline.name) 
+    #     - name: pipelinerun_name
+    #       value: $(context.pipelineRun.name)     
+    #   runAfter:
+    #     - wait-for-approve
+    #     - custom-approval-pre-oc
+    #   taskRef:
+    #     kind: Task
+    #     name: custom-approval-post-oc
     - name: after-approve
       params:
         - name: cmd

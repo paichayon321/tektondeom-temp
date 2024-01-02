@@ -3,6 +3,8 @@ kind: Task
 metadata:
   name: custom-approval
 spec:
+  results:
+  - name: approve_result
   params:
   - name: recipients
     type: string
@@ -16,10 +18,9 @@ spec:
       - secretRef:
           name: gmail-secret 
   steps:
-  - image: docker.io/paichayon1/tekton-approve:0.4
+  - image: docker.io/paichayon1/tekton-approve:0.5
     name: wait-approve
     script: |
-      # loop until approval=true
       echo $(params.recipients)
       echo $(params.pipeline_name)
       echo $(params.pipelinerun_name)
@@ -30,6 +31,9 @@ spec:
       approve_link="<b>Pipeline name:</b> $(params.pipeline_name) <br> <b>Pipeline Approve Code:</b> $code<p>Click link below to Approve:<br>http://$(params.pipelinerun_name)-wait-for-approve-pod-$basedomain"
       python sendgmail.py "$user" "$password" "$(params.recipients)" "PipelineSystem - Approve Code for $(params.pipeline_name)" "$approve_link" 
       python approval.py "$code"
-
+      
+      approve_result=$(cat result.txt)
+      # echo $approve_result
+      printf "%s" "${approve_result}" > "$(results.approve_result.path)"
 
 

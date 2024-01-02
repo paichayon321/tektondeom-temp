@@ -26,14 +26,17 @@ def process():
     if action == 'approve':
         # Perform approval logic
         if approval_code == tempcode:
-          result = f'Approval code {approval_code} approved.'
+          result = f'Approval code {approval_code} acction approved.'
+          os.system('echo approve > result.txt')
           return render_template('result.html', result=result)
         else:
           result = f'Invalid approve code'
     elif action == 'reject':
         # Perform rejection logic
+
         if approval_code == tempcode:
-          result = f'Approval code {approval_code} rejected.'
+          result = f'Approval code {approval_code} action rejected.'
+          os.system('echo reject > result.txt')
           return render_template('result.html', result=result)
     else:
         result = 'Invalid action.'

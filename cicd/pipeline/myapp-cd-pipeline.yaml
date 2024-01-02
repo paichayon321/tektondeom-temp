@@ -17,6 +17,41 @@ spec:
       default: image-registry.openshift-image-registry.svc:5000/cicd
       description: Image registry repository where image existing
   tasks:
+# Begin wait process
+# Prepare service and route to approve URL          
+    - name: custom-approval-pre-oc
+      params:
+        - name: pipelinerun_name
+          value: $(context.pipelineRun.name)     
+      taskRef:
+        kind: Task
+        name: custom-approval-pre-oc
+# Waiting Task for approve
+    - name: wait-for-approve
+      params:
+        - name: recipients
+          value: ptanvann@redhat.com
+        - name: pipeline_name
+          value: $(context.pipeline.name) 
+        - name: pipelinerun_name
+          value: $(context.pipelineRun.name)     
+      runAfter:
+        - first-step
+      taskRef:
+        kind: Task
+        name: custom-approval
+# Clean Service and Route
+    - name: custom-approval-post-oc
+      params:
+        - name: pipelinerun_name
+          value: $(context.pipelineRun.name)     
+      runAfter:
+        - wait-for-approve
+        - custom-approval-pre-oc
+      taskRef:
+        kind: Task
+        name: custom-approval-post-oc
+# End wait process        
 # Update Manifest
     - name: update-manifest-task
       params:
@@ -31,6 +66,8 @@ spec:
       taskRef:
         kind: Task
         name: update-manifest-task
+      runAfter:
+        - custom-approval-post-oc
 
 # ArgoCD SyncApp
     - name: argocd-task-sync-and-wait

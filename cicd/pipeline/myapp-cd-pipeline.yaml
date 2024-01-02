@@ -42,7 +42,9 @@ spec:
     - name: custom-approval-post-oc
       params:
         - name: pipelinerun_name
-          value: $(context.pipelineRun.name)     
+          value: $(context.pipelineRun.name)   
+        - name: approve_result 
+          value: $(tasks.wait-for-approve.results.approve_result) 
       runAfter:
         - wait-for-approve
         - custom-approval-pre-oc

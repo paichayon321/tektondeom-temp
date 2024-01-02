@@ -48,7 +48,7 @@ spec:
         - name: recipients
           value: ptanvann@redhat.com
         - name: message
-          value: $(params.image_tag) "|" $(params.environment) "| approval-task reject"
+          value: $(params.image_tag) "|" $(params.environment) "| Reject"
         - name: pipeline_name
           value: $(context.pipeline.name) 
         - name: pipelinerun_name

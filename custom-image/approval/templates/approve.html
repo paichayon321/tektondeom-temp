@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Approval System</title>
 </head>
+
 <body>
+    <p style="text-align: center;"><br></p>
     <form action="/process" method="post">
-        <label for="approval_code">Approval Code:</label>
-        <input type="text" id="approval_code" name="approval_code" required>
-        <br>
-        <button type="submit" name="action" value="approve">Approve</button>
-        <button type="submit" name="action" value="reject">Reject</button>
+        <table style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 50%; text-align: center; background-color: rgb(40, 50, 78);" colspan="2">
+                        <p><strong><span style="color: rgb(255, 255, 255); font-size: 20px;">OpenShift Tekton pipeline simple approve system</span></strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; text-align: center; background-color: rgb(97, 189, 109);">
+                        <p><button type="submit" name="action" value="approve">Approve</button></p>
+                    </td>
+                    <td style="width: 50%; text-align: center; background-color: rgb(226, 80, 65);">
+                        <p><button type="submit" name="action" value="reject">Reject</button></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; text-align: center; background-color: rgb(209, 213, 216);" colspan="2"><label for="approval_code">Approval Code:                </label><input type="text" id="approval_code" name="approval_code" required=""></td>
+                </tr>
+            </tbody>
+
+        </table>
     </form>
+<p></p>
+<hr>
+  
 </body>
+
 </html>

@@ -15,6 +15,19 @@ spec:
       workspaces:
         - name: source
           workspace: source
+    - name: custom-approval-pre-oc
+      params:
+        - name: recipients
+          value: ptanvann@redhat.com
+        - name: pipeline_name
+          value: $(context.pipeline.name) 
+        - name: pipelinerun_name
+          value: $(context.pipelineRun.name)     
+      runAfter:
+        - first-step
+      taskRef:
+        kind: Task
+        name: custom-approval-pre-oc
     - name: wait-for-approve
       params:
         - name: recipients
@@ -28,6 +41,19 @@ spec:
       taskRef:
         kind: Task
         name: custom-approval
+    - name: custom-approval-post-oc
+      params:
+        - name: recipients
+          value: ptanvann@redhat.com
+        - name: pipeline_name
+          value: $(context.pipeline.name) 
+        - name: pipelinerun_name
+          value: $(context.pipelineRun.name)     
+      runAfter:
+        - first-step
+      taskRef:
+        kind: Task
+        name: custom-approval-post-oc
     - name: after-approve
       params:
         - name: cmd

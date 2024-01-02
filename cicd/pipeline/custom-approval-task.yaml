@@ -12,20 +12,20 @@ spec:
   - name: pipelinerun_name
     type: string  
   steps:
-  - env:
-      - name: HOME
-        value: /tekton/home
-    image: >-
-      image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
-    name: oc
-    resources: {}
-    script: |
-      #!/usr/bin/env bash
-      oc expose pod/$(params.pipelinerun_name)-wait-for-approve-pod --port 5000
-      oc expose service/$(params.pipelinerun_name)-wait-for-approve-pod
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 65532
+  # - env:
+  #     - name: HOME
+  #       value: /tekton/home
+  #   image: >-
+  #     image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+  #   name: oc
+  #   resources: {}
+  #   script: |
+  #     #!/usr/bin/env bash
+  #     oc expose pod/$(params.pipelinerun_name)-wait-for-approve-pod --port 5000
+  #     oc expose service/$(params.pipelinerun_name)-wait-for-approve-pod
+  #   securityContext:
+  #     runAsNonRoot: true
+  #     runAsUser: 65532
   - image: docker.io/paichayon1/tekton-approve:0.3
     name: wait-approve
     script: |
@@ -33,10 +33,6 @@ spec:
       echo $(params.recipients)
       echo $(params.pipeline_name)
       echo $(params.pipelinerun_name)
-      # oc expose pod/test-approve-11sssq-wait-for-approve-pod --port 5000
-      # oc expose service/test-approve-11sssq-wait-for-approve-pod
-      # test-approve-11sssq-wait-for-approve-pod-cicd.apps.524vf.dynamic.opentlc.com
-
       code=$(shuf -i 1000000000000000-9999999999999999 -n 1)
       echo "code number: $code" 
       python approval.py "$code"

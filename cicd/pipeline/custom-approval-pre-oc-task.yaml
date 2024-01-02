@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: custom-approval-pre-oc
+spec:
+  params:
+  - name: recipients
+    type: string
+    description: recipient email addresses
+  - name: pipeline_name
+    type: string
+  - name: pipelinerun_name
+    type: string  
+  steps:
+  - env:
+      - name: HOME
+        value: /tekton/home
+    image: >-
+      image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+    name: oc
+    resources: {}
+    script: |
+      #!/usr/bin/env bash
+      oc expose pod/$(params.pipelinerun_name)-wait-for-approve-pod --port 5000
+      oc expose service/$(params.pipelinerun_name)-wait-for-approve-pod
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 65532

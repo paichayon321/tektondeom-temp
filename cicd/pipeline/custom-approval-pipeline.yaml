@@ -29,6 +29,10 @@ spec:
 # Waiting Task for approve
     - name: wait-for-approve
       params:
+        - name: image_tag
+          value: "0.0.0"
+        - name: environment
+          value: "default"
         - name: recipients
           value: ptanvann@redhat.com
         - name: pipeline_name

@@ -115,8 +115,7 @@ spec:
         - name: recipients
           value: ptanvann@redhat.com
         - name: message
-          # value: $(tasks.update-manifest-task.results.image_tag) "|" $(tasks.update-manifest-task.results.environment) "| update-manifest-task :" $(tasks.update-manifest-task.status) "| argocd-task-sync :" $(tasks.argocd-task-sync-and-wait.status)
-          value:  "test | none | update-manifest-task : test | argocd-task-sync : test"
+          value: $(tasks.update-manifest-task.results.image_tag) "|" $(tasks.update-manifest-task.results.environment) "| update-manifest-task :" $(tasks.update-manifest-task.status) "| argocd-task-sync :" $(tasks.argocd-task-sync-and-wait.status)
         - name: pipeline_name
           value: $(context.pipeline.name) 
         - name: pipelinerun_name

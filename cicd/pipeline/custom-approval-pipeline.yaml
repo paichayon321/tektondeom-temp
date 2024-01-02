@@ -55,7 +55,7 @@ spec:
     - name: after-approve
       params:
         - name: cmd
-          value: echo "Run After approve=true"
+          value: echo $(tasks.wait-for-approve.results.approve_result)
       runAfter:
         - custom-approval-post-oc
       taskRef:

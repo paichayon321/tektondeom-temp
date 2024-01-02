@@ -50,7 +50,7 @@ spec:
         - name: pipelinerun_name
           value: $(context.pipelineRun.name)     
       runAfter:
-        - first-step
+        - wait-for-approve
       taskRef:
         kind: Task
         name: custom-approval-post-oc

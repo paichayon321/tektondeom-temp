@@ -22,7 +22,7 @@ spec:
     script: |
       #!/usr/bin/env bash
       oc service $(params.pipelinerun_name)-wait-for-approve-pod
-      oc delete route $(params.pipelinerun_name)-wait-for-approve-pod
+      # oc delete route $(params.pipelinerun_name)-wait-for-approve-pod
 
     securityContext:
       runAsNonRoot: true

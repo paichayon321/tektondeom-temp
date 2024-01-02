@@ -51,6 +51,7 @@ spec:
           value: $(context.pipelineRun.name)     
       runAfter:
         - wait-for-approve
+        - custom-approval-pre-oc
       taskRef:
         kind: Task
         name: custom-approval-post-oc

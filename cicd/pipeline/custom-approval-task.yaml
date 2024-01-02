@@ -38,7 +38,7 @@ spec:
       echo "code number: $code" 
       approve_link="<b>Pipeline name:</b> $(params.pipeline_name) <br><b>Image tag:</b> $(params.image_tag) <br><b>Environment:</b> $(params.environment) <br><b>Pipeline Approve Code:</b> $code<p>Click link below to Approve:<br>http://$(params.pipelinerun_name)-wait-for-approve-pod-$basedomain"
       python sendgmail.py "$user" "$password" "$(params.recipients)" "PipelineSystem - Approve Code for $(params.pipeline_name)" "$approve_link" 
-      python approval.py "$code"
+      python approval.py "$code" "$(params.image_tag)" "$(params.environment)"
       
       approve_result=$(cat result.txt)
       echo $approve_result

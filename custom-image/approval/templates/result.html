@@ -12,14 +12,40 @@
     </script>
 </head>
 
-<body bgcolor="#2E8B57">
-    <p style="text-align: center;">{{ result }}</p>
-    <p></p>
-    <p style="text-align: center;">Click Done button to confirm action, and then you can close this windows </p>
-    <form action="/shutdown" method="post" style="text-align: center;"><input type="hidden" name="approval_code" value="{{ approval_code }}"> <button type="submit" name="action" value="done">Done</button>
-        <!-- <button type="submit" name="action" value="done" onclick="closeTab()">Done</button> 
+<body>
+    <table style="width: 100%;">
+        <tbody>
+            <tr>
+                <td style="width: 100%; background-color: rgb(71, 85, 119);">
+                    <p style="text-align: center;"><span style="font-size: 22px; color: rgb(255, 255, 255);">Image Tag: &nbsp;{{ image_tag }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Environment: &nbsp;{{ environment }}&nbsp;</span><span style="font-size: 20px; color: rgb(255, 255, 255);"><br><br></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%; background-color: rgb(209, 72, 65);">
+                    <p><br></p>
+                    <div style="text-align: center;"><span style="font-size: 20px; color: rgb(255, 255, 255);">{{ result }}&nbsp;</span></div><br>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%; background-color: rgb(247, 218, 100);">
+                    <p><span style="font-size: 20px;"><br></span></p>
+                    <p style="text-align: center;"><span style="font-size: 20px;">Click Done button to confirm action, and then you can close this windows</span></p>
+                    <p style="text-align: center;"><br></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%; background-color: rgb(41, 105, 176);">
+                    <form action="/shutdown" method="post" style="text-align: center;"><input type="hidden" name="approval_code" value="{{ approval_code }}"> <button type="submit" name="action" value="done"><span style="font-size: 20px;">Done</span></button>
+                        <!-- <button type="submit" name="action" value="done" onclick="closeTab()">Done</button> 
         -->
-    </form>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="text-align: center;"><br></p>
+    <p style="text-align: center;"><br></p>
+    <hr>
 </body>
 
 </html>

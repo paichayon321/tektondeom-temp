@@ -20,7 +20,7 @@ def index():
 
 @app.route('/approvepage')
 def approvepage():
-    return render_template('approve.html', image_tag="0.0.0", environment="default")
+    return render_template('approve.html', image_tag=image_tag, environment=environment)
 
 @app.route('/process', methods=['POST'])
 def process():
@@ -32,18 +32,18 @@ def process():
     if action == 'approve':
         # Perform approval logic
         if approval_code == tempcode:
-          result = f'Approval code {approval_code} action approved.'
+          result = f'Has been approved with Approval code {approval_code}'
           os.system('echo approve > result.txt')
-          return render_template('result.html', result=result)
+          return render_template('result.html', result=result, image_tag=image_tag, environment=environment)
         else:
           result = f'Invalid approve code'
     elif action == 'reject':
         # Perform rejection logic
 
         if approval_code == tempcode:
-          result = f'Approval code {approval_code} action rejected.'
+          result = f'Has been rejected with Approval code {approval_code}'
           os.system('echo reject > result.txt')
-          return render_template('result.html', result=result)
+          return render_template('result.html', result=result, image_tag=image_tag, environment=environment)
     else:
         result = 'Invalid action.'
 

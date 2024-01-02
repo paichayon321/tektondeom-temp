@@ -9,14 +9,18 @@
 
 <body>
     <p style="text-align: center;"><br></p>
-    <p style="text-align: center;">{{ image_tag }}</p>
-    <p style="text-align: center;">{{ environment }}</p>
+    <p style="text-align: center;"><br></p>
     <form action="/process" method="post">
         <table style="width: 100%;">
             <tbody>
                 <tr>
                     <td style="width: 50%; text-align: center; background-color: rgb(40, 50, 78);" colspan="2">
                         <p><strong><span style="color: rgb(255, 255, 255); font-size: 20px;">OpenShift Tekton pipeline simple approve system</span></strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 99.9087%; text-align: center; background-color: rgb(41, 105, 176);" colspan="2">
+                        <div style="text-align: center;"><span style="font-size: 20px; color: rgb(247, 218, 100);">Image Tag: &nbsp;{{ image_tag }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Environment: &nbsp;{{ environment }}</span></div>
                     </td>
                 </tr>
                 <tr>
@@ -28,15 +32,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 50%; text-align: center; background-color: rgb(209, 213, 216);" colspan="2"><label for="approval_code">Approval Code:                </label><input type="text" id="approval_code" name="approval_code" required=""></td>
+                    <td style="width: 50%; text-align: center; background-color: rgb(209, 213, 216);" colspan="2"><label for="approval_code">Approval Code:&nbsp;</label><input type="text" id="approval_code" name="approval_code" required=""></td>
                 </tr>
             </tbody>
-
         </table>
     </form>
-<p></p>
-<hr>
-  
+    <p><br></p>
+    <hr>
+    <p><br></p>
 </body>
 
 </html>

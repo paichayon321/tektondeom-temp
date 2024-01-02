@@ -6,6 +6,7 @@ spec:
   results:
   - name: approve_result
   params:
+
   - name: recipients
     type: string
     description: recipient email addresses
@@ -13,6 +14,10 @@ spec:
     type: string
   - name: pipelinerun_name
     type: string  
+  - name: image_tag
+    type: string 
+  - name: environment
+    type: string 
   stepTemplate:
     envFrom:
       - secretRef:
@@ -24,11 +29,14 @@ spec:
       echo $(params.recipients)
       echo $(params.pipeline_name)
       echo $(params.pipelinerun_name)
+      echo $(params.image_tag)
+      echo $(params.environment)
+
       code=$(shuf -i 1000000000000000-9999999999999999 -n 1)
       cicd_ns="cicd"
       basedomain="$cicd_ns.apps.524vf.dynamic.opentlc.com"
       echo "code number: $code" 
-      approve_link="<b>Pipeline name:</b> $(params.pipeline_name) <br> <b>Pipeline Approve Code:</b> $code<p>Click link below to Approve:<br>http://$(params.pipelinerun_name)-wait-for-approve-pod-$basedomain"
+      approve_link="<b>Pipeline name:</b> $(params.pipeline_name) <br><b> Image tag:</b>  $(params.image_tag) <br><b>Environment:</b>$(params.environment) <br><b>Pipeline Approve Code:</b> $code<p>Click link below to Approve:<br>http://$(params.pipelinerun_name)-wait-for-approve-pod-$basedomain"
       python sendgmail.py "$user" "$password" "$(params.recipients)" "PipelineSystem - Approve Code for $(params.pipeline_name)" "$approve_link" 
       python approval.py "$code"
       

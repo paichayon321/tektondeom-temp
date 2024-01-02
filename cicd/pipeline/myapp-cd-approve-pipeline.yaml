@@ -29,6 +29,10 @@ spec:
 # Waiting Task for approve
     - name: wait-for-approve
       params:
+        - name: image_tag
+          value: $(params.image_tag)
+        - name: environment
+          value: $(params.environment)
         - name: recipients
           value: ptanvann@redhat.com
         - name: pipeline_name

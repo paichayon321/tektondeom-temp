@@ -16,6 +16,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/approvepage')
+def approvepage();
+    return render_template('approve.html')
+
 @app.route('/process', methods=['POST'])
 def process():
     approval_code = request.form['approval_code']
@@ -26,7 +30,7 @@ def process():
     if action == 'approve':
         # Perform approval logic
         if approval_code == tempcode:
-          result = f'Approval code {approval_code} acction approved.'
+          result = f'Approval code {approval_code} action approved.'
           os.system('echo approve > result.txt')
           return render_template('result.html', result=result)
         else:

@@ -8,6 +8,17 @@ echo "Random 16-digit number: $random_number"
 pip install flask
 python apps/approval.py <approvecode>
 
+#approval.py will return user approve status in file result.txt 
+
+
+# Task reture result (approve or reject)
+      approve_result=$(cat result.txt)
+      echo $approve_result
+      printf "%s" "${approve_result}" > "$(results.approve_result.path)"
+
+
+$(tasks.wait-for-approve.results.approve_result)
+
 
 ###### Build approve Image by python script
 cat << EOF > Dockerfile

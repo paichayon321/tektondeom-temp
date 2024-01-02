@@ -22,7 +22,7 @@ spec:
       echo $svc_remove
       oc delete service $svc_remove
       oc delete route $svc_remove
-      echo "${params.approve_result}"
+      echo ${params.approve_result}
       if [[ ${params.approve_result} == reject ]]; then
           exit 1
       fi 

@@ -21,8 +21,10 @@ spec:
     resources: {}
     script: |
       #!/usr/bin/env bash
-      oc service $(params.pipelinerun_name)-wait-for-approve-pod
-      # oc delete route $(params.pipelinerun_name)-wait-for-approve-pod
+      svc_remove="$(params.pipelinerun_name)-wait-for-approve-pod"
+      echo $svc_remove
+      oc delete service $svc_remove
+      oc delete route $svc_remove
 
     securityContext:
       runAsNonRoot: true

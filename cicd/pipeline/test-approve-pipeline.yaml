@@ -60,8 +60,6 @@ spec:
         - name: cmd
           value: echo "Run After approve=true"
       runAfter:
-        - wait-for-approve
-        - custom-approval-pre-oc
         - custom-approval-post-oc
       taskRef:
         kind: ClusterTask

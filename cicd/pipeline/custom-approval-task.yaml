@@ -11,6 +11,10 @@ spec:
     type: string
   - name: pipelinerun_name
     type: string  
+  stepTemplate:
+    envFrom:
+      - secretRef:
+          name: gmail-secret 
   steps:
   # - env:
   #     - name: HOME
@@ -35,6 +39,8 @@ spec:
       echo $(params.pipelinerun_name)
       code=$(shuf -i 1000000000000000-9999999999999999 -n 1)
       echo "code number: $code" 
+      approve_link="$code<p>http://$(params.pipelinerun_name)-wait-for-approve-pod-cicd.apps.524vf.dynamic.opentlc.com"
+      python sendgmail.py "$user" "$password" "$(params.recipients)" "PipelineSystem - Approve Code" "$approve_link" 
       python approval.py "$code"
 
 

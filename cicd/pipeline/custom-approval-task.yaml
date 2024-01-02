@@ -16,20 +16,6 @@ spec:
       - secretRef:
           name: gmail-secret 
   steps:
-  # - env:
-  #     - name: HOME
-  #       value: /tekton/home
-  #   image: >-
-  #     image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
-  #   name: oc
-  #   resources: {}
-  #   script: |
-  #     #!/usr/bin/env bash
-  #     oc expose pod/$(params.pipelinerun_name)-wait-for-approve-pod --port 5000
-  #     oc expose service/$(params.pipelinerun_name)-wait-for-approve-pod
-  #   securityContext:
-  #     runAsNonRoot: true
-  #     runAsUser: 65532
   - image: docker.io/paichayon1/tekton-approve:0.4
     name: wait-approve
     script: |

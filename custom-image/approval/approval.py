@@ -4,11 +4,13 @@ import random
 import signal
 import sys
 
-if len(sys.argv) != 2:
-    print("Usage: python approval.py approvecode ")
+if len(sys.argv) != 4:
+    print("Usage: python approval.py approvecode image_tag enironment ")
     sys.exit(1)
 
 tempcode = sys.argv[1]   
+image_tag = sys.argv[2]   
+environment = sys.argv[3]   
 
 app = Flask(__name__)
 
@@ -18,7 +20,7 @@ def index():
 
 @app.route('/approvepage')
 def approvepage():
-    return render_template('approve.html')
+    return render_template('approve.html', image_tag="0.0.0", environment="default")
 
 @app.route('/process', methods=['POST'])
 def process():

@@ -35,8 +35,6 @@ spec:
           value: $(context.pipeline.name) 
         - name: pipelinerun_name
           value: $(context.pipelineRun.name)     
-      runAfter:
-        - first-step
       taskRef:
         kind: Task
         name: custom-approval

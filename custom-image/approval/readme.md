@@ -31,5 +31,5 @@ ADD . ./
 EXPOSE 5000
 EOF
 
-podman build -t docker.io/paichayon1/tekton-approve:0.6  .
-podman push docker.io/paichayon1/tekton-approve:0.6 
+podman build -t docker.io/paichayon1/tekton-approve:0.7  .
+podman push docker.io/paichayon1/tekton-approve:0.7 

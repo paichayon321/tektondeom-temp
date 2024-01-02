@@ -23,7 +23,7 @@ spec:
       - secretRef:
           name: gmail-secret 
   steps:
-  - image: docker.io/paichayon1/tekton-approve:0.6
+  - image: docker.io/paichayon1/tekton-approve:0.7
     name: wait-approve
     script: |
       echo $(params.recipients)

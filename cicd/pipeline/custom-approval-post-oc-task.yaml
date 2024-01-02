@@ -4,11 +4,6 @@ metadata:
   name: custom-approval-post-oc
 spec:
   params:
-  - name: recipients
-    type: string
-    description: recipient email addresses
-  - name: pipeline_name
-    type: string
   - name: pipelinerun_name
     type: string  
   steps:

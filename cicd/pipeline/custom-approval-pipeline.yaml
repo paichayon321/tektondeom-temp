@@ -19,10 +19,6 @@ spec:
 # Prepare service and route to approve URL          
     - name: custom-approval-pre-oc
       params:
-        - name: recipients
-          value: ptanvann@redhat.com
-        - name: pipeline_name
-          value: $(context.pipeline.name) 
         - name: pipelinerun_name
           value: $(context.pipelineRun.name)     
       runAfter:
@@ -47,10 +43,6 @@ spec:
 # Clean Service and Route
     - name: custom-approval-post-oc
       params:
-        - name: recipients
-          value: ptanvann@redhat.com
-        - name: pipeline_name
-          value: $(context.pipeline.name) 
         - name: pipelinerun_name
           value: $(context.pipelineRun.name)     
       runAfter:

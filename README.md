@@ -111,13 +111,17 @@ stringData:
 https://github.com/paichayon321/tekton-pipeline.git
 
 # Source Code Repo for test (MVN)
-
+https://github.com/paichayon321/spring-web-quickstart.git
 
 # Prepare ArgoCD:
-Create Cluster-admin group and add user to these group
+Create "cluster-admins" group and add user to cluster-admins group
 
+## Add Role to gitops service account
+```
 oc adm policy add-cluster-role-to-use cluster-admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller
+```
 
+## Login to argoCD portat
 Setting Repository to https://github.com/paichayon321/tekton-pipeline.git
 
 Create Application:

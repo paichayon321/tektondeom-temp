@@ -26,7 +26,7 @@ kubeseal < github-pat-secret.yaml  > github-pat-secret-sealed.yaml  -o yaml -n c
 ```
 
 
-# Prerequire Secret for Update Manifest Task
+# Prerequire Secret for Update Manifest Task (Github PAT secret)
 
 ```
 apiVersion: v1
@@ -63,6 +63,17 @@ data:
 ```
 ----
 
+# Webhook Secret
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-webhook-secret
+data:
+  secretToken: <token>
+```
+
+
 # SonarQube Task -Secret
 ```
 apiVersion: v1
@@ -73,7 +84,6 @@ data:
   SONAR_HOST_URL: <username>
   SONAR_LOGIN_TOKEN: <password>
 ```
-
 
 # Send Mail Task - Secret
 
@@ -91,3 +101,41 @@ stringData:
 ```
 ----
 
+# Prepare New Environment for DEMO
+# System Requirement
+- OpenShift 4.12
+- OpenShift GitOps Operator
+- Openshift Pipeline Operator
+
+# Pipeline Git Repo
+https://github.com/paichayon321/tekton-pipeline.git
+
+# Source Code Repo for test (MVN)
+
+
+# Prepare ArgoCD:
+Create Cluster-admin group and add user to these group
+
+oc adm policy add-cluster-role-to-use cluster-admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller
+
+Setting Repository to https://github.com/paichayon321/tekton-pipeline.git
+
+Create Application:
+- myapp-sealsecret  
+  Path: platform/sealsecret
+  Namespace: kube-system
+
+- myapp-sonarqube
+  Path: platform/sonarqube
+  Namespace: cicd-tools
+
+- myapp-cicd
+  Path: cicd/pipeline
+  Namespace: cicd
+
+Install kubeseal and Re-create Secret:
+argocd-env-secret
+github-pat-secret
+github-webhook-secret
+gmail-secret
+sonarqube-secret

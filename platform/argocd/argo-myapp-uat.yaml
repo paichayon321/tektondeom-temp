@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: app/myapp/env/uat
-    repoURL: https://github.com/paichayon321/tekton-pipeline.git
+    repoURL: https://github.com/paichayon321/tektondeom-temp.git
     targetRevision: main
   syncPolicy:
     automated: {}

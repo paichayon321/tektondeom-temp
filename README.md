@@ -113,8 +113,8 @@ tar xzvf kubeseal-0.21.0-linux-amd64.tar.gz
 kubeseal < github-pat-secret.yaml  > github-pat-secret-sealed.yaml  -o yaml -n cicd
 ```
 
+#### Image from https://quay.io/repository/argoproj/argocd not working sync success but alway return fail
 ArgoCD configmap and secret:
-**** Image from https://quay.io/repository/argoproj/argocd not working sync success but alway return fail *****
 
 ```
 apiVersion: v1

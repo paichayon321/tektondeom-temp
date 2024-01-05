@@ -202,12 +202,11 @@ cat << EOF | oc create -f -
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mypvc
+  name: myapp-source
 spec:
   accessModes:
     - ReadWriteOnce
   volumeMode: Filesystem
-  storageClassName: gp2
   resources:
     requests:
       storage: 1Gi

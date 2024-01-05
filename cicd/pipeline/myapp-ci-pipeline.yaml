@@ -207,7 +207,7 @@ spec:
         - name: app_name
           value: $(params.git_repo_name)
         - name: image_repo_url
-          value: default-route-openshift-image-registry.apps.524vf.dynamic.opentlc.com/cicd
+          value: default-route-openshift-image-registry.apps.cluster-h942w.h942w.sandbox2265.opentlc.com/cicd 
         - name: environment
           value: $(tasks.initial-info.results.environment)
         - name: IMAGE

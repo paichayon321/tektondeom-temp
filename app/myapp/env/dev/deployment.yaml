@@ -19,7 +19,7 @@ spec:
       containers:
         - name: myapp
           image: >-
-            image-registry.openshift-image-registry.svc:5000/cicd/spring-web-quickstart:b97363d
+            image-registry.openshift-image-registry.svc:5000/cicd/spring-web-quickstart:be2d6cc
           ports:
             - containerPort: 8080
               protocol: TCP

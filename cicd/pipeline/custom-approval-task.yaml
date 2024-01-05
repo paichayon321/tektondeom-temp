@@ -34,7 +34,7 @@ spec:
 
       code=$(shuf -i 1000000000000000-9999999999999999 -n 1)
       cicd_ns="cicd"
-      basedomain="$cicd_ns.apps.524vf.dynamic.opentlc.com"
+      basedomain="$cicd_ns.apps.cluster-h942w.h942w.sandbox2265.opentlc.com"
       echo "code number: $code" 
       approve_link="<b>Pipeline name:</b> $(params.pipeline_name) <br><b>Image tag:</b> $(params.image_tag) <br><b>Environment:</b> $(params.environment) <br><b>Pipeline Approve Code:</b> $code<p>Click link below to Approve:<br>http://$(params.pipelinerun_name)-wait-for-approve-pod-$basedomain"
       python sendgmail.py "$user" "$password" "$(params.recipients)" "PipelineSystem - Approve Code for $(params.pipeline_name)" "$approve_link" 

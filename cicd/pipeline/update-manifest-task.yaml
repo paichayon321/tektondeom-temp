@@ -54,7 +54,7 @@ spec:
         fi  
 
         git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/paichayon321/tektondeom-temp.git
-        cd tekton-pipeline
+        cd tektondeom-temp
         git checkout origin/main
         git config --global user.name "tekton_pipeline"
         git config --global user.email "tektonPipeline@domain.local"

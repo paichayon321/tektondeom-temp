@@ -142,6 +142,18 @@ Setting Repository:
 > Proejct: default
 > Repository URL: https://github.com/paichayon321/tekton-pipeline.git
 
+[cols="1,1"]
+|===
+|Cell in column 1, row 1 
+|Cell in column 2, row 1 
+
+|Cell in column 1, row 2
+|Cell in column 2, row 2
+
+|Cell in column 1, row 3
+|Cell in column 2, row 3 
+|=== 
+
 Setting Application:
 Name: myapp-sealsecret
 Project: default

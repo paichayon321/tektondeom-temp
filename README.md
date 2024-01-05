@@ -135,26 +135,16 @@ Default URL:
 https://openshift-gitops-server-openshift-gitops.apps.<base domain>
 
 Setting Repository:
-
+```
 > Setting > Repositories > connect repo
 > Connect Method: HTTPS
 > Type: git
 > Proejct: default
 > Repository URL: https://github.com/paichayon321/tekton-pipeline.git
+```
 
-[cols="1,1"]
-|===
-|Cell in column 1, row 1 
-|Cell in column 2, row 1 
-
-|Cell in column 1, row 2
-|Cell in column 2, row 2
-
-|Cell in column 1, row 3
-|Cell in column 2, row 3 
-|=== 
-
-Setting Application:
+Setting SealSecret Application:
+```
 Name: myapp-sealsecret
 Project: default
 Sync Policy: Automatic
@@ -164,14 +154,21 @@ Source: https://github.com/paichayon321/tekton-pipeline.git
 Revision: main
 Path: platform/sealsecret
 Namespace: kube-system
+```
 
+Setting SonarQube Application:
+```
+Name: myapp-sonarqube
+Project: default
+Sync Policy: Automatic
+Prune Resources: true
+Auto-create namespace: true
+Source: https://github.com/paichayon321/tekton-pipeline.git
+Revision: main
+Path: platform/sonarqube
+Namespace: cicd-tools
+```
 
-
-
-
-- myapp-sonarqube
-  Path: platform/sonarqube
-  Namespace: cicd-tools
 
 - myapp-cicd
   Path: cicd/pipeline

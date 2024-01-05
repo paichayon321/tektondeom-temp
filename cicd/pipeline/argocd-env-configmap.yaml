@@ -4,4 +4,4 @@ metadata:
   name: argocd-env-configmap
   namespace: cicd
 data:
-  ARGOCD_SERVER: 'openshift-gitops-server-openshift-gitops.apps.524vf.dynamic.opentlc.com:443'
+  ARGOCD_SERVER: 'openshift-gitops-server-openshift-gitops.apps.cluster-h942w.h942w.sandbox2265.opentlc.com:443'

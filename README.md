@@ -116,6 +116,15 @@ https://github.com/paichayon321/spring-web-quickstart.git
 # Prepare ArgoCD:
 Create "cluster-admins" group and add user to cluster-admins group
 
+```
+apiVersion: user.openshift.io/v1
+kind: Group
+metadata:
+  name: cluster-admins
+users:
+  - ocadmin
+```
+
 ## Add Role to gitops service account
 ```
 oc adm policy add-cluster-role-to-use cluster-admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller

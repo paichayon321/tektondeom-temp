@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp-uat
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: myapp-uat
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: app/myapp/env/sit
+    repoURL: https://github.com/paichayon321/tektondeom-temp.git
+    targetRevision: main
+  syncPolicy:
+    automated: {}

@@ -26,11 +26,14 @@ oc policy add-role-to-user system:image-puller system:serviceaccount:myapp-dr:de
 - OpenShift GitOps Operator
 - Openshift Pipeline Operator
 
-## Pipeline Git Repo
-https://github.com/paichayon321/tekton-pipeline.git
+## Clone Pipeline Repo and Source Code for demo repo as your own
+```
+# Pipeline Git Repo
+git clone https://github.com/paichayon321/tekton-pipeline.git
 
 ## Source Code Repo for test (MVN)
-https://github.com/paichayon321/spring-web-quickstart.git
+git clone https://github.com/paichayon321/spring-web-quickstart.git
+```
 
 ## Prepare ArgoCD:
 Create "cluster-admins" group and add user to cluster-admins group
@@ -108,9 +111,11 @@ Prepare kubeseal cli
 # Download CLI (kubeseal)
 wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.21.0/kubeseal-0.21.0-linux-amd64.tar.gz
 tar xzvf kubeseal-0.21.0-linux-amd64.tar.gz
+sudo mv kubeseal /usr/bin
+kubeseal --version
 
 # Create Secret Sealed yaml
-kubeseal < github-pat-secret.yaml  > github-pat-secret-sealed.yaml  -o yaml -n cicd
+kubeseal < secretfile.yaml  > sealed-secretfile.yaml  -o yaml -n cicd
 ```
 
 #### Image from https://quay.io/repository/argoproj/argocd not working sync success but alway return fail

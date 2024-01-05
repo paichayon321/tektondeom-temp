@@ -127,16 +127,35 @@ users:
 
 ## Add Role to gitops service account
 ```
-oc adm policy add-cluster-role-to-use cluster-admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller
+oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller
 ```
 
 ## Login to argoCD portat
-Setting Repository to https://github.com/paichayon321/tekton-pipeline.git
+Default URL:
+https://openshift-gitops-server-openshift-gitops.apps.<base domain>
 
-Create Application:
-- myapp-sealsecret  
-  Path: platform/sealsecret
-  Namespace: kube-system
+Setting Repository:
+
+> Setting > Repositories > connect repo
+> Connect Method: HTTPS
+> Type: git
+> Proejct: default
+> Repository URL: https://github.com/paichayon321/tekton-pipeline.git
+
+Setting Application:
+Name: myapp-sealsecret
+Project: default
+Sync Policy: Automatic
+Prune Resources: true
+Auto-create namespace: true
+Source: https://github.com/paichayon321/tekton-pipeline.git
+Revision: main
+Path: platform/sealsecret
+Namespace: kube-system
+
+
+
+
 
 - myapp-sonarqube
   Path: platform/sonarqube

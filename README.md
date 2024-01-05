@@ -156,6 +156,19 @@ Path: platform/sealsecret
 Namespace: kube-system
 ```
 
+Setting SonarQube Application:
+```
+Name: myapp-sonarqube
+Project: default
+Sync Policy: Automatic
+Prune Resources: true
+Auto-create namespace: true
+Source: https://github.com/paichayon321/tekton-pipeline.git
+Revision: main
+Path: platform/sonarqube
+Namespace: cicd-tools
+```
+
 
 ## Prepare Secret for Pipeline
 
@@ -170,7 +183,7 @@ sonarqube-secret
 ## Prepare PVC for Pipeline
 
 
-Setting SonarQube Application:
+Setting cicd pipeline Application:
 ```
 Name: myapp-cicd
 Project: default

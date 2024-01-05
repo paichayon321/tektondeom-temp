@@ -18,83 +18,6 @@ oc policy add-role-to-user system:image-puller system:serviceaccount:myapp-prod:
 oc policy add-role-to-user system:image-puller system:serviceaccount:myapp-dr:default --namespace=cicd
 
 ```
-
-
-
-
-# Prerequire Secret for Update Manifest Task (Github PAT secret)
-
-```
-apiVersion: v1
-kind: Secret
-metadata:
-  name: github-pat-secret
-data:
-  # User name and PAT token
-  GIT_CREDS_USR: <username>
-  GIT_CREDS_PSW: <password>
-```
-
-----
-# Prerequire configmap and Secret for Arcocd Sync Task
-# **** Image from https://quay.io/repository/argoproj/argocd not working sync success but alway return fail*****
-
-```
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: argocd-env-configmap
-data:
-  ARGOCD_SERVER: <Argo CD server address>
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: argocd-env-secret
-data:
-  # choose one of username/password or auth token
-  ARGOCD_USERNAME: <username>
-  ARGOCD_PASSWORD: <password>
-  ARGOCD_AUTH_TOKEN: <token>
-```
-----
-
-# Webhook Secret
-```
-apiVersion: v1
-kind: Secret
-metadata:
-  name: github-webhook-secret
-data:
-  secretToken: <token>
-```
-
-
-# SonarQube Task -Secret
-```
-apiVersion: v1
-kind: Secret
-metadata:
-  name: sonarqube-secret
-data:
-  SONAR_HOST_URL: <username>
-  SONAR_LOGIN_TOKEN: <password>
-```
-
-# Send Mail Task - Secret
-
-```
-kind: Secret
-apiVersion: v1
-metadata:
-  name: gmail-secret
-stringData:
-  url: "smtp.gmail.com"
-  port: "465"
-  user: "gcp.pai0001@gmail.com"
-  password: "password"
-  tls: "True"
-```
 ----
 
 # Prepare New Environment for DEMO
@@ -180,6 +103,7 @@ Namespace: cicd
 
 
 ## Prepare Secret for Pipeline
+Prepare kubeseal cli
 ```
 # Download CLI (kubeseal)
 wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.21.0/kubeseal-0.21.0-linux-amd64.tar.gz
@@ -189,12 +113,77 @@ tar xzvf kubeseal-0.21.0-linux-amd64.tar.gz
 kubeseal < github-pat-secret.yaml  > github-pat-secret-sealed.yaml  -o yaml -n cicd
 ```
 
-Install kubeseal and Re-create Secret:
-argocd-env-secret
-github-pat-secret
-github-webhook-secret
-gmail-secret
-sonarqube-secret
+ArgoCD configmap and secret:
+**** Image from https://quay.io/repository/argoproj/argocd not working sync success but alway return fail *****
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-env-configmap
+data:
+  ARGOCD_SERVER: <Argo CD server address>
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: argocd-env-secret
+data:
+  # choose one of username/password or auth token
+  ARGOCD_USERNAME: <username>
+  ARGOCD_PASSWORD: <password>
+  ARGOCD_AUTH_TOKEN: <token>
+```
+
+Github PAT secret:
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-pat-secret
+data:
+  # User name and PAT token
+  GIT_CREDS_USR: <username>
+  GIT_CREDS_PSW: <password>
+```
+
+Github Webhook Secret:
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-webhook-secret
+data:
+  secretToken: <token>
+```
+
+SonarQube Secret:
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sonarqube-secret
+data:
+  SONAR_HOST_URL: <username>
+  SONAR_LOGIN_TOKEN: <password>
+```
+
+Gmail for Send mail Secret:
+
+```
+kind: Secret
+apiVersion: v1
+metadata:
+  name: gmail-secret
+stringData:
+  url: "smtp.gmail.com"
+  port: "465"
+  user: "gcp.pai0001@gmail.com"
+  password: "password"
+  tls: "True"
+```
+
 
 ## Prepare PVC for Pipeline
 ```

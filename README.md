@@ -102,18 +102,18 @@ stringData:
 ----
 
 # Prepare New Environment for DEMO
-# System Requirement
+## System Requirement
 - OpenShift 4.12
 - OpenShift GitOps Operator
 - Openshift Pipeline Operator
 
-# Pipeline Git Repo
+## Pipeline Git Repo
 https://github.com/paichayon321/tekton-pipeline.git
 
-# Source Code Repo for test (MVN)
+## Source Code Repo for test (MVN)
 https://github.com/paichayon321/spring-web-quickstart.git
 
-# Prepare ArgoCD:
+## Prepare ArgoCD:
 Create "cluster-admins" group and add user to cluster-admins group
 
 ```
@@ -157,7 +157,7 @@ Namespace: kube-system
 ```
 
 
-# Prepare Secret for Pipeline
+## Prepare Secret for Pipeline
 
 
 Install kubeseal and Re-create Secret:
@@ -167,7 +167,7 @@ github-webhook-secret
 gmail-secret
 sonarqube-secret
 
-# Prepare PVC for Pipeline
+## Prepare PVC for Pipeline
 
 
 Setting SonarQube Application:

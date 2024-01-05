@@ -19,11 +19,7 @@ oc policy add-role-to-user system:image-puller system:serviceaccount:myapp-dr:de
 
 ```
 
-# Create Secret Sealed
 
-```
-kubeseal < github-pat-secret.yaml  > github-pat-secret-sealed.yaml  -o yaml -n cicd
-```
 
 
 # Prerequire Secret for Update Manifest Task (Github PAT secret)
@@ -169,20 +165,6 @@ Path: platform/sonarqube
 Namespace: cicd-tools
 ```
 
-
-## Prepare Secret for Pipeline
-
-
-Install kubeseal and Re-create Secret:
-argocd-env-secret
-github-pat-secret
-github-webhook-secret
-gmail-secret
-sonarqube-secret
-
-## Prepare PVC for Pipeline
-
-
 Setting cicd pipeline Application:
 ```
 Name: myapp-cicd
@@ -195,4 +177,44 @@ Revision: main
 Path: cicd/pipeline
 Namespace: cicd
 ```
+
+
+## Prepare Secret for Pipeline
+```
+# Download CLI (kubeseal)
+wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.21.0/kubeseal-0.21.0-linux-amd64.tar.gz
+tar xzvf kubeseal-0.21.0-linux-amd64.tar.gz
+
+# Create Secret Sealed yaml
+kubeseal < github-pat-secret.yaml  > github-pat-secret-sealed.yaml  -o yaml -n cicd
+```
+
+Install kubeseal and Re-create Secret:
+argocd-env-secret
+github-pat-secret
+github-webhook-secret
+gmail-secret
+sonarqube-secret
+
+## Prepare PVC for Pipeline
+```
+cat << EOF | oc create -f -
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mypvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: gp2
+  resources:
+    requests:
+      storage: 1Gi
+EOF
+
+
+```
+
+
 
